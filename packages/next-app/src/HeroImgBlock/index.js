@@ -1,0 +1,208 @@
+import * as THREE from 'three'
+import { css, injectGlobal } from '@emotion/css'
+import { CSS3DRenderer, CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+injectGlobal`
+  canvas {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+  }
+
+  svg {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+  }
+`
+
+class HomeGraph {
+  constructor(graphRoot) {
+    this.rootElement = graphRoot
+    this.rootElementRect = null
+
+    this.clock = new THREE.Clock()
+    this.svgRenderer = null
+    this.renderer = null
+    this.cssRenderer = null
+    this.camera = null
+    this.cssCamera = null
+    this.scene = null
+    this.controls = null
+    this._devicePixelRatio = window.devicePixelRatio || 1
+    this._cameraFar = 2000
+
+    this.requestAnimationFrameId = null
+    this.init = this.init.bind(this)
+    this.clear = this.clear.bind(this)
+    this.isRotating = false
+  }
+
+  async init() {
+    this.rootElementRect = this.rootElement.getBoundingClientRect()
+    const renderWidth = this.rootElementRect.width
+    const renderHeight = this.rootElementRect.height
+
+    const FOV = 45;
+    const NEAR = 0.1;
+    const FAR = 1000;
+    const ASPECT = renderWidth / renderHeight;
+    this.camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
+    this.camera.position.set(0, 0, 10);
+    this.camera.target = new THREE.Vector3(0, 0, 0);
+
+    this.cssCamera = new THREE.PerspectiveCamera( 40, renderWidth / renderHeight, 1, 10000 );
+    this.cssCamera.position.z = 3000;
+    this.cssCamera.position.y = -100;
+
+    this.scene = new THREE.Scene()
+    const ambient = new THREE.AmbientLight( 0x80ffff );
+    this.scene.add( ambient );
+
+    const directional = new THREE.DirectionalLight( 0xffff00 );
+    directional.position.set( - 1, 0.5, 0 );
+    this.scene.add( directional );
+
+    this.renderer = new THREE.WebGLRenderer({
+      // alpha: true,
+      antialias: true,
+    })
+    this.renderer.setPixelRatio(this._devicePixelRatio * 2)
+    this.renderer.setClearColor(0xffffff, 0)
+
+
+    this.cssRenderer = new CSS3DRenderer()
+    this.cssRenderer.domElement.classList.add(css`
+      position: absolute;
+      z-index: 10;
+    `)
+    this.rootElement.appendChild( this.cssRenderer.domElement )
+
+    this.rootElement.appendChild( this.renderer.domElement )
+    this.controls = new OrbitControls(this.camera, this.rootElement);
+
+    this.render3D()
+    this.renderCSS()
+    this.resize()
+    this._animate()
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
+
+  }
+
+  async clear() {
+    this.rootElement.removeChild(this.renderer.domElement)
+    this.rootElement.removeChild(this.cssRenderer.domElement)
+    window.removeEventListener('resize', () => {
+      this.resize()
+    })
+    cancelAnimationFrame(this.requestAnimationFrameId)
+  }
+
+  render3D() {
+    const matNormal = new THREE.MeshNormalMaterial();
+
+    const sphereGeo = new THREE.SphereBufferGeometry(0.5, 32, 32);
+    const sphere = new THREE.Mesh(sphereGeo, matNormal);
+    sphere.scale.set( 3,  3,  3)
+    sphere.position.set(0, 0, 1)
+    this.scene.add(sphere);
+  }
+
+  renderCSS() {
+    const div = document.createElement( 'div' );
+    div.textContent = ' HI !  I\'m tokileecy'
+    div.classList.add(css`
+      /* top: 10px;
+      right: 10px; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 750px;
+      height: 500px;
+      background-color: rgba(1,1,1, 0.25);
+      border: white 2px solid;
+      font-size: 60px;
+      font-weight: bold;
+      color: rgba(255,255,255,0.75);
+      text-shadow: 0 0 10px rgba(0,255,255,0.95);
+    `)
+    const object = new CSS3DSprite( div );
+    object.position.x = -900,
+    object.position.y = 600,
+    object.position.z = 0;
+    this.scene.add( object );
+
+    const div1 = document.createElement( 'div' );
+    div1.innerHTML = 'Wellcome to... <br/> Toki\`s Website!'
+    div1.classList.add(css`
+      /* top: 10px;
+      right: 10px; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 750px;
+      height: 500px;
+      background-color: rgba(1,1,1, 0.25);
+      border: white 2px solid;
+      font-size: 60px;
+      font-weight: bold;
+      color: rgba(255,255,255,0.75);
+      text-shadow: 0 0 10px rgba(0,255,255,0.95);
+    `)
+    const div1Obj = new CSS3DSprite( div1 );
+    div1Obj.position.x = 900,
+    div1Obj.position.y = -600,
+    div1Obj.position.z = 0;
+
+    this.scene.add( div1Obj );
+  }
+
+  resize() {
+    this.rootElementRect = this.rootElement.getBoundingClientRect()
+    const renderWidth = this.rootElementRect.width
+    const renderHeight = this.rootElementRect.height
+
+    this.renderer.setSize(renderWidth, renderHeight)
+    this.cssRenderer.setSize( renderWidth, renderHeight );
+  }
+
+  _animate() {
+    this.requestAnimationFrameId = requestAnimationFrame(() => {
+      this._animate()
+    })
+
+    this.controls.update()
+    this.renderer.render(this.scene, this.camera)
+    this.cssRenderer.render( this.scene, this.cssCamera )
+  }
+
+  _resizeCamera() {
+    const renderWidth = this.rootElementRect.width
+    const renderHeight = this.rootElementRect.height
+    let aspectRatio =
+      renderWidth > renderHeight
+        ? renderWidth / renderHeight
+        : renderHeight / renderWidth
+    const scale = 1.2
+    if (renderWidth > renderHeight) {
+      this.camera.left = -aspectRatio * this._earthRadius * scale
+      this.camera.right = aspectRatio * this._earthRadius * scale
+      this.camera.top = this._earthRadius * scale
+      this.camera.bottom = -this._earthRadius * scale
+    } else {
+      this.camera.left = -this._earthRadius * scale
+      this.camera.right = this._earthRadius * scale
+      this.camera.top = aspectRatio * this._earthRadius * scale
+      this.camera.bottom = -aspectRatio * this._earthRadius * scale
+    }
+    this.camera.updateProjectionMatrix()
+  }
+}
+
+export default HomeGraph
