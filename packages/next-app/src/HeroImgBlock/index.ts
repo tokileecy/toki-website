@@ -14,13 +14,13 @@ injectGlobal`
     height: 100%;
   }
 
-  svg {
+  /* svg {
     position: absolute;
     display: none;
     z-index: 2;
     width: 100%;
     height: 100%;
-  }
+  } */
 `
 
 class HomeImgBlock {
