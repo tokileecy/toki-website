@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { css, injectGlobal } from '@emotion/css'
+import { css } from '@emotion/css'
 import HeroImgBlock from '../../HeroImgBlock'
 
 const cssHomePageRoot = css`
@@ -35,13 +35,13 @@ const cssHomeContainer = css`
   }
 `
 
-function HomePage() {
+function HomePage(): JSX.Element {
   const heroImgRef = useRef(null)
-  const heroImgBlockRef = useRef(null)
+  const heroImgBlockRef = useRef<HeroImgBlock | null>(null)
   useEffect(() => {
-    const heroImgBlock = new HeroImgBlock(heroImgRef.current)
+    const heroImgBlock = new HeroImgBlock(heroImgRef)
     heroImgBlockRef.current = heroImgBlock
-    heroImgBlock.init({})
+    heroImgBlock.init()
 
     return () => {
       heroImgBlock.clear()
@@ -50,18 +50,15 @@ function HomePage() {
 
   return (
     <div className={cssHomePageRoot}>
-      <div
-        ref={heroImgRef}
-        className={cssHeroImg}
-      ></div>
+      <div ref={heroImgRef} className={cssHeroImg}></div>
       <div className={cssHomeContainer}>
         <main>
           <div></div>
         </main>
         <nav>
-          {['Home', 'About', 'Blog', 'Contact'].map((item) =>{
+          {['Home', 'About', 'Blog', 'Contact'].map((item) => {
             return (
-              <Link href={'/'}>
+              <Link key={item} href={'/'}>
                 <a
                   className={css`
                     display: inline-flex;
@@ -70,14 +67,16 @@ function HomePage() {
                     flex: 1 0 auto;
                     color: white;
                   `}
-                >{item}</a>
+                >
+                  {item}
+                </a>
               </Link>
             )
           })}
         </nav>
       </div>
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage

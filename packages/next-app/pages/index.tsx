@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { css } from '@emotion/css'
 
 const HomePage = dynamic(() => import('../src/components/pages/Home'), {
-  ssr: false
+  ssr: false,
 })
 
 const cssContainer = css`
@@ -15,8 +15,7 @@ const cssContainer = css`
   height: 100vh;
 `
 
-export default function Home() {
-
+export default function Home(): JSX.Element {
   return (
     <div className={cssContainer}>
       <Head>
@@ -25,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HomePage/>
+      <HomePage />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { injectGlobal } from '@emotion/css'
+import { AppProps } from 'next/app'
 
 injectGlobal`
   html,
@@ -19,8 +20,7 @@ injectGlobal`
   }
 `
 
-
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />
 }
 

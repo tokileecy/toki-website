@@ -1,0 +1,16 @@
+/jsdoc/**
+/node_modules/*
+babel.config.js
+/**/*.scss
+/**/*.svg
+/**/*.log
+
+package.json
+yarn.lock
+webpack.config.js
+jest.config.js
+
+/examples
+/docs
+.next
+/packages/next-app/public
