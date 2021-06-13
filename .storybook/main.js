@@ -18,6 +18,17 @@ module.exports = {
       ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
     ]
   }),
+  webpackFinal: async (config) => {
+    config.module.rules.push({
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      exclude: /node_modules/,
+      use: [
+        'raw-loader',
+        'glslify-loader'
+      ]
+    })
+    return config
+  },
   "stories": [
     "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../packages/next-app/**/*.stories.@(js|jsx|ts|tsx|mdx)",
