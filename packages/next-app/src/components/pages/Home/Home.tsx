@@ -1,6 +1,5 @@
-import { useRef, useEffect } from 'react'
 import { css } from '@emotion/css'
-import HeroImgBlock from '../../../HeroImgBlock'
+import HeroImg from './HeroImg'
 import Nav from './Nav'
 
 const cssHomePageRoot = css`
@@ -25,21 +24,9 @@ const cssHomeContainer = css`
 `
 
 function HomePage(): JSX.Element {
-  const heroImgRef = useRef(null)
-  const heroImgBlockRef = useRef<HeroImgBlock | null>(null)
-  useEffect(() => {
-    const heroImgBlock = new HeroImgBlock(heroImgRef)
-    heroImgBlockRef.current = heroImgBlock
-    heroImgBlock.init()
-
-    return () => {
-      heroImgBlock.clear()
-    }
-  }, [])
-
   return (
     <div className={cssHomePageRoot}>
-      <div ref={heroImgRef} className={cssHeroImg}></div>
+      <HeroImg className={cssHeroImg} />
       <div className={cssHomeContainer}>
         <main
           className={css`

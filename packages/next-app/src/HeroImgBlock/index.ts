@@ -6,23 +6,6 @@ import {
 } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-injectGlobal`
-  canvas {
-    position: absolute;
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* svg {
-    position: absolute;
-    display: none;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-  } */
-`
-
 class HomeImgBlock {
   rootElementRect: DOMRect
   clock: THREE.Clock

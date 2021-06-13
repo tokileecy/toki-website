@@ -10,11 +10,6 @@ injectGlobal`
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
   * {
     box-sizing: border-box;
   }
