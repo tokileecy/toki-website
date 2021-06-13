@@ -3,7 +3,7 @@ import { css } from '@emotion/css'
 import HeroImg, { HeroImgProps } from './HeroImg'
 
 export default {
-  title: 'next-app/Pages/HeroImg',
+  title: 'next-app/HeroImg',
   component: HeroImg,
   argTypes: {},
 } as Meta
