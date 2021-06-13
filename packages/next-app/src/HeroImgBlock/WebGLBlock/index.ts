@@ -1,5 +1,12 @@
 import * as THREE from 'three'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+import VERTEX from './shaders/vert.glsl'
+import FRAGMENT from './shaders/frag.glsl'
+import FRAGMENT_FINAL from './shaders/fragFinal.glsl'
 
 class WebGLBlock {
   clock: THREE.Clock
@@ -8,6 +15,9 @@ class WebGLBlock {
   rootElementRect: DOMRect
   renderer: THREE.WebGLRenderer
   camera: THREE.PerspectiveCamera
+  composer: EffectComposer | null
+  pass: ShaderPass | null
+  passFinal: ShaderPass | null
   cameraWrap: null
   controls: OrbitControls | null
   _devicePixelRatio: number
@@ -33,6 +43,10 @@ class WebGLBlock {
     this.controls = new OrbitControls(this.camera, this.rootElement)
 
     this.requestAnimationFrameId = null
+
+    this.composer = null
+    this.pass = null
+    this.passFinal = null
     this.cameraWrap = null
   }
 
@@ -45,6 +59,7 @@ class WebGLBlock {
     this.scene.add(directional)
 
     this._initObjs()
+    this._initPostProcessing()
     this.resize()
   }
 
@@ -79,13 +94,19 @@ class WebGLBlock {
 
     this.renderer.setSize(renderWidth, renderHeight)
     this.renderer.setPixelRatio(this._devicePixelRatio)
+    this._initPostProcessing()
+    this.pass?.uniforms.iResolution.value.set(renderWidth, renderHeight)
 
     this.render()
   }
 
   render(): void {
+    const elapsed = this.clock.getElapsedTime()
+    this.passFinal && (this.passFinal.uniforms.iTime.value = elapsed)
+
     this.controls?.update()
     this.renderer.render(this.scene, this.camera)
+    this.composer?.render()
   }
 
   _initObjs(): void {
@@ -95,6 +116,44 @@ class WebGLBlock {
     sphere.scale.set(3, 3, 3)
     sphere.position.set(0, 0, 1)
     this.scene.add(sphere)
+  }
+
+  _initPostProcessing(): void {
+    const width = this.rootElementRect.width
+    const height = this.rootElementRect.height
+
+    const resolution = new THREE.Vector2(width, height)
+
+    const drawShader = {
+      uniforms: {
+        tDiffuse: { type: 't', value: null },
+        // tShadow: { type: 't', value: null },
+        iResolution: { type: 'v2', value: resolution },
+      },
+      vertexShader: VERTEX,
+      fragmentShader: FRAGMENT,
+    }
+
+    const finalShader = {
+      uniforms: {
+        tDiffuse: { type: 't', value: null },
+        iTime: { type: 'f', value: 0.0 },
+        tNoise: { type: 't', value: new THREE.TextureLoader() },
+      },
+      vertexShader: VERTEX,
+      fragmentShader: FRAGMENT_FINAL,
+    }
+
+    this.composer = new EffectComposer(this.renderer)
+    this.composer.addPass(new RenderPass(this.scene, this.camera))
+
+    this.pass = new ShaderPass(drawShader)
+    this.pass.renderToScreen = true
+    this.composer.addPass(this.pass)
+
+    this.passFinal = new ShaderPass(finalShader)
+    this.passFinal.renderToScreen = true
+    this.composer.addPass(this.passFinal)
   }
 }
 
