@@ -3,6 +3,16 @@ module.exports = {
     ...options,
     // presets: [ [ "@babel/preset-env", { "targets": { "node": true } } ] ],
     plugins: [
+      [
+        '@emotion',
+        {
+          // sourceMap is on by default but source maps are dead code eliminated in production
+          'sourceMap': true,
+          'autoLabel': 'dev-only',
+          'labelFormat': '[local]',
+          'cssPropOptimization': true,
+        },
+      ],
       ["@babel/plugin-proposal-private-methods", { "loose": true }],
       ["@babel/plugin-proposal-class-properties", { "loose": true }],
       ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
