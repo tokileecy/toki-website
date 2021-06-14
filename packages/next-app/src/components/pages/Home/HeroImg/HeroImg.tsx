@@ -25,12 +25,18 @@ function HeroImg(props: HeroImgProps): JSX.Element {
   const heroImgBlockRef = useRef<HeroImgBlock | null>(null)
 
   useEffect(() => {
-    const heroImgBlock = new HeroImgBlock(heroImgElementRef)
-    heroImgBlockRef.current = heroImgBlock
-    heroImgBlock.init()
+    let heroImgBlock: HeroImgBlock | null = null
+    const loadHeroImgBlock = async () => {
+      const HeroImgBlock = (await import('../../../../HeroImgBlock')).default
+      heroImgBlock = new HeroImgBlock(heroImgElementRef)
+      heroImgBlockRef.current = heroImgBlock
+      heroImgBlock.init()
+    }
+
+    loadHeroImgBlock()
 
     return () => {
-      heroImgBlock.clear()
+      heroImgBlock !== null && heroImgBlock.clear()
     }
   }, [])
   return (

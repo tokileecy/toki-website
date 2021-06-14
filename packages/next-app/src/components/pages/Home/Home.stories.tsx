@@ -30,6 +30,9 @@ const Template: Story = (args) => {
   )
 }
 
-export const NormalHome = Template.bind({})
+export const NormalHome = Template.bind({
+  syncTitle: false,
+  syncHistory: false,
+})
 
 NormalHome.args = {}

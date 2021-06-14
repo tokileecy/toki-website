@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import { cx, css } from '@emotion/css'
 
 const cssBaseSelectBar = css`
@@ -9,11 +9,11 @@ const cssBaseSelectBar = css`
   height: 5px;
   transition: transform 0.5s;
 `
+
 const cssLink = css`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  display: inline-flex;
   justify-content: center;
   align-items: center;
   color: white;
@@ -32,38 +32,44 @@ const cssLink = css`
   }
 `
 
-export interface NavItemProps {
+export interface NavItemProps extends Omit<LinkProps, 'href'> {
+  href: string
   children?: React.ReactNode
   selected?: boolean
+  nextLink?: boolean
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }
 
 const defaultProps: NavItemProps = {
   selected: false,
+  nextLink: false,
+  href: '/',
 }
 
 export function NavItem(props: NavItemProps): JSX.Element {
-  const { children, selected } = props
+  const { children, selected, nextLink, onClick, href, ...linkProps } = props
 
-  return (
-    <div
-      className={css`
-        display: flex;
-        flex-direction: column;
-        flex: 1 0 auto;
-        height: 100%;
-        align-items: center;
-      `}
+  const link = (
+    <a
+      className={cx(cssLink, {
+        selected,
+      })}
+      onClick={(e) => {
+        return onClick?.(e)
+      }}
+      href={href}
+      {...linkProps}
     >
-      <Link href={'/'}>
-        <a
-          className={cx(cssLink, {
-            selected,
-          })}
-        >
-          {children}
-        </a>
-      </Link>
-    </div>
+      {children}
+    </a>
+  )
+
+  return nextLink ? (
+    <Link href={href} {...linkProps}>
+      {link}
+    </Link>
+  ) : (
+    <>{link}</>
   )
 }
 

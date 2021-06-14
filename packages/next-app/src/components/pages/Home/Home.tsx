@@ -1,4 +1,5 @@
 import { css } from '@emotion/css'
+import { useRouter } from 'next/router'
 import HeroImg from './HeroImg'
 import Nav from './Nav'
 
@@ -23,7 +24,20 @@ const cssHomeContainer = css`
   flex-direction: column;
 `
 
-function HomePage(): JSX.Element {
+export interface HomePageProps {
+  syncHistory: boolean
+  syncTitle: boolean
+}
+
+const defaultProps: HomePageProps = {
+  syncHistory: true,
+  syncTitle: true,
+}
+
+function HomePage(props: HomePageProps): JSX.Element {
+  const { syncHistory, syncTitle } = props
+  const router = useRouter()
+
   return (
     <div className={cssHomePageRoot}>
       <HeroImg className={cssHeroImg} />
@@ -33,10 +47,16 @@ function HomePage(): JSX.Element {
             flex: 1 0 auto;
           `}
         ></main>
-        <Nav />
+        <Nav
+          initPage={router?.pathname}
+          syncHistory={syncHistory}
+          syncTitle={syncTitle}
+        />
       </div>
     </div>
   )
 }
+
+HomePage.defaultProps = defaultProps
 
 export default HomePage

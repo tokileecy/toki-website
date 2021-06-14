@@ -1,6 +1,7 @@
-import { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useMemo } from 'react'
 import { cx, css } from '@emotion/css'
 import NavItem from './NavItem'
+import pageInfos from '../../../../pageInfos'
 
 const cssCurrent = css`
   position: absolute;
@@ -30,6 +31,7 @@ const cssNav = css`
 
 const hide = css`
   opacity: 0;
+  pointer-events: none;
 `
 
 const show = css`
@@ -42,14 +44,15 @@ const cssContent = css`
   height: 100%;
 
   &.mode-default {
-    .current {
-      ${show}
-    }
+    &:not(:hover) {
+      .current {
+        ${show}
+      }
 
-    .list {
-      ${hide}
+      .list {
+        ${hide}
+      }
     }
-
     &:hover {
       .current {
         ${hide}
@@ -83,10 +86,12 @@ const cssContent = css`
 
 const intervalSize = 500
 
-const navItems = ['Home', 'About', 'Blog', 'Contact']
-
-const validateCurrentChange = (prev: number, next: number): number => {
-  return next < navItems.length && next >= 0 ? next : prev
+const validateCurrentChange = (
+  prev: number,
+  next: number,
+  totalSize: number
+): number => {
+  return next < totalSize && next >= 0 ? next : prev
 }
 
 export type ScrollState = {
@@ -98,19 +103,55 @@ export type NavModes = 'default' | 'current' | 'list'
 
 export interface NavProps {
   mode: NavModes
+  initPage?: string
+  syncHistory?: boolean
+  syncTitle?: boolean
 }
 
 const defaultProps: NavProps = {
   mode: 'default',
+  syncHistory: false,
+  syncTitle: false,
 }
 
+const navItems = [
+  {
+    ...pageInfos.home,
+    nextLink: false,
+  },
+  {
+    ...pageInfos.about,
+    nextLink: false,
+  },
+  {
+    ...pageInfos.blog,
+    nextLink: false,
+  },
+  {
+    ...pageInfos.contact,
+    nextLink: false,
+  },
+]
 function Nav(props: NavProps): JSX.Element {
-  const { mode } = props
-  const [currentSelectedItemIndex, setCurrentSelectedItemIndex] = useState(0)
+  const { mode, initPage, syncHistory, syncTitle } = props
+
   const scrollStateRef = useRef<ScrollState>({
     isEnter: false,
     size: 0,
   })
+
+  const [currentPage, setCurrentPage] = useState(initPage ?? navItems[0].href)
+
+  const currentSelectedItemIndex = useMemo(() => {
+    return navItems.findIndex((item) => item.href === currentPage)
+  }, [currentPage])
+
+  const setCurrentSelectedItemIndex = useCallback(
+    (next) => {
+      setCurrentPage(navItems[next].href)
+    },
+    [setCurrentPage]
+  )
 
   const handleWheel = useCallback(
     (e) => {
@@ -118,13 +159,17 @@ function Nav(props: NavProps): JSX.Element {
       const divide = Math.trunc(scrollStateRef.current.size / intervalSize)
       const sign = divide > 0 ? 1 : -1
       if (Math.abs(divide) > 1) {
-        setCurrentSelectedItemIndex((prev) =>
-          validateCurrentChange(prev, prev + sign)
+        setCurrentSelectedItemIndex(
+          validateCurrentChange(
+            currentSelectedItemIndex,
+            currentSelectedItemIndex + sign,
+            navItems.length
+          )
         )
         scrollStateRef.current.size = 0
       }
     },
-    [setCurrentSelectedItemIndex]
+    [currentSelectedItemIndex, setCurrentSelectedItemIndex]
   )
 
   return (
@@ -141,13 +186,30 @@ function Nav(props: NavProps): JSX.Element {
     >
       <div className={cx(cssContent, `mode-${mode}`)}>
         <div className={cx(cssCurrent, 'current')}>
-          {navItems[currentSelectedItemIndex]}
+          {navItems[currentSelectedItemIndex].text}
         </div>
         <div className={cx(cssList, 'list')}>
           {navItems.map((item, index) => {
             return (
-              <NavItem key={item} selected={currentSelectedItemIndex === index}>
-                {item}
+              <NavItem
+                key={item.href}
+                href={item.href}
+                nextLink={item.nextLink}
+                selected={currentSelectedItemIndex === index}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCurrentSelectedItemIndex(index)
+                  scrollStateRef.current.size = 0
+                  syncHistory &&
+                    window.history.pushState(
+                      null,
+                      `page ${item.href}`,
+                      item.href
+                    )
+                  syncTitle && (document.title = item.documentTitle)
+                }}
+              >
+                {item.text}
               </NavItem>
             )
           })}
