@@ -1,52 +1,13 @@
+import React from 'react'
+import ReactDom from 'react-dom'
 import * as THREE from 'three'
 import { css } from '@emotion/css'
 import {
   CSS3DRenderer,
   CSS3DSprite,
 } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
-
-function Div1() {
-  const div = document.createElement('div')
-  div.textContent = " HI !  I'm tokileecy"
-  const cssDiv1 = css`
-    /* top: 10px;
-    right: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 750px;
-    height: 500px;
-    background-color: rgba(1, 1, 1, 0.25);
-    border: white 2px solid;
-    font-size: 60px;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.75);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-  `
-  div.classList.add(cssDiv1)
-  return div
-}
-
-function Div2() {
-  const div = document.createElement('div')
-  div.innerHTML = 'Wellcome to... <br/> Toki`s Website!'
-  div.classList.add(css`
-    /* top: 10px;
-      right: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 750px;
-    height: 500px;
-    background-color: rgba(1, 1, 1, 0.25);
-    border: white 2px solid;
-    font-size: 60px;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.75);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-  `)
-  return div
-}
+import Div1 from './Div1'
+import Div2 from './Div2'
 
 class CSSBlock {
   clock: THREE.Clock
@@ -98,13 +59,19 @@ class CSSBlock {
   }
 
   initObjs(): void {
-    const div1Obj = new CSS3DSprite(Div1())
+    const div1Container = document.createElement('div')
+    ReactDom.render(React.createElement(Div1), div1Container)
+
+    const div1Obj = new CSS3DSprite(div1Container)
     div1Obj.position.x = -900
     div1Obj.position.y = 600
     div1Obj.position.z = 0
     this.scene.add(div1Obj)
 
-    const div2Obj = new CSS3DSprite(Div2())
+    const div2Container = document.createElement('div')
+    ReactDom.render(React.createElement(Div2), div2Container)
+
+    const div2Obj = new CSS3DSprite(div2Container)
     div2Obj.position.x = 900
     div2Obj.position.y = -600
     div2Obj.position.z = 0
