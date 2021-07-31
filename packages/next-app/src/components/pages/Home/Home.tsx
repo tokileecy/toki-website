@@ -4,8 +4,13 @@ import HeroImg from './HeroImg'
 import Nav from './Nav'
 
 const cssHomePageRoot = css`
+  position: relative;
   width: 100%;
   height: 100%;
+  @supports (height: fill-available) or (height: -webkit-fill-available) or (height: -moz-available)  {
+    height: fill-available;
+    min-height: fill-available;
+  }
 `
 
 const cssHeroImg = css`
@@ -18,7 +23,7 @@ const cssHeroImg = css`
 const cssHomeContainer = css`
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
   z-index: 1;
   display: flex;
   flex-direction: column;
