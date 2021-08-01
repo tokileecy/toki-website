@@ -36,6 +36,8 @@ class WebGLBlock {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
     })
+
+    this.renderer.context.getExtension('OES_standard_derivatives');
     this.renderer.setClearColor(0xffffff, 0)
 
     this.scene = new THREE.Scene()

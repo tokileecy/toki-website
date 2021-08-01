@@ -7,7 +7,9 @@ varying vec2 vUv;
 #define Period 60.0
 #define ShakeRange 0.003
 #define ShakeRange1 0.007
-#extension GL_OES_standard_derivatives : enable
+#ifdef GL_OES_standard_derivatives
+  #extension GL_OES_standard_derivatives : enable
+#endif
 
 // TODO add outer, inner shadow
 void main()
