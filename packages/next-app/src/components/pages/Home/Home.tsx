@@ -2,6 +2,7 @@ import { css } from '@emotion/css'
 import { useRouter } from 'next/router'
 import HeroImg from './HeroImg'
 import Nav from './Nav'
+import heroImgState, { Page } from '../../../HeroImgBlock/HeroImgState'
 
 const cssHomePageRoot = css`
   position: relative;
@@ -55,6 +56,9 @@ function HomePage(props: HomePageProps): JSX.Element {
         <Nav
           initPage={router?.pathname}
           syncHistory={syncHistory}
+          onPageChange={(nextPage: Page) => {
+            heroImgState.setPage(nextPage)
+          }}
           syncTitle={syncTitle}
         />
       </div>

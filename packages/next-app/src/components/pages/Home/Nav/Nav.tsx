@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback, useMemo } from 'react'
 import { cx, css } from '@emotion/css'
 import NavItem from './NavItem'
 import pageInfos from '../../../../pageInfos'
+import { Page } from '../../../../HeroImgBlock//HeroImgState'
 
 const cssCurrent = css`
   position: absolute;
@@ -106,6 +107,7 @@ export interface NavProps {
   initPage?: string
   syncHistory?: boolean
   syncTitle?: boolean
+  onPageChange?: (nextPage: Page) => void
 }
 
 const defaultProps: NavProps = {
@@ -133,7 +135,7 @@ const navItems = [
   },
 ]
 function Nav(props: NavProps): JSX.Element {
-  const { mode, initPage, syncHistory, syncTitle } = props
+  const { mode, initPage, syncHistory, syncTitle, onPageChange } = props
 
   const scrollStateRef = useRef<ScrollState>({
     isEnter: false,
@@ -206,6 +208,9 @@ function Nav(props: NavProps): JSX.Element {
                       `page ${item.href}`,
                       item.href
                     )
+                    if (item.name !== null && item.name !== undefined) {
+                      onPageChange?.(item.name)
+                    }
                   syncTitle && (document.title = item.documentTitle)
                 }}
               >

@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import CSSBlock from './CSSBlock'
 import WebGLBlock from './WebGLBlock'
+import heroImgState, { Page } from './HeroImgState'
 
 type GraphRootElementRef = { current: HTMLElement | null }
 
@@ -31,27 +32,33 @@ class HomeImgBlock {
     })
   }
 
-  init(): void {
+  init = (): void => {
     this.resizeObserver.observe(this.rootElement)
     this.rootElement.appendChild(this.webGlBlock.renderer.domElement)
     this.rootElement.appendChild(this.cssBlock.renderer.domElement)
     this.webGlBlock.init()
     this.cssBlock.init()
     this.webGlBlock.animate()
+    this.cssBlock.animate()
     this.cssBlock.render()
     this.resize()
   }
 
-  resize(): void {
+  resize = (): void => {
     this.webGlBlock.resize()
     this.cssBlock.resize()
   }
 
-  clear(): void {
+  clear = (): void => {
     this.webGlBlock.stopAnimate()
+    this.cssBlock.stopAnimate()
     this.rootElement.removeChild(this.webGlBlock.renderer.domElement)
     this.rootElement.removeChild(this.cssBlock.renderer.domElement)
     this.resizeObserver.unobserve(this.rootElement)
+  }
+
+  setPage = (nextPage: Page): void => {
+    heroImgState.page = nextPage
   }
 }
 
