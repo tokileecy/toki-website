@@ -12,8 +12,8 @@ const cssRoot = css`
   align-items: center;
   justify-content: center;
   background-color: rgba(1, 1, 1, 0.25);
-  border: white 2px solid;
-  font-size: 60px;
+  border: white 1px solid;
+  font-size: 16px;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);

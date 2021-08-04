@@ -208,10 +208,10 @@ function Nav(props: NavProps): JSX.Element {
                       `page ${item.href}`,
                       item.href
                     )
-                    if (item.name !== null && item.name !== undefined) {
-                      onPageChange?.(item.name)
-                    }
-                  syncTitle && (document.title = item.documentTitle)
+                  if (item.name !== null && item.name !== undefined) {
+                    onPageChange?.(item.name)
+                  }
+                  syncTitle && (document.title = item?.documentTitle ?? '')
                 }}
               >
                 {item.text}

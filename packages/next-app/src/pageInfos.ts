@@ -35,5 +35,4 @@ const pageInfos: {
   },
 }
 
-
 export default pageInfos

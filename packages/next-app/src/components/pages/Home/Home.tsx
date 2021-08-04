@@ -8,7 +8,8 @@ const cssHomePageRoot = css`
   position: relative;
   width: 100%;
   height: 100%;
-  @supports (height: fill-available) or (height: -webkit-fill-available) or (height: -moz-available)  {
+  @supports (height: fill-available) or (height: -webkit-fill-available) or
+    (height: -moz-available) {
     height: fill-available;
     min-height: fill-available;
   }

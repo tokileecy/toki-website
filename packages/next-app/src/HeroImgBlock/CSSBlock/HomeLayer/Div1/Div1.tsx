@@ -1,12 +1,12 @@
 import { css } from '@emotion/css'
-import MessageBox from '../../../components/MessageBox'
+import MessageBox from '../../../../components/MessageBox'
 
 export default function Div1(): JSX.Element {
   return (
     <MessageBox
       className={css`
-        width: 750px;
-        height: 500px;
+        width: 250px;
+        height: 150px;
       `}
     >
       {" HI !  I'm tokileecy"}

@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import MessageBox from '../../../components/MessageBox'
+import MessageBox from '../../../../components/MessageBox'
 
 export function Div2(): JSX.Element {
   return (
@@ -8,8 +8,8 @@ export function Div2(): JSX.Element {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 750px;
-        height: 500px;
+        width: 250px;
+        height: 150px;
       `}
     >
       {'Wellcome to...'}
