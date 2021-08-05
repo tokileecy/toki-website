@@ -1,5 +1,3 @@
-import React, { createRef } from 'react'
-import ReactDom from 'react-dom'
 import * as THREE from 'three'
 import { css } from '@emotion/css'
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
@@ -55,6 +53,7 @@ class CSSBlock {
           this.pageLayers.home?.outAnimation?.()
           this.pageLayers.about?.inAnimation?.()
         } else if (prevPage === 'about' && page === 'home') {
+          this.pageLayers.about?.outAnimation?.()
           this.pageLayers.home?.inAnimation?.()
         }
       }
@@ -70,8 +69,8 @@ class CSSBlock {
     this.camera.position.z = 3000
     this.camera.position.y = -100
 
-    this.pageLayers.home?.init?.()
-    this.pageLayers.about?.init?.()
+    this.pageLayers.home?.init?.(this.heroImgState.page === 'home')
+    this.pageLayers.about?.init?.(this.heroImgState.page === 'about')
     this.resize()
   }
 

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import HeroImg from './HeroImg'
 import Nav from './Nav'
 import heroImgState, { Page } from '../../../HeroImgBlock/HeroImgState'
+import { useEffect } from 'react'
 
 const cssHomePageRoot = css`
   position: relative;
@@ -44,6 +45,11 @@ const defaultProps: HomePageProps = {
 function HomePage(props: HomePageProps): JSX.Element {
   const { syncHistory, syncTitle } = props
   const router = useRouter()
+
+  useEffect(() => {
+    const initPage = router?.pathname.replace(/\//g, '')
+    heroImgState.setPage(initPage)
+  }, [])
 
   return (
     <div className={cssHomePageRoot}>

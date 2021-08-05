@@ -5,7 +5,7 @@ export type PageLayerParent = THREE.Object3D | THREE.Group
 class PageLayer {
   parent?: THREE.Object3D
   group: THREE.Group
-  init?: () => void
+  init?: (isInitPage?: boolean) => void
   outAnimation?: () => void
   inAnimation?: () => void
 

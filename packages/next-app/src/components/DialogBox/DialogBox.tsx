@@ -103,7 +103,7 @@ export interface DialogBoxProps
   title?: string
 }
 
-const DialogBox = React.forwardRef(
+const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
   (props: DialogBoxProps, ref): JSX.Element => {
     const { className = '', children, title = '', animated = false } = props
 
@@ -111,12 +111,6 @@ const DialogBox = React.forwardRef(
     const [expandContent, setExpandContent] = useState(false)
     const [showContent, setShowContent] = useState(false)
     const [blink, setBlink] = useState(true)
-
-    const rootRef = useRef(null)
-
-    useImperativeHandle(ref, () => ({
-      /* animate: () => {}, */
-    }))
 
     useEffect(() => {
       if (animated === true) {
@@ -130,11 +124,15 @@ const DialogBox = React.forwardRef(
             }, 1000)
           }, 500)
         }, 0)
+      } else {
+        setExpandHeader(false)
+        setExpandContent(false)
+        setShowContent(false)
       }
     }, [animated])
     return (
       <div
-        ref={rootRef}
+        ref={ref}
         className={cx(
           cssRoot,
           {

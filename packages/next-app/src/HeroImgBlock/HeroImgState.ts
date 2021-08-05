@@ -2,6 +2,7 @@ import { makeObservable, observable, action } from 'mobx'
 
 export type Page = 'home' | 'about' | 'blog' | 'contact'
 
+const pages = ['home', 'about', 'blog', 'contact']
 
 export class HeroImgState {
   page: Page
@@ -13,8 +14,10 @@ export class HeroImgState {
     })
   }
 
-  setPage = (nextPage: Page): void => {
-    this.page = nextPage
+  setPage = (nextPage: string): void => {
+    if (pages.includes(nextPage)) {
+      this.page = nextPage as Page
+    }
   }
 }
 

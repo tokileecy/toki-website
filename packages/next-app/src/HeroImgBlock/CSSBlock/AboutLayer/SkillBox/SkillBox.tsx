@@ -1,45 +1,56 @@
-import React, { useState, useImperativeHandle } from 'react'
+import React, { useState, useImperativeHandle, RefObject } from 'react'
 import DialogBox from '../../../../components/DialogBox'
 import SubSkillBlock from '../../../../components/SubSkillBlock'
 import { css } from '@emotion/css'
 
 export type SkillBoxRefContent = {
   animate: () => void
+  reset: () => void
 }
 
-const SkillBox = React.forwardRef<SkillBoxRefContent>((props, ref) => {
-  const [animated, setAnimated] = useState(false)
+export type SkillBoxActionRef = RefObject<SkillBoxRefContent>
 
-  useImperativeHandle(ref, () => ({
-    animate: () => {
-      setAnimated(true)
-    },
-  }))
+export type SkillBoxProps = {
+  actionRef?: SkillBoxActionRef
+}
 
-  return (
-    <DialogBox
-      ref={{
-        current: '[Circular]',
-      }}
-      animated={animated}
-      title="SKILL"
-      className={css`
-        width: 400px;
-      `}
-    >
-      <SubSkillBlock
-        description="feqjfioqewjfoejfoeqwjfoewjofewjqoifewjpofewjqopfjeqwofjopqewjfopqewjfopeqwjfqeiwopfjopiqewfjopewqjfpowqejfoqewjfeqwjfopeqwjopfewjopfewjqopj"
-        skills={['React', 'Material-UI', 'Vue', 'Polymer']}
-        title="Framwork"
-      />
-      <SubSkillBlock
-        description="feqjfioqewjfoejfoeqwjfoewjofewjqoifewjpofewjqopfjeqwofjopqewjfopqewjfopeqwjfqeiwopfjopiqewfjopewqjfpowqejfoqewjfeqwjfopeqwjopfewjopfewjqopj"
-        skills={['React', 'Material-UI', 'Vue', 'Polymer']}
-        title="Framwork"
-      />
-    </DialogBox>
-  )
-})
+const SkillBox = React.forwardRef<HTMLDivElement, SkillBoxProps>(
+  (props: SkillBoxProps, ref) => {
+    const { actionRef } = props
+    const [animated, setAnimated] = useState(false)
+
+    useImperativeHandle(actionRef, () => ({
+      animate: () => {
+        setAnimated(true)
+      },
+      reset: () => {
+        setAnimated(false)
+      },
+    }))
+
+    return (
+      <DialogBox
+        ref={ref}
+        animated={animated}
+        title="SKILL"
+        className={css`
+          width: 400px;
+        `}
+      >
+        <SubSkillBlock
+          description="feqjfioqewjfoejfoeqwjfoewjofewjqoifewjpofewjqopfjeqwofjopqewjfopqewjfopeqwjfqeiwopfjopiqewfjopewqjfpowqejfoqewjfeqwjfopeqwjopfewjopfewjqopj"
+          skills={['React', 'Material-UI', 'Vue', 'Polymer']}
+          title="Framwork"
+        />
+        <SubSkillBlock
+          description="feqjfioqewjfoejfoeqwjfoewjofewjqoifewjpofewjqopfjeqwofjopqewjfopqewjfopeqwjfqeiwopfjopiqewfjopewqjfpowqejfoqewjfeqwjfopeqwjopfewjopfewjqopj"
+          skills={['React', 'Material-UI', 'Vue', 'Polymer']}
+          title="Framwork"
+        />
+      </DialogBox>
+    )
+  }
+)
 
 SkillBox.displayName = 'SkillBox'
 
