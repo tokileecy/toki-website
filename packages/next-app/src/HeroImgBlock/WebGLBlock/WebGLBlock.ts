@@ -22,12 +22,16 @@ class WebGLBlock {
   controls: OrbitControls | null
   _devicePixelRatio: number
   requestAnimationFrameId: number | null
+  composeRequestAnimationFrameId: number | null
+  iState: number
+  sphere: THREE.Mesh
 
   constructor(clock: THREE.Clock, rootElement: HTMLElement) {
     this.rootElement = rootElement
     this.rootElementRect = this.rootElement.getBoundingClientRect()
     this._devicePixelRatio = window.devicePixelRatio || 1
     this.clock = clock
+    this.iState = 0
 
     this.camera = new THREE.PerspectiveCamera(0, 0, 0, 0)
     this.camera.position.set(0, 0, 10)
@@ -44,7 +48,15 @@ class WebGLBlock {
 
     this.controls = new OrbitControls(this.camera, this.rootElement)
 
+    const matNormal = new THREE.MeshNormalMaterial()
+    const sphereGeo = new THREE.SphereBufferGeometry(0.5, 32, 32)
+    this.sphere = new THREE.Mesh(sphereGeo, matNormal)
+    this.sphere.scale.set(3, 3, 3)
+    this.sphere.position.set(0, 0, 1)
+    this.scene.add(this.sphere)
+
     this.requestAnimationFrameId = null
+    this.composeRequestAnimationFrameId = null
 
     this.composer = null
     this.pass = null
@@ -60,16 +72,8 @@ class WebGLBlock {
     directional.position.set(-1, 0.5, 0)
     this.scene.add(directional)
 
-    this._initObjs()
     this._initPostProcessing()
     this.resize()
-  }
-
-  animate(): void {
-    this.render()
-    this.requestAnimationFrameId = requestAnimationFrame(() => {
-      this.animate()
-    })
   }
 
   stopAnimate(): void {
@@ -103,21 +107,35 @@ class WebGLBlock {
   }
 
   render(): void {
-    const elapsed = this.clock.getElapsedTime()
-    this.passFinal && (this.passFinal.uniforms.iTime.value = elapsed)
-
     this.controls?.update()
     this.renderer.render(this.scene, this.camera)
+  }
+
+  animate(): void {
+    this.render()
+    this.requestAnimationFrameId = requestAnimationFrame(() => {
+      this.animate()
+    })
+  }
+
+  composerRender = (): void => {
+    const elapsed = this.clock.getElapsedTime()
+    // if (this.iState > 1) {
+    //   this.iState = 0
+    // } else {
+    //   this.iState += 0.08
+    // }
+
+    this.passFinal && (this.passFinal.uniforms.iTime.value = elapsed)
+    this.passFinal && (this.passFinal.uniforms.iState.value = this.iState)
     this.composer?.render()
   }
 
-  _initObjs(): void {
-    const matNormal = new THREE.MeshNormalMaterial()
-    const sphereGeo = new THREE.SphereBufferGeometry(0.5, 32, 32)
-    const sphere = new THREE.Mesh(sphereGeo, matNormal)
-    sphere.scale.set(3, 3, 3)
-    sphere.position.set(0, 0, 1)
-    this.scene.add(sphere)
+  composerAnimate = (): void => {
+    this.composerRender()
+    this.requestAnimationFrameId = requestAnimationFrame(() => {
+      this.composerAnimate()
+    })
   }
 
   _initPostProcessing(): void {
@@ -140,6 +158,7 @@ class WebGLBlock {
       uniforms: {
         tDiffuse: { type: 't', value: null },
         iTime: { type: 'f', value: 0.0 },
+        iState: { type: 'f', value: 0.0 },
         tNoise: { type: 't', value: new THREE.TextureLoader() },
       },
       vertexShader: VERTEX,

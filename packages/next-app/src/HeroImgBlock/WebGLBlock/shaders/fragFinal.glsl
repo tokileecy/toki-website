@@ -1,6 +1,7 @@
 uniform sampler2D tDiffuse;
 uniform sampler2D tNoise;
 uniform float iTime;
+uniform float iState;
 varying vec2 vUv;
 #define EdgeColor vec4(0.5, 0.7, 0.6, 1.0)
 #define BackgroundColor vec4(0, 0, 0, 1)
@@ -17,12 +18,15 @@ void main()
   float time = iTime * 6.0;
   vec2 uv = vUv;
 
+  float k = ShakeRange + iState * (1.0 - ShakeRange);
+  float h = ShakeRange + iState * (1.0 - ShakeRange1);
+
   vec2 uvs[5];
-  uvs[0] = uv + vec2(ShakeRange * sin(Period * uv.y + 5.0 * time) , ShakeRange * sin(Period * uv.x + 5.0 * time));
-  uvs[1] = uv + vec2(ShakeRange * sin(Period * uv.y + 1.047 * time) , ShakeRange * sin(Period * uv.x + 3.142 * time));
-  uvs[2] = uv + vec2(ShakeRange * sin(Period * uv.y - 3.0 * time) , ShakeRange * sin(Period * uv.x + 3.66 * time));
-  uvs[3] = uv + vec2(ShakeRange1 * sin(Period * uv.y + 2.094 * time) , ShakeRange1 * sin(Period * uv.x - 1.571 * time));
-  uvs[4] = uv + vec2(ShakeRange1 * sin(Period * uv.y - 0.555 * time) , ShakeRange1 * sin(Period * uv.x - 2.1111 * time));
+  uvs[0] = uv + vec2(k * sin(Period * uv.y + 5.0 * time) , ShakeRange * sin(Period * uv.x + 5.0 * time));
+  uvs[1] = uv + vec2(k * sin(Period * uv.y + 1.047 * time) , ShakeRange * sin(Period * uv.x + 3.142 * time));
+  uvs[2] = uv + vec2(k * sin(Period * uv.y - 3.0 * time) , ShakeRange * sin(Period * uv.x + 3.66 * time));
+  uvs[3] = uv + vec2(h * sin(Period * uv.y + 2.094 * time) , ShakeRange1 * sin(Period * uv.x - 1.571 * time));
+  uvs[4] = uv + vec2(h * sin(Period * uv.y - 0.555 * time) , ShakeRange1 * sin(Period * uv.x - 2.1111 * time));
   
   float edge = texture2D(tDiffuse, uvs[0]).r *
     texture2D(tDiffuse, uvs[1]).r * 
