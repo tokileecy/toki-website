@@ -8,8 +8,9 @@ import TWEEN from '@tweenjs/tween.js'
 import PageLayer from './PageLayer'
 import HomeLayer from './HomeLayer'
 import AboutLayer from './AboutLayer'
+import ContactLayer from './ContactLayer'
 
-export type PageLayerName = 'home' | 'about'
+export type PageLayerName = 'home' | 'about' | 'contact'
 
 class CSSBlock {
   clock: THREE.Clock
@@ -34,6 +35,7 @@ class CSSBlock {
     this.pageLayers = {
       home: new HomeLayer(this.group),
       about: new AboutLayer(this.group),
+      contact: new ContactLayer(this.group),
     }
     this.rootElement = rootElement
     this.rootElementRect = rootElement.getBoundingClientRect()
@@ -71,6 +73,7 @@ class CSSBlock {
 
     this.pageLayers.home?.init?.(this.heroImgState.page === 'home')
     this.pageLayers.about?.init?.(this.heroImgState.page === 'about')
+    this.pageLayers.contact?.init?.(this.heroImgState.page === 'contact')
     this.resize()
   }
 
