@@ -14,7 +14,7 @@ const cssHeader = css`
 const paddingRight = 10
 const cssTitle = css`
   padding: ${paddingRight}px;
-  color: black;
+  color: white;
   width: 100%;
   min-height: 20px;
   font-size: 32px;
@@ -64,7 +64,7 @@ const SubSkillBlock = (props: SubSkillBlockProps): JSX.Element => {
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  padding-right: 10px;
+                  padding-right: 5px;
 
                   &:last-child {
                     padding-right: 0;
@@ -73,8 +73,9 @@ const SubSkillBlock = (props: SubSkillBlockProps): JSX.Element => {
               >
                 <div
                   className={css`
-                    width: 30px;
-                    background-color: black;
+                    width: 20px;
+                    margin: 0 8px;
+                    background-color: rgba(0, 255, 255, 1);
                     height: 70px;
                   `}
                 ></div>

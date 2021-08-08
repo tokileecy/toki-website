@@ -5,8 +5,10 @@ import React, {
   useState,
   useEffect,
   PropsWithChildren,
+  ForwardedRef,
 } from 'react'
 import { cx, css, keyframes } from '@emotion/css'
+import Box from '../Box'
 
 const whiteBackground = keyframes`
   0% {
@@ -35,7 +37,7 @@ const cssRoot = css`
   font-size: 30px;
   font-weight: bold;
   color: #2b2b2b;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+  text-shadow: 0 0 7px rgba(0, 255, 255, 0.6);
   transform: translateX(0);
   transition: transform 0.5s;
 
@@ -46,7 +48,7 @@ const cssRoot = css`
 `
 
 const cssHeader = css`
-  background-color: rgba(0, 255, 255, 0.95);
+  background-color: rgba(0, 255, 255, 0.6);
   width: 40%;
   /* font-size: 32px; */
   height: 15px;
@@ -75,7 +77,9 @@ const cssContent = css`
 
 const cssContentContainer = css`
   padding: 10px;
-  background-color: rgba(0, 255, 255, 0.95);
+  /* background-color: rgba(0, 255, 255, 0.95); */
+  background-color: transparent;
+  color: white;
   transition: transform 1s;
   transform-origin: left;
 
@@ -104,7 +108,7 @@ export interface DialogBoxProps
 }
 
 const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
-  (props: DialogBoxProps, ref): JSX.Element => {
+  (props: DialogBoxProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
     const { className = '', children, title = '', animated = false } = props
 
     const [expandHeader, setExpandHeader] = useState(false)
@@ -141,13 +145,13 @@ const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
           className
         )}
       >
-        <div
+        {/* <div
           className={cx(cssHeader, {
             expanded: expandHeader,
             collapsed: !expandHeader,
           })}
-        ></div>
-        <div
+        ></div> */}
+        <Box
           className={cx(cssContentContainer, {
             expanded: expandContent,
             collapsed: !expandContent,
@@ -162,7 +166,7 @@ const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
             <div className={cssTitle}>{title}</div>
             {children}
           </div>
-        </div>
+        </Box>
       </div>
     )
   }

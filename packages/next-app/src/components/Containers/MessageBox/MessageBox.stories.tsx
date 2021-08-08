@@ -28,7 +28,7 @@ const eventHandler = (event: string) => {
 Object.values(EVENTS).forEach((event) => emitter.on(event, eventHandler(event)))
 
 export default {
-  title: 'next-app/MessageBox',
+  title: 'next-app/Containers/MessageBox',
   component: MessageBox,
   argTypes: {},
 } as Meta
@@ -80,7 +80,13 @@ const Template: Story<MessageBoxProps> = (args) => {
             padding: 20px;
           `}
         >
-          <MessageBox ref={messageBoxRef} {...args}>
+          <MessageBox
+            ref={messageBoxRef}
+            {...args}
+            className={css`
+              padding: 50px;
+            `}
+          >
             messageBox
           </MessageBox>
         </div>
@@ -91,4 +97,4 @@ const Template: Story<MessageBoxProps> = (args) => {
 
 export const NormalMessageBox = Template.bind({})
 
-NormalMessageBox.args = { collapsed: false }
+NormalMessageBox.args = {}

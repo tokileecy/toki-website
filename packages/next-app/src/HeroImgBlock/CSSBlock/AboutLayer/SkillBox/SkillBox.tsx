@@ -1,5 +1,5 @@
 import React, { useState, useImperativeHandle, RefObject } from 'react'
-import DialogBox from '../../../../components/DialogBox'
+import DialogBox from '../../../../components/Containers/DialogBox'
 import SubSkillBlock from '../../../../components/SubSkillBlock'
 import { css } from '@emotion/css'
 

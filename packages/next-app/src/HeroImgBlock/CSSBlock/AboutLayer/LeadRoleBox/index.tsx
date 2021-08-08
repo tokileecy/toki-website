@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import MessageBox from '../../../../components/MessageBox'
+import MessageBox from '../../../../components/Containers/MessageBox'
 
 export default function LeadRoleBox(): JSX.Element {
   return (

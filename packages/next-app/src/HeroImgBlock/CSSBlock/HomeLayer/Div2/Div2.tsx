@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import MessageBox from '../../../../components/MessageBox'
+import MessageBox from '../../../../components/Containers/MessageBox'
 
 export function Div2(): JSX.Element {
   return (

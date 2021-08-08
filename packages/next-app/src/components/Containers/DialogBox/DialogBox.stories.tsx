@@ -1,13 +1,11 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import { css } from '@emotion/css'
-import DialogBox, { DialogBoxProps, DialogBoxRef } from './DialogBox'
-import SubSkillBlock from '../SubSkillBlock'
-
-const dialogBoxRef: DialogBoxRef = React.createRef()
+import DialogBox, { DialogBoxProps } from './DialogBox'
+import SubSkillBlock from '../../SubSkillBlock'
 
 export default {
-  title: 'next-app/DialogBox',
+  title: 'next-app/ContainersDialogBox',
   component: DialogBox,
   argTypes: {},
 } as Meta
@@ -35,7 +33,7 @@ const Template: Story<DialogBoxProps> = (args) => {
         `}
       >
         <div className={css``}>
-          <DialogBox ref={dialogBoxRef} {...args}>
+          <DialogBox {...args}>
             <SubSkillBlock
               title={'Framwork'}
               description={
