@@ -126,7 +126,7 @@ const navItems = [
     nextLink: false,
   },
   {
-    ...pageInfos.blog,
+    ...pageInfos.work,
     nextLink: false,
   },
   {

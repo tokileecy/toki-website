@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import VERTEX from './shaders/vert.glsl'
 import FRAGMENT from './shaders/frag.glsl'
@@ -19,7 +19,7 @@ class WebGLBlock {
   pass: ShaderPass | null
   passFinal: ShaderPass | null
   cameraWrap: null
-  controls: OrbitControls | null
+  // controls: OrbitControls | null
   _devicePixelRatio: number
   requestAnimationFrameId: number | null
   composeRequestAnimationFrameId: number | null
@@ -46,7 +46,7 @@ class WebGLBlock {
 
     this.scene = new THREE.Scene()
 
-    this.controls = new OrbitControls(this.camera, this.rootElement)
+    // this.controls = new OrbitControls(this.camera, this.rootElement)
 
     const matNormal = new THREE.MeshNormalMaterial()
     const sphereGeo = new THREE.SphereBufferGeometry(0.5, 32, 32)
@@ -107,7 +107,7 @@ class WebGLBlock {
   }
 
   render(): void {
-    this.controls?.update()
+    // this.controls?.update()
     this.renderer.render(this.scene, this.camera)
   }
 

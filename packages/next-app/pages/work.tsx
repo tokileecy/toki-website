@@ -6,7 +6,7 @@ export default function Blog(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{pageInfos.blog.documentTitle}</title>
+        <title>{pageInfos.work.documentTitle}</title>
       </Head>
       <HomePage />
     </>

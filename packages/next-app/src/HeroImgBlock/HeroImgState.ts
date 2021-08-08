@@ -1,8 +1,8 @@
 import { makeObservable, observable, action } from 'mobx'
 
-export type Page = 'home' | 'about' | 'blog' | 'contact'
+export type Page = 'home' | 'about' | 'work' | 'contact'
 
-const pages = ['home', 'about', 'blog', 'contact']
+const pages = ['home', 'about', 'work', 'contact']
 
 export class HeroImgState {
   page: Page

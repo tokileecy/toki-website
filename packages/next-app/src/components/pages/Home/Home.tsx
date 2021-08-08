@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 
 const cssHomePageRoot = css`
   position: relative;
+  z-index: 20;
   width: 100%;
   height: 100%;
   @supports (height: fill-available) or (height: -webkit-fill-available) or
@@ -30,6 +31,8 @@ const cssHomeContainer = css`
   z-index: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
 `
 
 export interface HomePageProps {
@@ -55,19 +58,25 @@ function HomePage(props: HomePageProps): JSX.Element {
     <div className={cssHomePageRoot}>
       <HeroImg className={cssHeroImg} />
       <div className={cssHomeContainer}>
-        <main
+        {/* <main
           className={css`
             flex: 1 0 auto;
           `}
-        ></main>
-        <Nav
-          initPage={router?.pathname}
-          syncHistory={syncHistory}
-          onPageChange={(nextPage: Page) => {
-            heroImgState.setPage(nextPage)
-          }}
-          syncTitle={syncTitle}
-        />
+        ></main> */}
+        <div
+          className={css`
+            pointer-events: auto;
+          `}
+        >
+          <Nav
+            initPage={router?.pathname}
+            syncHistory={syncHistory}
+            onPageChange={(nextPage: Page) => {
+              heroImgState.setPage(nextPage)
+            }}
+            syncTitle={syncTitle}
+          />
+        </div>
       </div>
     </div>
   )

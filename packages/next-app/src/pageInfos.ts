@@ -21,11 +21,11 @@ const pageInfos: {
     text: 'About',
     documentTitle: 'About | Tokileecy',
   },
-  blog: {
-    name: 'blog',
-    href: '/blog',
-    text: 'Blog',
-    documentTitle: 'Blog | Tokileecy',
+  work: {
+    name: 'work',
+    href: '/work',
+    text: 'Work',
+    documentTitle: 'Work | Tokileecy',
   },
   contact: {
     name: 'contact',

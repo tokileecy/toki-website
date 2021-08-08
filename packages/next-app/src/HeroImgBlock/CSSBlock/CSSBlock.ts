@@ -9,9 +9,9 @@ import PageLayer from './PageLayer'
 import HomeLayer from './HomeLayer'
 import AboutLayer from './AboutLayer'
 import ContactLayer from './ContactLayer'
+import WorkLayer from './WorkLayer'
 
-export type PageLayerName = 'home' | 'about' | 'contact'
-
+export type PageLayerName = Page
 class CSSBlock {
   clock: THREE.Clock
   scene: THREE.Scene
@@ -36,6 +36,7 @@ class CSSBlock {
       home: new HomeLayer(this.group),
       about: new AboutLayer(this.group),
       contact: new ContactLayer(this.group),
+      work: new WorkLayer(this.group),
     }
     this.rootElement = rootElement
     this.rootElementRect = rootElement.getBoundingClientRect()
@@ -51,12 +52,24 @@ class CSSBlock {
     reaction(
       () => this.heroImgState.page,
       (page: Page, prevPage: Page) => {
-        if (prevPage === 'home' && page === 'about') {
+        if (prevPage === 'home' && page !== 'home') {
           this.pageLayers.home?.outAnimation?.()
-          this.pageLayers.about?.inAnimation?.()
-        } else if (prevPage === 'about' && page === 'home') {
+        } else if (prevPage === 'about' && page !== 'about') {
           this.pageLayers.about?.outAnimation?.()
+        } else if (prevPage === 'work' && page !== 'work') {
+          this.pageLayers.work?.outAnimation?.()
+        } else if (prevPage === 'contact' && page !== 'contact') {
+          this.pageLayers.contact?.outAnimation?.()
+        }
+
+        if (prevPage !== 'home' && page === 'home') {
           this.pageLayers.home?.inAnimation?.()
+        } else if (prevPage !== 'about' && page === 'about') {
+          this.pageLayers.about?.inAnimation?.()
+        } else if (prevPage !== 'work' && page === 'work') {
+          this.pageLayers.work?.inAnimation?.()
+        } else if (prevPage !== 'contact' && page === 'contact') {
+          this.pageLayers.contact?.inAnimation?.()
         }
       }
     )
@@ -74,6 +87,7 @@ class CSSBlock {
     this.pageLayers.home?.init?.(this.heroImgState.page === 'home')
     this.pageLayers.about?.init?.(this.heroImgState.page === 'about')
     this.pageLayers.contact?.init?.(this.heroImgState.page === 'contact')
+    this.pageLayers.work?.init?.(this.heroImgState.page === 'work')
     this.resize()
   }
 
