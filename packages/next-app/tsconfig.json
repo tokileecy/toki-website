@@ -22,7 +22,8 @@
   },
   "include": [
     "src",
-    "type-glsl.d.ts"
+    "type-glsl.d.ts",
+    "custom.d.ts"
   ],
   "exclude": [
     "node_modules",
