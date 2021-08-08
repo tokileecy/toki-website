@@ -45,6 +45,13 @@ class CSSBlock {
     this._devicePixelRatio = window.devicePixelRatio ?? 1
     this.scene.add(this.group)
     this.renderer = new CSS3DRenderer()
+
+    this.renderer.domElement.classList.add(css`
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+    `)
+
     this.camera = new THREE.PerspectiveCamera(0, 0, 0, 0)
     this.heroImgState = heroImgState
     this.requestAnimationFrameId = null
@@ -76,11 +83,6 @@ class CSSBlock {
   }
 
   init = (): void => {
-    this.renderer.domElement.classList.add(css`
-      position: absolute;
-      z-index: 10;
-    `)
-
     this.camera.position.z = 3000
     this.camera.position.y = -100
 

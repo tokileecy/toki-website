@@ -3,6 +3,10 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 
 injectGlobal`
+  html {
+    overflow: hidden;
+  }
+  
   html,
   body {
     padding: 0;

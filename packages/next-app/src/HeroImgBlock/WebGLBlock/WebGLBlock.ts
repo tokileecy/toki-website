@@ -41,6 +41,10 @@ class WebGLBlock {
       antialias: true,
     })
 
+    this.renderer.domElement.addEventListener('wheel', (e) => {
+      e.preventDefault()
+    })
+
     this.renderer.context.getExtension('OES_standard_derivatives')
     this.renderer.setClearColor(0xffffff, 0)
 
