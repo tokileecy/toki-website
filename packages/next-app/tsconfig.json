@@ -21,7 +21,9 @@
     "isolatedModules": true
   },
   "include": [
-    "src"
+    "src",
+    "type-glsl.d.ts",
+    "custom.d.ts"
   ],
   "exclude": [
     "node_modules",
