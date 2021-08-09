@@ -48,7 +48,7 @@ class CSSBlock {
 
     this.renderer.domElement.classList.add(css`
       position: absolute;
-      z-index: 10;
+      z-index: 30;
       pointer-events: none;
     `)
 
