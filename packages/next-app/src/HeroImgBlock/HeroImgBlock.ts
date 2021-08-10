@@ -20,7 +20,7 @@ class HomeImgBlock {
       console.warn(`graphRoot.current should not be ${graphRoot.current}`)
     }
 
-    this.clock = new THREE.Clock()
+    this.clock = heroImgState.clock
     this.webGlBlock = new WebGLBlock(this.clock, this.rootElement)
     this.cssBlock = new CSSBlock(this.clock, this.rootElement)
     this.resizeObserver = new ResizeObserver((entries) => {
