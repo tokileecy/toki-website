@@ -1,6 +1,60 @@
 import * as THREE from 'three'
 import heroImgState from '../HeroImgState'
+import gridVertShader from './shaders/grid/vert.glsl'
+import gridFragShader from './shaders/grid/frag.glsl'
+import Color from 'color'
 
+const createGrid3D = (
+  width = 1,
+  height = 1,
+  depth = 1,
+  widthSegments = 1,
+  heightSegments = 1,
+  depthSegments = 1
+) => {
+  const deltaX = width / widthSegments
+  const deltaY = height / heightSegments
+  const deltaZ = depth / depthSegments
+
+  const positions = []
+  const indices = []
+  const maxVertextX = widthSegments + 1
+  const maxVertextY = heightSegments + 1
+  const maxVertextZ = depthSegments + 1
+  for (let i = 0; i < maxVertextX; i++) {
+    for (let j = 0; j < maxVertextY; j++) {
+      for (let k = 0; k < maxVertextZ; k++) {
+        const index = k + j * maxVertextZ + i * maxVertextY * maxVertextZ
+        positions.push(
+          i * deltaX - width / 2,
+          j * deltaY - height / 2,
+          k * deltaZ - depth / 2
+        )
+
+        if (k !== 0) {
+          indices.push(index - 1, index)
+        }
+
+        if (j !== 0) {
+          indices.push(index - j * maxVertextZ, index)
+        }
+
+        if (i !== 0) {
+          indices.push(index - i * maxVertextY * maxVertextZ, index)
+        }
+      }
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry()
+  geometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(new Float32Array(positions), 3)
+  )
+  geometry.setIndex(indices)
+
+  return geometry
+}
 class WebGLBlock {
   rootElement: HTMLElement
   rootElementRect: DOMRect
@@ -17,9 +71,9 @@ class WebGLBlock {
 
     this.iState = 0
 
-    heroImgState.scene.fog = new THREE.Fog(0x000000, 50, 3000)
+    heroImgState.scene.fog = new THREE.Fog(0x000000, 50, 1000)
 
-    const geometry = new THREE.BoxGeometry(1000, 1000, 1000, 50, 50, 50)
+    const geometry = new THREE.BoxGeometry(800, 800, 1000, 60, 60, 40)
 
     const wireframe = new THREE.WireframeGeometry(geometry)
 
@@ -35,7 +89,32 @@ class WebGLBlock {
     line.material.opacity = 0.25
     line.material.transparent = true
 
-    heroImgState.scene.add(line)
+    const gridGeo = createGrid3D(1000, 1000, 4000, 20, 20, 20)
+
+    const uniforms = THREE.UniformsUtils.merge([
+      THREE.UniformsLib.fog,
+      {
+        lineWidth: { value: 1 },
+        alpha: {
+          value: 0.05,
+        },
+        color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+      },
+    ])
+
+    const girdMaterial = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: gridVertShader,
+      fragmentShader: gridFragShader,
+      transparent: true,
+      fog: true,
+      linewidth: 10,
+    })
+
+    const grid = new THREE.LineSegments(gridGeo, girdMaterial)
+    grid.position.set(0, 0, 300)
+
+    heroImgState.scene.add(grid)
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -75,8 +154,8 @@ class WebGLBlock {
     const renderHeight = this.rootElementRect.height
 
     const FOV = 45
-    const NEAR = 500
-    const FAR = 1000
+    const NEAR = 10
+    const FAR = 2000
     const ASPECT = renderWidth / renderHeight
 
     heroImgState.camera.fov = FOV
@@ -96,6 +175,7 @@ class WebGLBlock {
   }
 
   animate = (): void => {
+    console.log('!')
     this.render()
     this.requestAnimationFrameId = requestAnimationFrame(() => {
       this.animate()

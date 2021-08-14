@@ -16,7 +16,7 @@ class ContactLayer extends PageLayer {
     this.speed = 2
     this.contactFormBox = new ReactCSSObjectWrapper(ContactFormBox)
     this.originContactFormBoxPos = new THREE.Vector3(0, 0, 0)
-    this.outContactFormBoxPos = new THREE.Vector3(1000, 0, 0)
+    this.outContactFormBoxPos = new THREE.Vector3(0, 1000, 0)
   }
 
   init = (isInitPage?: boolean): void => {
