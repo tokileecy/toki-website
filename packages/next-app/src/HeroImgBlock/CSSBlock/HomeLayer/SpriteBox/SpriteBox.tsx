@@ -2,6 +2,7 @@ import CircleWebGLBlock from './CircleWebGLBlock'
 import { useRef, useEffect } from 'react'
 import heroImgState from '../../../HeroImgState'
 import { css } from '@emotion/css'
+import Box from '../../../../components/Containers/Box'
 
 const SpriteBox = (): JSX.Element => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -34,16 +35,17 @@ const SpriteBox = (): JSX.Element => {
     }
   }, [])
   return (
-    <div
+    <Box
       className={css`
+        background-color: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 250px;
-        height: 150px;
+        height: 250px;
       `}
       ref={containerRef}
-    ></div>
+    ></Box>
   )
 }
 

@@ -7,15 +7,21 @@ const pages = ['home', 'about', 'work', 'contact']
 export class HeroImgState {
   page: Page
   clock: THREE.Clock
+  scene: THREE.Scene
+  camera: THREE.PerspectiveCamera
 
   constructor() {
     this.page = 'home'
     this.clock = new THREE.Clock()
+    this.scene = new THREE.Scene()
+    this.camera = new THREE.PerspectiveCamera(0, 0, 0, 0)
 
     makeObservable(this, {
       page: observable,
       setPage: action,
       clock: observable.ref,
+      scene: observable.ref,
+      camera: observable.ref,
     })
   }
 

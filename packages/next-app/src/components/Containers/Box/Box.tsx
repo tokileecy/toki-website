@@ -1,9 +1,17 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, {
+  ForwardedRef,
+  forwardRef,
+  DetailedHTMLProps,
+  HTMLAttributes,
+} from 'react'
 import { cx, css } from '@emotion/css'
 import Corners from '../Corners'
 import Color from 'color'
 
-export type BoxProps = React.HTMLAttributes<HTMLDivElement>
+export type BoxProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>
 
 const bgColor = new Color('#22b6db')
 

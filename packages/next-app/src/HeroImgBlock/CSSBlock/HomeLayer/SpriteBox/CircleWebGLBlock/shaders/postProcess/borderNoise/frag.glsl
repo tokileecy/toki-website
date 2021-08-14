@@ -3,8 +3,8 @@ uniform sampler2D tShadow;
 uniform vec2 iResolution;
 varying vec2 vUv;
 
-#define AcceptNormalRange (float(100.0 / iResolution.y))
-#define AcceptDepthRange (float(100.0 / iResolution.y))
+#define AcceptNormalRange (float(10.0 / iResolution.y))
+#define AcceptDepthRange (float(10.0 / iResolution.y))
 
 float checkIsOverlap(vec4 sample1, vec4 sample2)
 {
@@ -19,7 +19,7 @@ float checkIsOverlap(vec4 sample1, vec4 sample2)
 
 void main()
 {
-  float width = 0.1;
+  float width = 0.05;
   vec4 sample0 = texture2D(tDiffuse, vUv);
   vec4 sample1 = texture2D(tDiffuse, vUv + (vec2(width, width) / iResolution.xy));
   vec4 sample2 = texture2D(tDiffuse, vUv + (vec2(-width, -width) / iResolution.xy));

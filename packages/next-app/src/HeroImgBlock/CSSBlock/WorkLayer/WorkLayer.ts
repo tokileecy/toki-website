@@ -4,6 +4,7 @@ import WorkBlockBox from './WorkBlockBox'
 import RecentlyBox from './RecentlyBox'
 import TWEEN from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
+import { observable, computed, autorun } from 'mobx'
 
 class WorkLayer extends PageLayer {
   speed: number
@@ -16,17 +17,18 @@ class WorkLayer extends PageLayer {
 
   constructor(parent?: PageLayerParent) {
     super(parent)
-    this.speed = 8
+    this.speed = 2
     this.workFormBox = new ReactCSSObjectWrapper(WorkBlockBox)
     this.recentlyBox = new ReactCSSObjectWrapper(RecentlyBox)
-    this.originWorkBoxPos = new THREE.Vector3(800, 0, 0)
-    this.outWorkBoxPos = new THREE.Vector3(3000, 0, 0)
-    this.originRecentlyBoxPos = new THREE.Vector3(-1100, -100, 0)
-    this.outRecentlyBoxPos = new THREE.Vector3(-3000, -100, 0)
+    this.originWorkBoxPos = new THREE.Vector3(400, 0, 0)
+    this.originRecentlyBoxPos = new THREE.Vector3(-400, -50, 0)
+    this.outWorkBoxPos = new THREE.Vector3(1000, 0, 0)
+    this.outRecentlyBoxPos = new THREE.Vector3(-1000, -50, 0)
   }
 
   init = (isInitPage?: boolean): void => {
     if (isInitPage) {
+      this.workFormBox.object.rotateX(Math.PI / 4)
       this.workFormBox.object.position.set(
         this.originWorkBoxPos.x,
         this.originWorkBoxPos.y,
@@ -38,6 +40,7 @@ class WorkLayer extends PageLayer {
         this.originRecentlyBoxPos.z
       )
     } else {
+      this.workFormBox.object.rotateX(Math.PI / 4)
       this.workFormBox.object.position.set(
         this.outWorkBoxPos.x,
         this.outWorkBoxPos.y,
@@ -58,7 +61,20 @@ class WorkLayer extends PageLayer {
     return distance / this.speed
   }
 
-  outAnimation = (): void => {
+  outAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      workFormBoxFinished: false,
+      recentlyBoxFinished: false,
+    })
+
+    autorun(() => {
+      if (
+        animationState.workFormBoxFinished &&
+        animationState.recentlyBoxFinished
+      ) {
+        onComplete?.()
+      }
+    })
     const workBoxCurrentPos = this.workFormBox.object.position.clone()
     const workBoxDestinationPos = this.outWorkBoxPos.clone()
 
@@ -67,6 +83,7 @@ class WorkLayer extends PageLayer {
       workBoxDestinationPos
     )
 
+    this.workFormBox.object.rotateX(Math.PI / 4)
     new TWEEN.Tween(this.workFormBox.object.position)
       .to(workBoxDestinationPos, workBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
@@ -86,7 +103,21 @@ class WorkLayer extends PageLayer {
       .start()
   }
 
-  inAnimation = (): void => {
+  inAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      workFormBoxFinished: false,
+      recentlyBoxFinished: false,
+    })
+
+    autorun(() => {
+      if (
+        animationState.workFormBoxFinished &&
+        animationState.recentlyBoxFinished
+      ) {
+        onComplete?.()
+      }
+    })
+
     const workBoxCurrentPos = this.workFormBox.object.position.clone()
     const workBoxDestinationPos = this.originWorkBoxPos.clone()
     const workBoxDuration = this.getDuration(
@@ -94,10 +125,14 @@ class WorkLayer extends PageLayer {
       workBoxDestinationPos
     )
 
+    this.workFormBox.object.rotateX(Math.PI / 4)
     new TWEEN.Tween(this.workFormBox.object.position)
       .to(workBoxDestinationPos, workBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.workFormBoxFinished = false
+      })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
     const recentlyBoxDestinationPos = this.originRecentlyBoxPos.clone()
@@ -111,6 +146,9 @@ class WorkLayer extends PageLayer {
       .to(recentlyBoxDestinationPos, recentlyBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.recentlyBoxFinished = false
+      })
   }
 }
 

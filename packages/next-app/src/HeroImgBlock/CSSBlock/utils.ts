@@ -2,7 +2,8 @@ import { createElement, createRef, FC, RefObject } from 'react'
 import ReactDom from 'react-dom'
 import { CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
 
-export const ratio = 1440 / 489.27
+export const ratio = 1
+// export const ratio = 1440 / 489.27
 
 export class ReactCSSObjectWrapper<T> {
   actionRef: RefObject<T>

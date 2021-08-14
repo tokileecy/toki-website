@@ -2,13 +2,15 @@ import * as THREE from 'three'
 import CSSBlock from './CSSBlock'
 import WebGLBlock from './WebGLBlock'
 import heroImgState, { Page } from './HeroImgState'
+import TWEEN from '@tweenjs/tween.js'
+import { getDuration } from './utils'
 
 type GraphRootElementRef = { current: HTMLElement | null }
 
 class HomeImgBlock {
+  heroImgState
   resizeObserver: ResizeObserver
   rootElement: HTMLElement
-  clock: THREE.Clock
   webGlBlock: WebGLBlock
   cssBlock: CSSBlock
 
@@ -20,9 +22,10 @@ class HomeImgBlock {
       console.warn(`graphRoot.current should not be ${graphRoot.current}`)
     }
 
-    this.clock = heroImgState.clock
-    this.webGlBlock = new WebGLBlock(this.clock, this.rootElement)
-    this.cssBlock = new CSSBlock(this.clock, this.rootElement)
+    this.heroImgState = heroImgState
+    this.heroImgState.camera.position.z = 1000
+    this.webGlBlock = new WebGLBlock(this.rootElement)
+    this.cssBlock = new CSSBlock(this.rootElement)
     this.resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.contentBoxSize) {
@@ -42,7 +45,7 @@ class HomeImgBlock {
     // this.webGlBlock.animate()
     // this.webGlBlock.composerRender()
     // this.webGlBlock.composerAnimate()
-    this.cssBlock.animate()
+    // this.cssBlock.animate()
     this.cssBlock.render()
     this.resize()
   }
@@ -62,6 +65,53 @@ class HomeImgBlock {
 
   setPage = (nextPage: Page): void => {
     heroImgState.page = nextPage
+  }
+
+  cameraAnimation1 = (): void => {
+    const originCameraPosition = new THREE.Vector3(0, 0, 1000)
+    const nextCameraPosition = new THREE.Vector3(0, 0, 0)
+    const cameraCurrentPos = this.heroImgState.camera.position.clone()
+    const cameraDestinationPos = nextCameraPosition.clone()
+
+    this.webGlBlock.animate()
+    this.cssBlock.animate()
+    const cameraDuration = getDuration(
+      cameraCurrentPos,
+      cameraDestinationPos,
+      2
+    )
+
+    new TWEEN.Tween(this.heroImgState.camera.position)
+      .to(cameraDestinationPos, cameraDuration)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .start()
+      .onComplete(() => {
+        this.webGlBlock.stopAnimate()
+        this.cssBlock.stopAnimate()
+      })
+  }
+
+  cameraAnimation2 = (): void => {
+    const originCameraPosition = new THREE.Vector3(0, 0, 1000)
+    const nextCameraPosition = new THREE.Vector3(0, 0, 1000)
+    const cameraCurrentPos = this.heroImgState.camera.position.clone()
+    const cameraDestinationPos = nextCameraPosition.clone()
+    this.webGlBlock.animate()
+    this.cssBlock.animate()
+    const cameraDuration = getDuration(
+      cameraCurrentPos,
+      cameraDestinationPos,
+      2
+    )
+
+    new TWEEN.Tween(this.heroImgState.camera.position)
+      .to(cameraDestinationPos, cameraDuration)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .start()
+      .onComplete(() => {
+        this.webGlBlock.stopAnimate()
+        this.cssBlock.stopAnimate()
+      })
   }
 }
 

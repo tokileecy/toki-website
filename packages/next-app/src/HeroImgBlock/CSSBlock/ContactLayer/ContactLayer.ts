@@ -3,6 +3,7 @@ import PageLayer, { PageLayerParent } from '../PageLayer'
 import ContactFormBox from './ContactFormBox'
 import TWEEN from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
+import { observable, autorun } from 'mobx'
 
 class ContactLayer extends PageLayer {
   speed: number
@@ -12,10 +13,10 @@ class ContactLayer extends PageLayer {
 
   constructor(parent?: PageLayerParent) {
     super(parent)
-    this.speed = 8
+    this.speed = 2
     this.contactFormBox = new ReactCSSObjectWrapper(ContactFormBox)
     this.originContactFormBoxPos = new THREE.Vector3(0, 0, 0)
-    this.outContactFormBoxPos = new THREE.Vector3(3000, 0, 0)
+    this.outContactFormBoxPos = new THREE.Vector3(1000, 0, 0)
   }
 
   init = (isInitPage?: boolean): void => {
@@ -40,7 +41,16 @@ class ContactLayer extends PageLayer {
     return distance / this.speed
   }
 
-  outAnimation = (): void => {
+  outAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      contactFormFinished: false,
+    })
+
+    autorun(() => {
+      if (animationState.contactFormFinished) {
+        onComplete?.()
+      }
+    })
     const contactFormBoxCurrentPos = this.contactFormBox.object.position.clone()
     const contactFormBoxDestinationPos = this.outContactFormBoxPos.clone()
 
@@ -53,9 +63,21 @@ class ContactLayer extends PageLayer {
       .to(contactFormBoxDestinationPos, contactFormBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.contactFormFinished = true
+      })
   }
 
-  inAnimation = (): void => {
+  inAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      contactFormFinished: false,
+    })
+
+    autorun(() => {
+      if (animationState.contactFormFinished) {
+        onComplete?.()
+      }
+    })
     const contactFormBoxCurrentPos = this.contactFormBox.object.position.clone()
     const contactFormBoxDestinationPos = this.originContactFormBoxPos.clone()
     const contactFormBoxDuration = this.getDuration(
@@ -67,6 +89,9 @@ class ContactLayer extends PageLayer {
       .to(contactFormBoxDestinationPos, contactFormBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.contactFormFinished = true
+      })
   }
 }
 

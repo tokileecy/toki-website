@@ -5,6 +5,7 @@ import LeadRoleBox from './LeadRoleBox'
 import RecentlyBox from './RecentlyBox'
 import { ReactCSSObjectWrapper } from '../utils'
 import TWEEN from '@tweenjs/tween.js'
+import { observable, autorun } from 'mobx'
 
 class HomeLayer extends PageLayer {
   speed: number
@@ -20,17 +21,17 @@ class HomeLayer extends PageLayer {
 
   constructor(parent?: PageLayerParent) {
     super(parent)
-    this.speed = 8
+    this.speed = 2
     this.skillBox = new ReactCSSObjectWrapper<SkillBoxRefContent>(SkillBox)
     this.leadRoleBox = new ReactCSSObjectWrapper(LeadRoleBox)
     this.recentlyBox = new ReactCSSObjectWrapper(RecentlyBox)
 
-    this.originSkillBox = new THREE.Vector3(800, 200, 0)
-    this.outOriginSkillBox = new THREE.Vector3(800, 200, 0)
-    this.originLeadRolBoxPos = new THREE.Vector3(-1100, 700, 0)
-    this.outLeadRolBoxPos = new THREE.Vector3(-3000, 700, 0)
-    this.originRecentlyBoxPos = new THREE.Vector3(-1100, -100, 0)
-    this.outRecentlyBoxPos = new THREE.Vector3(-3000, -100, 0)
+    this.originSkillBox = new THREE.Vector3(400, 50, 0)
+    this.originLeadRolBoxPos = new THREE.Vector3(-500, 200, 0)
+    this.originRecentlyBoxPos = new THREE.Vector3(-500, -100, 0)
+    this.outOriginSkillBox = new THREE.Vector3(1100, 200, 0)
+    this.outLeadRolBoxPos = new THREE.Vector3(-1100, 700, 0)
+    this.outRecentlyBoxPos = new THREE.Vector3(-1100, -100, 0)
   }
 
   init = (isInitPage?: boolean): void => {
@@ -78,7 +79,23 @@ class HomeLayer extends PageLayer {
     return distance / this.speed
   }
 
-  inAnimation = (): void => {
+  inAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      skillFinished: false,
+      leadRolFinished: false,
+      recentlyBoxFinished: false,
+    })
+
+    autorun(() => {
+      if (
+        animationState.skillFinished &&
+        animationState.leadRolFinished &&
+        animationState.recentlyBoxFinished
+      ) {
+        onComplete?.()
+      }
+    })
+
     this.skillBox.object.position.set(
       this.originSkillBox.x,
       this.originSkillBox.y,
@@ -98,6 +115,9 @@ class HomeLayer extends PageLayer {
       .to(leadRoleBoxDestinationPos, leadRoleBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.leadRolFinished = true
+      })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
     const recentlyBoxDestinationPos = this.originRecentlyBoxPos.clone()
@@ -111,9 +131,26 @@ class HomeLayer extends PageLayer {
       .to(recentlyBoxDestinationPos, recentlyBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.recentlyBoxFinished = true
+      })
   }
 
-  outAnimation = (): void => {
+  outAnimation = (onComplete?: () => void): void => {
+    const animationState = observable({
+      leadRolFinished: false,
+      recentlyBoxFinished: false,
+    })
+
+    autorun(() => {
+      if (
+        animationState.leadRolFinished &&
+        animationState.recentlyBoxFinished
+      ) {
+        onComplete?.()
+      }
+    })
+
     this.skillBox.object.position.set(
       this.outOriginSkillBox.x,
       this.outOriginSkillBox.y,
@@ -134,6 +171,9 @@ class HomeLayer extends PageLayer {
       .to(leadRoleBoxDestinationPos, leadRoleBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.leadRolFinished = true
+      })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
     const recentlyBoxDestinationPos = this.outRecentlyBoxPos.clone()
@@ -147,6 +187,9 @@ class HomeLayer extends PageLayer {
       .to(recentlyBoxDestinationPos, recentlyBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        animationState.recentlyBoxFinished = true
+      })
   }
 }
 

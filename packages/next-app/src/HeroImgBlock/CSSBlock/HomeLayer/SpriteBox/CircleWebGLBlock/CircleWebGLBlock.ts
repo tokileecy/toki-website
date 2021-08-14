@@ -2,20 +2,15 @@ import * as THREE from 'three'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
 import VERTEX from './shaders/postProcess/borderNoise/vert.glsl'
 import FRAGMENT from './shaders/postProcess/borderNoise/frag.glsl'
 import FRAGMENT_FINAL from './shaders/postProcess/borderNoise/fragFinal.glsl'
 
-import BaseWebGLBlock from '../../../../BaseWebGLBlock'
+import BaseWebGLBlock from '../../../../../components/three/BaseWebGLBlock'
 
 class SphereWebGLBlock extends BaseWebGLBlock {
   resizeObserver: ResizeObserver
-  // rootElement: HTMLElement
-  // clock: THREE.Clock
-  // webGlBlock: WebGLBlock
-  // cssBlock: CSSBlock
   sphere: THREE.Mesh
 
   composer: EffectComposer | null
@@ -30,7 +25,10 @@ class SphereWebGLBlock extends BaseWebGLBlock {
       antialias: true,
       alpha: true,
     })
-    this.renderer.context.getExtension('OES_standard_derivatives')
+    const context = this.renderer.getContext()
+    if (context !== null && context !== undefined) {
+      context.getExtension('OES_standard_derivatives')
+    }
     this.renderer.setClearColor(0x000000, 0)
     this.iState = 0
     this.resizeObserver = new ResizeObserver((entries) => {
@@ -45,7 +43,7 @@ class SphereWebGLBlock extends BaseWebGLBlock {
     const sphereGeo = new THREE.SphereBufferGeometry(0.5, 32, 32)
     this.sphere = new THREE.Mesh(sphereGeo, matNormal)
     this.sphere.scale.set(3, 3, 3)
-    this.sphere.position.set(0, 0, 1)
+    this.sphere.position.set(0, 0, 5)
     this.scene.add(this.sphere)
 
     this.composeRequestAnimationFrameId = null
@@ -108,7 +106,6 @@ class SphereWebGLBlock extends BaseWebGLBlock {
     const drawShader = {
       uniforms: {
         tDiffuse: { type: 't', value: null },
-        // tShadow: { type: 't', value: null },
         iResolution: { type: 'v2', value: resolution },
       },
       vertexShader: VERTEX,

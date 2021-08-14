@@ -26,6 +26,7 @@ function HeroImg(props: HeroImgProps): JSX.Element {
 
   useEffect(() => {
     let heroImgBlock: HeroImgBlock | null = null
+    const timeoutId: null | ReturnType<typeof setTimeout> = null
     const loadHeroImgBlock = async () => {
       const HeroImgBlock = (await import('../../../../HeroImgBlock')).default
       heroImgBlock = new HeroImgBlock(heroImgElementRef)
@@ -37,6 +38,7 @@ function HeroImg(props: HeroImgProps): JSX.Element {
 
     return () => {
       heroImgBlock !== null && heroImgBlock.clear()
+      timeoutId !== null && clearTimeout(timeoutId)
     }
   }, [])
   return (
