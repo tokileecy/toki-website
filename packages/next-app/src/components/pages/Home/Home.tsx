@@ -74,6 +74,7 @@ const HomePage = (props: HomePageProps): JSX.Element => {
     <div className={cssHomePageRoot}>
       <div
         className={css`
+          overflow: hidden;
           width: 100%;
           height: 100%;
           position: absolute;
