@@ -8,9 +8,9 @@ import { cx, css } from '@emotion/css'
 import Corners from '../Corners'
 import Color from 'color'
 
-export type BoxProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
+export type BoxProps = Omit<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  'ref'
 >
 
 const bgColor = new Color('#22b6db')

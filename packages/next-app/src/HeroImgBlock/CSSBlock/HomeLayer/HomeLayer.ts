@@ -5,10 +5,43 @@ import Div2 from './Div2'
 import SpriteBox from './SpriteBox'
 import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, autorun, action } from 'mobx'
+import { makeAutoObservable, observable, autorun, action } from 'mobx'
+
+class HomeAnimationState {
+  div1Finished: boolean
+  div2Finished: boolean
+  spriteFinished: boolean
+
+  constructor() {
+    this.div1Finished = false
+    this.div2Finished = false
+    this.spriteFinished = false
+
+    makeAutoObservable(this, {
+      div1Finished: observable,
+      div2Finished: observable,
+      spriteFinished: observable,
+      div1Complete: action,
+      div2Complete: action,
+      spriteComplete: action,
+    })
+  }
+
+  div1Complete = (): void => {
+    this.div1Finished = true
+  }
+
+  div2Complete = (): void => {
+    this.div2Finished = true
+  }
+
+  spriteComplete = (): void => {
+    this.spriteFinished = true
+  }
+}
 
 class HomeLayer extends PageLayer {
-  animationState
+  animationState: HomeAnimationState
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
@@ -37,27 +70,7 @@ class HomeLayer extends PageLayer {
 
     this.animations = []
     this.onComplete = undefined
-    this.animationState = observable(
-      {
-        div1Finished: false,
-        div2Finished: false,
-        spriteFinished: false,
-        div1Complete() {
-          this.div1Finished = true
-        },
-        div2Complete() {
-          this.div2Finished = true
-        },
-        spriteComplete() {
-          this.spriteFinished = true
-        },
-      },
-      {
-        div1Complete: action,
-        div2Complete: action,
-        spriteComplete: action,
-      }
-    )
+    this.animationState = new HomeAnimationState()
 
     autorun(() => {
       if (

@@ -2,13 +2,7 @@ import React from 'react'
 import Link, { LinkProps } from 'next/link'
 import { cx, css } from '@emotion/css'
 
-const cssBaseSelectBar = css`
-  content: '';
-  width: 100%;
-  background-color: #39ebeb;
-  height: 5px;
-  transition: transform 0.5s;
-`
+// const cssBaseSelectBar = css``
 
 const cssLink = css`
   display: flex;
@@ -20,13 +14,19 @@ const cssLink = css`
   text-decoration: none;
 
   &::after {
-    ${cssBaseSelectBar}
+    content: '';
+    width: 100%;
+    background-color: #39ebeb;
+    height: 5px;
+    transition: transform 0.5s;
+  }
+
+  &::after {
     transform: scaleX(0);
   }
 
   &.selected {
     &::after {
-      ${cssBaseSelectBar}
       transform: scaleX(1);
     }
   }

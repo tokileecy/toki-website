@@ -3,10 +3,26 @@ import PageLayer, { PageLayerParent } from '../PageLayer'
 import ContactFormBox from './ContactFormBox'
 import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, autorun, action } from 'mobx'
+import { makeAutoObservable, observable, autorun, action } from 'mobx'
 
+class ContactAnimationState {
+  contactFormFinished: boolean
+
+  constructor() {
+    this.contactFormFinished = false
+
+    makeAutoObservable(this, {
+      contactFormFinished: observable,
+      contactFormComplete: action,
+    })
+  }
+
+  contactFormComplete = (): void => {
+    this.contactFormFinished = true
+  }
+}
 class ContactLayer extends PageLayer {
-  animationState
+  animationState: ContactAnimationState
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
@@ -23,17 +39,7 @@ class ContactLayer extends PageLayer {
 
     this.animations = []
     this.onComplete = undefined
-    this.animationState = observable(
-      {
-        contactFormFinished: false,
-        contactFormComplete() {
-          this.contactFormFinished = true
-        },
-      },
-      {
-        contactFormComplete: action,
-      }
-    )
+    this.animationState = new ContactAnimationState()
 
     autorun(() => {
       if (this.animationState.contactFormFinished) {

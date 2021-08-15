@@ -5,10 +5,33 @@ import LeadRoleBox from './LeadRoleBox'
 import RecentlyBox from './RecentlyBox'
 import { ReactCSSObjectWrapper } from '../utils'
 import TWEEN, { Tween } from '@tweenjs/tween.js'
-import { observable, autorun, action } from 'mobx'
+import { makeAutoObservable, observable, autorun, action } from 'mobx'
 
-class HomeLayer extends PageLayer {
-  animationState
+class AboutAnimationState {
+  leadRolFinished: boolean
+  recentlyBoxFinished: boolean
+  constructor() {
+    this.leadRolFinished = false
+    this.recentlyBoxFinished = false
+
+    makeAutoObservable(this, {
+      leadRolFinished: observable,
+      recentlyBoxFinished: observable,
+      leadRolComplete: action,
+      recentlyBoxComplete: action,
+    })
+  }
+
+  leadRolComplete = (): void => {
+    this.leadRolFinished = true
+  }
+
+  recentlyBoxComplete = (): void => {
+    this.recentlyBoxFinished = true
+  }
+}
+class AboutLayer extends PageLayer {
+  animationState: AboutAnimationState
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
@@ -38,27 +61,7 @@ class HomeLayer extends PageLayer {
 
     this.animations = []
     this.onComplete = undefined
-    this.animationState = observable(
-      {
-        // skillFinished: false,
-        leadRolFinished: false,
-        recentlyBoxFinished: false,
-        // skillComplete() {
-        //   this.skillFinished = true
-        // },
-        leadRolComplete() {
-          this.leadRolFinished = true
-        },
-        recentlyBoxComplete() {
-          this.recentlyBoxFinished = true
-        },
-      },
-      {
-        // skillComplete: action,
-        leadRolComplete: action,
-        recentlyBoxComplete: action,
-      }
-    )
+    this.animationState = new AboutAnimationState()
 
     autorun(() => {
       if (
@@ -212,4 +215,4 @@ class HomeLayer extends PageLayer {
   }
 }
 
-export default HomeLayer
+export default AboutLayer

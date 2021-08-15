@@ -4,10 +4,35 @@ import WorkBlockBox from './WorkBlockBox'
 import RecentlyBox from './RecentlyBox'
 import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, autorun, action } from 'mobx'
+import { makeAutoObservable, observable, autorun, action } from 'mobx'
+
+class ContactAnimationState {
+  workFormBoxFinished: boolean
+  recentlyBoxFinished: boolean
+
+  constructor() {
+    this.workFormBoxFinished = false
+    this.recentlyBoxFinished = false
+
+    makeAutoObservable(this, {
+      workFormBoxFinished: observable,
+      recentlyBoxFinished: observable,
+      workFormBoxComplete: action,
+      recentlyBoxComplete: action,
+    })
+  }
+
+  workFormBoxComplete = (): void => {
+    this.workFormBoxFinished = true
+  }
+
+  recentlyBoxComplete = (): void => {
+    this.recentlyBoxFinished = true
+  }
+}
 
 class WorkLayer extends PageLayer {
-  animationState
+  animationState: ContactAnimationState
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
@@ -30,22 +55,7 @@ class WorkLayer extends PageLayer {
 
     this.animations = []
     this.onComplete = undefined
-    this.animationState = observable(
-      {
-        workFormBoxFinished: false,
-        recentlyBoxFinished: false,
-        workFormBoxComplete() {
-          this.workFormBoxFinished = true
-        },
-        recentlyBoxComplete() {
-          this.recentlyBoxFinished = true
-        },
-      },
-      {
-        workFormBoxComplete: action,
-        recentlyBoxComplete: action,
-      }
-    )
+    this.animationState = new ContactAnimationState()
 
     autorun(() => {
       if (

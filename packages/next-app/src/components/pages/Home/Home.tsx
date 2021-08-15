@@ -34,8 +34,8 @@ const cssHomeContainer = css`
   pointer-events: none;
 `
 export type HomePageProps = {
-  syncHistory: boolean
-  syncTitle: boolean
+  syncHistory?: boolean
+  syncTitle?: boolean
 }
 
 const ShadowBox = (): JSX.Element => {
