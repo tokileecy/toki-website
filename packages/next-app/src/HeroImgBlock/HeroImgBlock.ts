@@ -8,6 +8,7 @@ import { getDuration } from './utils'
 type GraphRootElementRef = { current: HTMLElement | null }
 
 class HomeImgBlock {
+  requestAnimationTweenId: ReturnType<typeof requestAnimationFrame> | null
   heroImgState
   resizeObserver: ResizeObserver
   rootElement: HTMLElement
@@ -22,6 +23,7 @@ class HomeImgBlock {
       console.warn(`graphRoot.current should not be ${graphRoot.current}`)
     }
 
+    this.requestAnimationTweenId = null
     this.heroImgState = heroImgState
     this.heroImgState.camera.position.z = 1000
     this.webGlBlock = new WebGLBlock(this.rootElement)
@@ -35,14 +37,30 @@ class HomeImgBlock {
     })
   }
 
+  calculateTween = (time: number): void => {
+    TWEEN.update(time)
+    this.requestAnimationTweenId = requestAnimationFrame((time) => {
+      this.calculateTween(time)
+    })
+  }
+
+  stopTweenCalculate = (): void => {
+    this.requestAnimationTweenId !== null &&
+      cancelAnimationFrame(this.requestAnimationTweenId)
+  }
+
   init = (): void => {
+    requestAnimationFrame((time) => {
+      this.calculateTween(time)
+    })
+
     this.resizeObserver.observe(this.rootElement)
     this.rootElement.appendChild(this.webGlBlock.renderer.domElement)
     this.rootElement.appendChild(this.cssBlock.renderer.domElement)
     this.webGlBlock.init()
     this.cssBlock.init()
     this.webGlBlock.render()
-    // this.webGlBlock.animate()
+    this.webGlBlock.animate()
     // this.webGlBlock.composerRender()
     // this.webGlBlock.composerAnimate()
     // this.cssBlock.animate()
@@ -61,6 +79,7 @@ class HomeImgBlock {
     this.rootElement.removeChild(this.webGlBlock.renderer.domElement)
     this.rootElement.removeChild(this.cssBlock.renderer.domElement)
     this.resizeObserver.unobserve(this.rootElement)
+    this.stopTweenCalculate()
   }
 
   setPage = (nextPage: Page): void => {
@@ -68,6 +87,7 @@ class HomeImgBlock {
   }
 
   cameraAnimation1 = (): void => {
+    this.webGlBlock.renderer.setPixelRatio(0.3)
     const originCameraPosition = new THREE.Vector3(0, 0, 1000)
     const nextCameraPosition = new THREE.Vector3(0, 0, 0)
     const cameraCurrentPos = this.heroImgState.camera.position.clone()
@@ -88,10 +108,14 @@ class HomeImgBlock {
       .onComplete(() => {
         this.webGlBlock.stopAnimate()
         this.cssBlock.stopAnimate()
+        this.webGlBlock.renderer.setPixelRatio(
+          this.webGlBlock._devicePixelRatio
+        )
       })
   }
 
   cameraAnimation2 = (): void => {
+    this.webGlBlock.renderer.setPixelRatio(0.7)
     const originCameraPosition = new THREE.Vector3(0, 0, 1000)
     const nextCameraPosition = new THREE.Vector3(0, 0, 1000)
     const cameraCurrentPos = this.heroImgState.camera.position.clone()
@@ -109,6 +133,10 @@ class HomeImgBlock {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
+        this.webGlBlock.renderer.setPixelRatio(
+          this.webGlBlock._devicePixelRatio
+        )
+        this.webGlBlock.render()
         this.webGlBlock.stopAnimate()
         this.cssBlock.stopAnimate()
       })

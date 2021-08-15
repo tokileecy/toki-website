@@ -104,7 +104,7 @@ class CSSBlock {
 
   animate = (time?: number): void => {
     this.render()
-    TWEEN.update(time)
+    // TWEEN.update(time)
 
     if (this.requestAnimationFrameId !== null) {
       this.stopAnimate()

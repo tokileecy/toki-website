@@ -3,6 +3,7 @@ import heroImgState from '../HeroImgState'
 import gridVertShader from './shaders/grid/vert.glsl'
 import gridFragShader from './shaders/grid/frag.glsl'
 import Color from 'color'
+import TWEEN, { Tween } from '@tweenjs/tween.js'
 
 const createGrid3D = (
   width = 1,
@@ -10,8 +11,14 @@ const createGrid3D = (
   depth = 1,
   widthSegments = 1,
   heightSegments = 1,
-  depthSegments = 1
+  depthSegments = 1,
+  options?: {
+    hideX?: boolean
+    hideY?: boolean
+    hideZ?: boolean
+  }
 ) => {
+  const { hideX = false, hideY = false, hideZ = false } = { ...options }
   const deltaX = width / widthSegments
   const deltaY = height / heightSegments
   const deltaZ = depth / depthSegments
@@ -31,15 +38,15 @@ const createGrid3D = (
           k * deltaZ - depth / 2
         )
 
-        if (k !== 0) {
+        if (!hideZ && k !== 0) {
           indices.push(index - 1, index)
         }
 
-        if (j !== 0) {
+        if (!hideY && j !== 0) {
           indices.push(index - j * maxVertextZ, index)
         }
 
-        if (i !== 0) {
+        if (!hideX && i !== 0) {
           indices.push(index - i * maxVertextY * maxVertextZ, index)
         }
       }
@@ -56,6 +63,7 @@ const createGrid3D = (
   return geometry
 }
 class WebGLBlock {
+  cube: THREE.LineSegments
   rootElement: HTMLElement
   rootElementRect: DOMRect
   renderer: THREE.WebGLRenderer
@@ -89,14 +97,14 @@ class WebGLBlock {
     line.material.opacity = 0.25
     line.material.transparent = true
 
-    const gridGeo = createGrid3D(1000, 1000, 4000, 20, 20, 20)
+    const gridGeo = createGrid3D(1000, 1000, 4000, 20, 20, 10, { hideZ: true })
 
     const uniforms = THREE.UniformsUtils.merge([
       THREE.UniformsLib.fog,
       {
         lineWidth: { value: 1 },
         alpha: {
-          value: 0.05,
+          value: 0.075,
         },
         color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
       },
@@ -108,13 +116,188 @@ class WebGLBlock {
       fragmentShader: gridFragShader,
       transparent: true,
       fog: true,
-      linewidth: 10,
+      linewidth: 1,
     })
 
     const grid = new THREE.LineSegments(gridGeo, girdMaterial)
-    grid.position.set(0, 0, 300)
+    grid.position.set(0, 0, 700)
+    grid.scale.set(0.05, 0.05, 0.05)
+    grid.rotation.x = 0.3
+    grid.rotation.y = 0.7
 
     heroImgState.scene.add(grid)
+
+    const cubeGeo = createGrid3D(1200, 1200, 900, 3, 3, 3)
+    const materail = new THREE.ShaderMaterial({
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.fog,
+        {
+          lineWidth: { value: 1 },
+          alpha: {
+            value: 1,
+          },
+          color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+        },
+      ]),
+      vertexShader: gridVertShader,
+      fragmentShader: gridFragShader,
+      transparent: true,
+      fog: true,
+      linewidth: 1,
+    })
+
+    const cube = new THREE.LineSegments(cubeGeo, materail)
+
+    cube.position.set(0, 0, 400)
+    // cube.scale.set(0.05, 0.05, 0.05)
+    // cube.rotation.x = 0.3
+    // cube.rotation.y = 0.7
+
+    heroImgState.scene.add(cube)
+    {
+      const cubeGeo = createGrid3D(1200, 1200, 400, 10, 10, 10)
+      const materail = new THREE.ShaderMaterial({
+        uniforms: THREE.UniformsUtils.merge([
+          THREE.UniformsLib.fog,
+          {
+            lineWidth: { value: 1 },
+            alpha: {
+              value: 0.1,
+            },
+            color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+          },
+        ]),
+        vertexShader: gridVertShader,
+        fragmentShader: gridFragShader,
+        transparent: true,
+        fog: true,
+        linewidth: 1,
+      })
+
+      const cube = new THREE.LineSegments(cubeGeo, materail)
+
+      cube.position.set(0, 0, 200)
+      // cube.scale.set(0.05, 0.05, 0.05)
+      // cube.rotation.x = 0.3
+      // cube.rotation.y = 0.7
+
+      heroImgState.scene.add(cube)
+    }
+
+    {
+      // const cubeGeo = createGrid3D(100, 100, 400, 10, 10, 10)
+      const cubeGeo = new THREE.BoxGeometry(50, 50, 400, 1, 1, 10)
+      const materail = new THREE.ShaderMaterial({
+        uniforms: THREE.UniformsUtils.merge([
+          THREE.UniformsLib.fog,
+          {
+            lineWidth: { value: 1 },
+            alpha: {
+              value: 1,
+            },
+            color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+          },
+        ]),
+        vertexShader: gridVertShader,
+        fragmentShader: gridFragShader,
+        transparent: true,
+        fog: true,
+        linewidth: 1,
+      })
+
+      this.cube = new THREE.LineSegments(cubeGeo, materail)
+
+      this.cube.position.set(150, 0, 1500)
+      // cube.scale.set(0.05, 0.05, 0.05)
+      // cube.rotation.x = 0.3
+      // cube.rotation.y = 0.7
+
+      heroImgState.scene.add(this.cube)
+
+      new TWEEN.Tween(this.cube.position)
+        .to(new THREE.Vector3(150, 0, -800), 5000)
+        .easing(TWEEN.Easing.Linear.None)
+        .start()
+        .repeat(Infinity)
+    }
+
+    {
+      // const cubeGeo = createGrid3D(100, 100, 400, 10, 10, 10)
+      const cubeGeo = new THREE.BoxGeometry(50, 50, 400, 1, 1, 10)
+      const materail = new THREE.ShaderMaterial({
+        uniforms: THREE.UniformsUtils.merge([
+          THREE.UniformsLib.fog,
+          {
+            lineWidth: { value: 1 },
+            alpha: {
+              value: 1,
+            },
+            color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+          },
+        ]),
+        vertexShader: gridVertShader,
+        fragmentShader: gridFragShader,
+        transparent: true,
+        fog: true,
+        linewidth: 1,
+      })
+
+      const cube = new THREE.LineSegments(cubeGeo, materail)
+
+      cube.position.set(-1000, 100, 500)
+      // cube.scale.set(0.05, 0.05, 0.05)
+      // cube.rotation.x = 0.3
+      cube.rotation.y = Math.PI / 2
+
+      heroImgState.scene.add(cube)
+
+      setTimeout(() => {
+        new TWEEN.Tween(cube.position)
+          .to(new THREE.Vector3(1000, 100, 500), 5000)
+          .easing(TWEEN.Easing.Linear.None)
+          .start()
+          .repeat(Infinity)
+      }, 2500)
+    }
+
+    {
+      // const cubeGeo = createGrid3D(100, 100, 400, 10, 10, 10)
+      const cubeGeo = new THREE.BoxGeometry(50, 50, 400, 1, 1, 10)
+      const materail = new THREE.ShaderMaterial({
+        uniforms: THREE.UniformsUtils.merge([
+          THREE.UniformsLib.fog,
+          {
+            lineWidth: { value: 1 },
+            alpha: {
+              value: 1,
+            },
+            color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+          },
+        ]),
+        vertexShader: gridVertShader,
+        fragmentShader: gridFragShader,
+        transparent: true,
+        fog: true,
+        linewidth: 1,
+      })
+
+      const cube = new THREE.LineSegments(cubeGeo, materail)
+
+      cube.position.set(-1000, -200, 500)
+      // cube.scale.set(0.05, 0.05, 0.05)
+      // cube.rotation.x = 0.3
+      cube.rotation.y = Math.PI / 2
+
+      heroImgState.scene.add(cube)
+
+      setTimeout(() => {
+        new TWEEN.Tween(cube.position)
+          .to(new THREE.Vector3(1000, -200, 500), 5000)
+          .easing(TWEEN.Easing.Linear.None)
+          .start()
+          .repeat(Infinity)
+      }, 3000)
+    }
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -175,7 +358,6 @@ class WebGLBlock {
   }
 
   animate = (): void => {
-    console.log('!')
     this.render()
     this.requestAnimationFrameId = requestAnimationFrame(() => {
       this.animate()
