@@ -1,11 +1,14 @@
 import * as THREE from 'three'
 import PageLayer, { PageLayerParent } from '../PageLayer'
 import ContactFormBox from './ContactFormBox'
-import TWEEN from '@tweenjs/tween.js'
+import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, autorun } from 'mobx'
+import { observable, autorun, action } from 'mobx'
 
 class ContactLayer extends PageLayer {
+  animationState
+  onComplete?: () => void
+  animations?: Tween<THREE.Vector3>[]
   speed: number
   contactFormBox: ReactCSSObjectWrapper<unknown>
   originContactFormBoxPos: THREE.Vector3
@@ -17,6 +20,32 @@ class ContactLayer extends PageLayer {
     this.contactFormBox = new ReactCSSObjectWrapper(ContactFormBox)
     this.originContactFormBoxPos = new THREE.Vector3(0, 0, 0)
     this.outContactFormBoxPos = new THREE.Vector3(0, 1000, 0)
+
+    this.animations = []
+    this.onComplete = undefined
+    this.animationState = observable(
+      {
+        contactFormFinished: false,
+        contactFormComplete() {
+          this.contactFormFinished = true
+        },
+      },
+      {
+        contactFormComplete: action,
+      }
+    )
+
+    autorun(() => {
+      if (this.animationState.contactFormFinished) {
+        this.onComplete?.()
+      }
+    })
+  }
+
+  clearAnimations = (): void => {
+    this.animations?.forEach((animation) => {
+      TWEEN.remove(animation)
+    })
   }
 
   init = (isInitPage?: boolean): void => {
@@ -42,15 +71,8 @@ class ContactLayer extends PageLayer {
   }
 
   outAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      contactFormFinished: false,
-    })
-
-    autorun(() => {
-      if (animationState.contactFormFinished) {
-        onComplete?.()
-      }
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
     const contactFormBoxCurrentPos = this.contactFormBox.object.position.clone()
     const contactFormBoxDestinationPos = this.outContactFormBoxPos.clone()
 
@@ -64,20 +86,14 @@ class ContactLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.contactFormFinished = true
+        this.animationState.contactFormComplete()
       })
   }
 
   inAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      contactFormFinished: false,
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
 
-    autorun(() => {
-      if (animationState.contactFormFinished) {
-        onComplete?.()
-      }
-    })
     const contactFormBoxCurrentPos = this.contactFormBox.object.position.clone()
     const contactFormBoxDestinationPos = this.originContactFormBoxPos.clone()
     const contactFormBoxDuration = this.getDuration(
@@ -90,7 +106,7 @@ class ContactLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.contactFormFinished = true
+        this.animationState.contactFormComplete()
       })
   }
 }

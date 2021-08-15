@@ -2,11 +2,14 @@ import * as THREE from 'three'
 import PageLayer, { PageLayerParent } from '../PageLayer'
 import WorkBlockBox from './WorkBlockBox'
 import RecentlyBox from './RecentlyBox'
-import TWEEN from '@tweenjs/tween.js'
+import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, computed, autorun } from 'mobx'
+import { observable, autorun, action } from 'mobx'
 
 class WorkLayer extends PageLayer {
+  animationState
+  onComplete?: () => void
+  animations?: Tween<THREE.Vector3>[]
   speed: number
   workFormBox: ReactCSSObjectWrapper<unknown>
   recentlyBox: ReactCSSObjectWrapper<unknown>
@@ -24,6 +27,40 @@ class WorkLayer extends PageLayer {
     this.originRecentlyBoxPos = new THREE.Vector3(-400, -50, 0)
     this.outWorkBoxPos = new THREE.Vector3(1000, 0, 0)
     this.outRecentlyBoxPos = new THREE.Vector3(-1000, -50, 0)
+
+    this.animations = []
+    this.onComplete = undefined
+    this.animationState = observable(
+      {
+        workFormBoxFinished: false,
+        recentlyBoxFinished: false,
+        workFormBoxComplete() {
+          this.workFormBoxFinished = true
+        },
+        recentlyBoxComplete() {
+          this.recentlyBoxFinished = true
+        },
+      },
+      {
+        workFormBoxComplete: action,
+        recentlyBoxComplete: action,
+      }
+    )
+
+    autorun(() => {
+      if (
+        this.animationState.workFormBoxFinished &&
+        this.animationState.recentlyBoxFinished
+      ) {
+        this.onComplete?.()
+      }
+    })
+  }
+
+  clearAnimations = (): void => {
+    this.animations?.forEach((animation) => {
+      TWEEN.remove(animation)
+    })
   }
 
   init = (isInitPage?: boolean): void => {
@@ -62,19 +99,9 @@ class WorkLayer extends PageLayer {
   }
 
   outAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      workFormBoxFinished: false,
-      recentlyBoxFinished: false,
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
 
-    autorun(() => {
-      if (
-        animationState.workFormBoxFinished &&
-        animationState.recentlyBoxFinished
-      ) {
-        onComplete?.()
-      }
-    })
     const workBoxCurrentPos = this.workFormBox.object.position.clone()
     const workBoxDestinationPos = this.outWorkBoxPos.clone()
 
@@ -88,6 +115,9 @@ class WorkLayer extends PageLayer {
       .to(workBoxDestinationPos, workBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        this.animationState.workFormBoxComplete()
+      })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
     const recentlyBoxDestinationPos = this.outRecentlyBoxPos.clone()
@@ -101,22 +131,14 @@ class WorkLayer extends PageLayer {
       .to(recentlyBoxDestinationPos, recentlyBoxDuration)
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
+      .onComplete(() => {
+        this.animationState.recentlyBoxComplete()
+      })
   }
 
   inAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      workFormBoxFinished: false,
-      recentlyBoxFinished: false,
-    })
-
-    autorun(() => {
-      if (
-        animationState.workFormBoxFinished &&
-        animationState.recentlyBoxFinished
-      ) {
-        onComplete?.()
-      }
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
 
     const workBoxCurrentPos = this.workFormBox.object.position.clone()
     const workBoxDestinationPos = this.originWorkBoxPos.clone()
@@ -131,7 +153,7 @@ class WorkLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.workFormBoxFinished = false
+        this.animationState.workFormBoxComplete()
       })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
@@ -147,7 +169,7 @@ class WorkLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.recentlyBoxFinished = false
+        this.animationState.recentlyBoxComplete()
       })
   }
 }

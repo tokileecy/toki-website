@@ -4,10 +4,13 @@ import SkillBox, { SkillBoxRefContent } from './SkillBox'
 import LeadRoleBox from './LeadRoleBox'
 import RecentlyBox from './RecentlyBox'
 import { ReactCSSObjectWrapper } from '../utils'
-import TWEEN from '@tweenjs/tween.js'
-import { observable, autorun } from 'mobx'
+import TWEEN, { Tween } from '@tweenjs/tween.js'
+import { observable, autorun, action } from 'mobx'
 
 class HomeLayer extends PageLayer {
+  animationState
+  onComplete?: () => void
+  animations?: Tween<THREE.Vector3>[]
   speed: number
   skillBox: ReactCSSObjectWrapper<SkillBoxRefContent>
   leadRoleBox: ReactCSSObjectWrapper<unknown>
@@ -32,6 +35,46 @@ class HomeLayer extends PageLayer {
     this.outOriginSkillBox = new THREE.Vector3(1100, 200, 0)
     this.outLeadRolBoxPos = new THREE.Vector3(-1100, 700, 0)
     this.outRecentlyBoxPos = new THREE.Vector3(-1100, -100, 0)
+
+    this.animations = []
+    this.onComplete = undefined
+    this.animationState = observable(
+      {
+        // skillFinished: false,
+        leadRolFinished: false,
+        recentlyBoxFinished: false,
+        // skillComplete() {
+        //   this.skillFinished = true
+        // },
+        leadRolComplete() {
+          this.leadRolFinished = true
+        },
+        recentlyBoxComplete() {
+          this.recentlyBoxFinished = true
+        },
+      },
+      {
+        // skillComplete: action,
+        leadRolComplete: action,
+        recentlyBoxComplete: action,
+      }
+    )
+
+    autorun(() => {
+      if (
+        // this.animationState.skillFinished &&
+        this.animationState.leadRolFinished &&
+        this.animationState.recentlyBoxFinished
+      ) {
+        this.onComplete?.()
+      }
+    })
+  }
+
+  clearAnimations = (): void => {
+    this.animations?.forEach((animation) => {
+      TWEEN.remove(animation)
+    })
   }
 
   init = (isInitPage?: boolean): void => {
@@ -80,21 +123,8 @@ class HomeLayer extends PageLayer {
   }
 
   inAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      skillFinished: false,
-      leadRolFinished: false,
-      recentlyBoxFinished: false,
-    })
-
-    autorun(() => {
-      if (
-        animationState.skillFinished &&
-        animationState.leadRolFinished &&
-        animationState.recentlyBoxFinished
-      ) {
-        onComplete?.()
-      }
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
 
     this.skillBox.object.position.set(
       this.originSkillBox.x,
@@ -116,7 +146,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.leadRolFinished = true
+        this.animationState.leadRolComplete()
       })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
@@ -132,24 +162,13 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.recentlyBoxFinished = true
+        this.animationState.recentlyBoxComplete()
       })
   }
 
   outAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      leadRolFinished: false,
-      recentlyBoxFinished: false,
-    })
-
-    autorun(() => {
-      if (
-        animationState.leadRolFinished &&
-        animationState.recentlyBoxFinished
-      ) {
-        onComplete?.()
-      }
-    })
+    this.onComplete = onComplete
+    this.clearAnimations()
 
     this.skillBox.object.position.set(
       this.outOriginSkillBox.x,
@@ -172,7 +191,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.leadRolFinished = true
+        this.animationState.leadRolComplete()
       })
 
     const recentlyBoxCurrentPos = this.recentlyBox.object.position.clone()
@@ -188,7 +207,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.recentlyBoxFinished = true
+        this.animationState.recentlyBoxComplete()
       })
   }
 }

@@ -57,7 +57,6 @@ class CSSBlock {
         this.animate()
         const onAnimationComplete = () => {
           this.stopAnimate()
-          console.log('stop')
         }
         if (prevPage === 'home' && page !== 'home') {
           this.pageLayers.home?.outAnimation?.(onAnimationComplete)

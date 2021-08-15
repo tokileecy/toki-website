@@ -134,7 +134,8 @@ const navItems = [
     nextLink: false,
   },
 ]
-function Nav(props: NavProps): JSX.Element {
+
+const Nav = (props: NavProps): JSX.Element => {
   const { mode, initPage, syncHistory, syncTitle, onPageChange } = props
 
   const scrollStateRef = useRef<ScrollState>({
@@ -174,17 +175,21 @@ function Nav(props: NavProps): JSX.Element {
     [currentSelectedItemIndex, setCurrentSelectedItemIndex]
   )
 
+  const navHandleMouseEnter = useCallback(() => {
+    scrollStateRef.current.isEnter = true
+  }, [scrollStateRef])
+
+  const navHandleMouseLeave = useCallback(() => {
+    scrollStateRef.current.size = 0
+    scrollStateRef.current.isEnter = false
+  }, [scrollStateRef])
+
   return (
     <nav
       className={cssNav}
       onWheel={handleWheel}
-      onMouseEnter={() => {
-        scrollStateRef.current.isEnter = true
-      }}
-      onMouseLeave={() => {
-        scrollStateRef.current.size = 0
-        scrollStateRef.current.isEnter = false
-      }}
+      onMouseEnter={navHandleMouseEnter}
+      onMouseLeave={navHandleMouseLeave}
     >
       <div className={cx(cssContent, `mode-${mode}`)}>
         <div className={cx(cssCurrent, 'current')}>

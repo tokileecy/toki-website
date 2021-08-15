@@ -3,11 +3,14 @@ import PageLayer, { PageLayerParent } from '../PageLayer'
 import Div1 from './Div1'
 import Div2 from './Div2'
 import SpriteBox from './SpriteBox'
-import TWEEN from '@tweenjs/tween.js'
+import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
-import { observable, autorun } from 'mobx'
+import { observable, autorun, action } from 'mobx'
 
 class HomeLayer extends PageLayer {
+  animationState
+  onComplete?: () => void
+  animations?: Tween<THREE.Vector3>[]
   speed: number
   div1: ReactCSSObjectWrapper<unknown>
   div2: ReactCSSObjectWrapper<unknown>
@@ -31,6 +34,46 @@ class HomeLayer extends PageLayer {
     this.outDiv1Pos = new THREE.Vector3(-1100, 50, 0)
     this.outDiv2Pos = new THREE.Vector3(1100, -50, 0)
     this.outSpriteBoxPos = new THREE.Vector3(-1100, -30, 0)
+
+    this.animations = []
+    this.onComplete = undefined
+    this.animationState = observable(
+      {
+        div1Finished: false,
+        div2Finished: false,
+        spriteFinished: false,
+        div1Complete() {
+          this.div1Finished = true
+        },
+        div2Complete() {
+          this.div2Finished = true
+        },
+        spriteComplete() {
+          this.spriteFinished = true
+        },
+      },
+      {
+        div1Complete: action,
+        div2Complete: action,
+        spriteComplete: action,
+      }
+    )
+
+    autorun(() => {
+      if (
+        this.animationState.div1Finished &&
+        this.animationState.div2Finished &&
+        this.animationState.spriteFinished
+      ) {
+        this.onComplete?.()
+      }
+    })
+  }
+
+  clearAnimations = (): void => {
+    this.animations?.forEach((animation) => {
+      TWEEN.remove(animation)
+    })
   }
 
   init = (isInitPage?: boolean): void => {
@@ -82,22 +125,8 @@ class HomeLayer extends PageLayer {
   }
 
   outAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      div1Finished: false,
-      div2Finished: false,
-      spriteFinished: false,
-    })
-
-    autorun(() => {
-      if (
-        animationState.div1Finished &&
-        animationState.div2Finished &&
-        animationState.spriteFinished
-      ) {
-        onComplete?.()
-      }
-    })
-
+    this.onComplete = onComplete
+    this.clearAnimations()
     const div1CurrentPos = this.div1.object.position.clone()
     const div1DestinationPos = this.outDiv1Pos.clone()
 
@@ -108,7 +137,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.div1Finished = true
+        this.animationState.div1Complete()
       })
 
     const div2CurrentPos = this.div2.object.position.clone()
@@ -121,7 +150,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.div2Finished = true
+        this.animationState.div2Complete()
       })
 
     const spriteBoxCurrentPos = this.spriteBox.object.position.clone()
@@ -137,27 +166,13 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.spriteFinished = true
+        this.animationState.spriteComplete()
       })
   }
 
   inAnimation = (onComplete?: () => void): void => {
-    const animationState = observable({
-      div1Finished: false,
-      div2Finished: false,
-      spriteFinished: false,
-    })
-
-    autorun(() => {
-      if (
-        animationState.div1Finished &&
-        animationState.div2Finished &&
-        animationState.spriteFinished
-      ) {
-        onComplete?.()
-      }
-    })
-
+    this.onComplete = onComplete
+    this.clearAnimations()
     const div1CurrentPos = this.div1.object.position.clone()
     const div1DestinationPos = this.originDiv1Pos.clone()
     const div1Duration = this.getDuration(div1CurrentPos, div1DestinationPos)
@@ -167,7 +182,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.div1Finished = true
+        this.animationState.div1Complete()
       })
 
     const div2CurrentPos = this.div2.object.position.clone()
@@ -180,7 +195,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.div2Finished = true
+        this.animationState.div2Complete()
       })
 
     const spriteBoxCurrentPos = this.spriteBox.object.position.clone()
@@ -196,7 +211,7 @@ class HomeLayer extends PageLayer {
       .easing(TWEEN.Easing.Quadratic.Out)
       .start()
       .onComplete(() => {
-        animationState.spriteFinished = true
+        this.animationState.spriteComplete()
       })
   }
 }
