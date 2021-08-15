@@ -3,7 +3,14 @@ import heroImgState from '../HeroImgState'
 import gridVertShader from './shaders/grid/vert.glsl'
 import gridFragShader from './shaders/grid/frag.glsl'
 import Color from 'color'
-import TWEEN, { Tween } from '@tweenjs/tween.js'
+import TWEEN from '@tweenjs/tween.js'
+import { Vector3 } from 'three'
+
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js'
+import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
 
 const createGrid3D = (
   width = 1,
@@ -62,6 +69,7 @@ const createGrid3D = (
 
   return geometry
 }
+
 class WebGLBlock {
   cube: THREE.LineSegments
   rootElement: HTMLElement
@@ -71,6 +79,10 @@ class WebGLBlock {
   _devicePixelRatio: number
   requestAnimationFrameId: number | null
   iState: number
+  renderPass: RenderPass
+  composer: EffectComposer
+  fxaaPass: ShaderPass
+  smaaPass: SMAAPass
 
   constructor(rootElement: HTMLElement) {
     this.rootElement = rootElement
@@ -94,38 +106,80 @@ class WebGLBlock {
 
     const line = new THREE.LineSegments(wireframe, material)
     line.material.depthTest = false
-    line.material.opacity = 0.25
+    line.material.opacity = 0.01
     line.material.transparent = true
 
-    const gridGeo = createGrid3D(1000, 1000, 4000, 20, 20, 10, { hideZ: true })
+    {
+      const gridGeo = createGrid3D(1000, 1000, 4000, 10, 10, 10, {
+        hideZ: true,
+      })
+      const gridGeo1 = createGrid3D(1100, 1100, 4400, 1, 1, 1, {})
 
-    const uniforms = THREE.UniformsUtils.merge([
-      THREE.UniformsLib.fog,
-      {
-        lineWidth: { value: 1 },
-        alpha: {
-          value: 0.075,
+      const uniforms = THREE.UniformsUtils.merge([
+        THREE.UniformsLib.fog,
+        {
+          alpha: {
+            value: 1,
+          },
+          color: {
+            value: new THREE.Color(
+              new Color('#02f1fa').darken(0.5).rgb().toString()
+            ),
+          },
         },
-        color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
-      },
-    ])
+      ])
 
-    const girdMaterial = new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader: gridVertShader,
-      fragmentShader: gridFragShader,
-      transparent: true,
-      fog: true,
-      linewidth: 1,
-    })
+      const girdMaterial = new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: gridVertShader,
+        fragmentShader: gridFragShader,
+        transparent: true,
+        fog: true,
+        linewidth: 1,
+      })
 
-    const grid = new THREE.LineSegments(gridGeo, girdMaterial)
-    grid.position.set(0, 0, 700)
-    grid.scale.set(0.05, 0.05, 0.05)
-    grid.rotation.x = 0.3
-    grid.rotation.y = 0.7
+      const originRotation = new Vector3(0.3, 0.7, 0)
+      const targetRotation = new Vector3(0.4, 0.8, 0)
+      const grid = new THREE.LineSegments(gridGeo, girdMaterial)
+      const grid1 = new THREE.LineSegments(gridGeo1, girdMaterial)
+      // grid.renderOrder = 2
+      // grid.position.set(0, 0, 700)
+      grid.scale.set(0.05, 0.05, 0.05)
+      // grid.rotation.set(0.3, 0.7, 0)
+      // grid.rotation.set(originRotation.x, originRotation.y, originRotation.z)
 
-    heroImgState.scene.add(grid)
+      // // grid1.position.set(0, 0, 700)
+      grid1.scale.set(0.05, 0.05, 0.05)
+      // grid1.rotation.set(originRotation.x, originRotation.y, originRotation.z)
+
+      const group = new THREE.Group()
+      group.add(grid)
+      group.add(grid1)
+      group.position.set(0, 0, 700)
+      group.rotation.set(originRotation.x, originRotation.y, originRotation.z)
+      // group.scale.set(0.05, 0.05, 0.05)
+      // .x = 0.3
+      // grid.rotation.y = 0.7
+
+      const duration = 2500
+      const easing = TWEEN.Easing.Quadratic.InOut
+      const startAnimate = new TWEEN.Tween(group.rotation)
+        .to(targetRotation, duration)
+        .easing(easing)
+        .start()
+
+      const reverseAnimation = new TWEEN.Tween(group.rotation)
+        .to(originRotation, duration)
+        .easing(easing)
+
+      startAnimate.chain(reverseAnimation)
+      reverseAnimation.chain(startAnimate)
+      startAnimate.start()
+      // .repeat(Infinity)
+
+      heroImgState.scene.add(group)
+      // heroImgState.scene.add(grid)
+    }
 
     const cubeGeo = createGrid3D(1200, 1200, 900, 3, 3, 3)
     const materail = new THREE.ShaderMaterial({
@@ -317,6 +371,30 @@ class WebGLBlock {
     this.requestAnimationFrameId = null
 
     this.cameraWrap = null
+
+    this.renderPass = new RenderPass(heroImgState.scene, heroImgState.camera)
+
+    // composer.addPass( pass );
+
+    this.fxaaPass = new ShaderPass(FXAAShader)
+
+    const renderWidth = this.rootElementRect.width
+    const renderHeight = this.rootElementRect.height
+
+    this.smaaPass = new SMAAPass(
+      renderWidth * this._devicePixelRatio,
+      renderHeight * this._devicePixelRatio
+    )
+
+    this.fxaaPass.material.uniforms['resolution'].value.x =
+      1 / (renderWidth * this._devicePixelRatio)
+    this.fxaaPass.material.uniforms['resolution'].value.y =
+      1 / (renderHeight * this._devicePixelRatio)
+
+    this.composer = new EffectComposer(this.renderer)
+    this.composer.addPass(this.renderPass)
+    // this.composer.addPass(this.fxaaPass)
+    this.composer.addPass(this.smaaPass)
   }
 
   init = (): void => {
@@ -350,11 +428,19 @@ class WebGLBlock {
     this.renderer.setSize(renderWidth, renderHeight)
     this.renderer.setPixelRatio(this._devicePixelRatio)
 
+    this.composer.setSize(renderWidth, renderHeight)
+
+    this.fxaaPass.material.uniforms['resolution'].value.x =
+      1 / (renderWidth * this._devicePixelRatio)
+    this.fxaaPass.material.uniforms['resolution'].value.y =
+      1 / (renderHeight * this._devicePixelRatio)
+
     this.render()
   }
 
   render = (): void => {
-    this.renderer.render(heroImgState.scene, heroImgState.camera)
+    // this.renderer.render(heroImgState.scene, heroImgState.camera)
+    this.composer.render()
   }
 
   animate = (): void => {

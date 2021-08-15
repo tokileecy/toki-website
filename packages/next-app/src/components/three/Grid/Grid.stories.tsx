@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { Story, Meta } from '@storybook/react'
-import { css } from '@emotion/css'
 import GridWebGLBlock from './Grid'
 
 export default {
   title: 'three/shader/Grid',
-  // component: Grid,
   argTypes: {},
 } as Meta
 

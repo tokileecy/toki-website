@@ -102,15 +102,14 @@ class CSSBlock {
     this.renderer.render(heroImgState.scene, heroImgState.camera)
   }
 
-  animate = (time?: number): void => {
+  animate = (): void => {
     this.render()
-    // TWEEN.update(time)
 
     if (this.requestAnimationFrameId !== null) {
       this.stopAnimate()
     }
     this.requestAnimationFrameId = requestAnimationFrame((time) => {
-      this.animate(time)
+      this.animate()
     })
   }
 

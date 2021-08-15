@@ -159,11 +159,15 @@ export const createGrid = (
   return gridGroup
 }
 
+export type GridWebGLBlockOptions = {
+  clock?: THREE.Clock
+}
+
 class GridWebGLBlock extends BaseWebGLBlock {
   iState: number
 
-  constructor(rootElement: HTMLElement) {
-    super(new THREE.Clock(), rootElement)
+  constructor(rootElement: HTMLElement, options?: GridWebGLBlockOptions) {
+    super(options?.clock ?? new THREE.Clock(), rootElement)
     this.iState = 0
 
     const gridGroup = createGrid(discImg, () => {

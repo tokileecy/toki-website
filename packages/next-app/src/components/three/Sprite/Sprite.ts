@@ -7,9 +7,12 @@ import VERTEX from './shaders/postProcess/borderNoise/vert.glsl'
 import FRAGMENT from './shaders/postProcess/borderNoise/frag.glsl'
 import FRAGMENT_FINAL from './shaders/postProcess/borderNoise/fragFinal.glsl'
 
-import BaseWebGLBlock from '../../../../../components/three/BaseWebGLBlock'
+import BaseWebGLBlock from '../BaseWebGLBlock'
 
-class SphereWebGLBlock extends BaseWebGLBlock {
+export type SpriteWebGLBlockOptions = {
+  clock?: THREE.Clock
+}
+class SpriteWebGLBlock extends BaseWebGLBlock {
   resizeObserver: ResizeObserver
   sphere: THREE.Mesh
 
@@ -19,8 +22,8 @@ class SphereWebGLBlock extends BaseWebGLBlock {
   composeRequestAnimationFrameId: number | null
   iState: number
 
-  constructor(clock: THREE.Clock, rootElement: HTMLElement) {
-    super(clock, rootElement)
+  constructor(rootElement: HTMLElement, options?: SpriteWebGLBlockOptions) {
+    super(options?.clock ?? new THREE.Clock(), rootElement)
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -136,4 +139,4 @@ class SphereWebGLBlock extends BaseWebGLBlock {
   }
 }
 
-export default SphereWebGLBlock
+export default SpriteWebGLBlock
