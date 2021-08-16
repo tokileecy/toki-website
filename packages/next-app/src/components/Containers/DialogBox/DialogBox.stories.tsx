@@ -39,7 +39,12 @@ const Template: Story<DialogBoxProps> = (args) => {
               description={
                 'feqjfioqewjfoejfoeqwjfoewjofewjqoifewjpofewjqopfjeqwofjopqewjfopqewjfopeqwjfqeiwopfjopiqewfjopewqjfpowqejfoqewjfeqwjfopeqwjopfewjopfewjqopj'
               }
-              skills={['React', 'Material-UI', 'Vue', 'Polymer']}
+              skills={[
+                { name: 'React', value: 0.8 },
+                { name: 'Material-UI', value: 0.7 },
+                { name: 'Vue', value: 0.3 },
+                { name: 'Polymer', value: 0.5 },
+              ]}
             />
           </DialogBox>
         </div>

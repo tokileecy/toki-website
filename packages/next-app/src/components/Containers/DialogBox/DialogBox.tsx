@@ -9,6 +9,7 @@ import React, {
 } from 'react'
 import { cx, css, keyframes } from '@emotion/css'
 import Box from '../Box'
+import ScrollableContent from '../ScrollableBox/ScrollableContent'
 
 const whiteBackground = keyframes`
   0% {
@@ -66,6 +67,8 @@ const cssHeader = css`
 `
 
 const cssContent = css`
+  height: 400px;
+  overflow: hidden;
   &.show {
     visibility: visible;
   }
@@ -163,8 +166,10 @@ const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
               hide: !showContent,
             })}
           >
-            <div className={cssTitle}>{title}</div>
-            {children}
+            <ScrollableContent>
+              <div className={cssTitle}>{title}</div>
+              {children}
+            </ScrollableContent>
           </div>
         </Box>
       </div>
