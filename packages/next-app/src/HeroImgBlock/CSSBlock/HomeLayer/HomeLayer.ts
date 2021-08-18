@@ -6,6 +6,7 @@ import SpriteBox from './SpriteBox'
 import TWEEN, { Tween } from '@tweenjs/tween.js'
 import { ReactCSSObjectWrapper } from '../utils'
 import { makeAutoObservable, observable, autorun, action } from 'mobx'
+import heroImgState, { AspectRatioEventDetail } from '../../HeroImgState'
 
 class HomeAnimationState {
   div1Finished: boolean
@@ -72,6 +73,19 @@ class HomeLayer extends PageLayer {
     this.onComplete = undefined
     this.animationState = new HomeAnimationState()
 
+    this.resetPosition()
+
+    heroImgState.heroImgEventTarget.addEventListener('resize-hero-img', () => {
+      this.resetPosition()
+    })
+
+    heroImgState.heroImgEventTarget.addEventListener(
+      'aspect-ratio-change',
+      (e) => {
+        this.resetPosition(e.detail)
+      }
+    )
+
     autorun(() => {
       if (
         this.animationState.div1Finished &&
@@ -81,6 +95,28 @@ class HomeLayer extends PageLayer {
         this.onComplete?.()
       }
     })
+  }
+
+  resetPosition = (detail?: AspectRatioEventDetail): void => {
+    if (detail === undefined) {
+      return
+    }
+
+    if (detail.value > 0) {
+      this.div1.object.position.set(0, 200, 0)
+    }
+
+    if (detail.value > 1) {
+      this.div1.object.position.set(-250, 200, 0)
+    }
+
+    if (detail.value > 1.4) {
+      this.div1.object.position.set(-400, 200, 0)
+    }
+
+    if (detail.value > 1.8) {
+      this.div1.object.position.set(-550, 200, 0)
+    }
   }
 
   clearAnimations = (): void => {

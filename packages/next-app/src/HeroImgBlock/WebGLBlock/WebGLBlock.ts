@@ -88,7 +88,6 @@ class WebGLBlock {
     this.rootElement = rootElement
     this.rootElementRect = this.rootElement.getBoundingClientRect()
     this._devicePixelRatio = window.devicePixelRatio || 1
-
     this.iState = 0
 
     heroImgState.scene.fog = new THREE.Fog(0x000000, 50, 1000)
@@ -417,13 +416,16 @@ class WebGLBlock {
     const FOV = 45
     const NEAR = 10
     const FAR = 2000
-    const ASPECT = renderWidth / renderHeight
 
     heroImgState.camera.fov = FOV
-    heroImgState.camera.aspect = ASPECT
+    heroImgState.camera.aspect = renderWidth / renderHeight
     heroImgState.camera.near = NEAR
     heroImgState.camera.far = FAR
     heroImgState.camera.updateProjectionMatrix()
+
+    heroImgState.heroImgEventTarget.aspectRatioChange(
+      heroImgState.camera.aspect
+    )
 
     this.renderer.setSize(renderWidth, renderHeight)
     this.renderer.setPixelRatio(this._devicePixelRatio)

@@ -54,6 +54,8 @@ class HomeImgBlock {
       this.calculateTween(time)
     })
 
+    window.addEventListener('resize', heroImgState.heroImgEventTarget.resize)
+
     this.resizeObserver.observe(this.rootElement)
     this.rootElement.appendChild(this.webGlBlock.renderer.domElement)
     this.rootElement.appendChild(this.cssBlock.renderer.domElement)
@@ -74,6 +76,7 @@ class HomeImgBlock {
   }
 
   clear = (): void => {
+    window.removeEventListener('resize', heroImgState.heroImgEventTarget.resize)
     this.webGlBlock.stopAnimate()
     this.cssBlock.stopAnimate()
     this.rootElement.removeChild(this.webGlBlock.renderer.domElement)
