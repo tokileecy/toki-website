@@ -5,6 +5,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "dev": "npm-run-all --parallel docs:dev repo:dev",
+    "build": "lerna run build --scope=@toki-website/next-app",
+    "export": "lerna run export --scope=@toki-website/next-app",
     "eslint:check": "eslint --ext .js,jsx,ts,tsx .",
     "eslint:fix": "eslint --ext .js,jsx,ts,tsx --fix .",
     "repo:dev": "lerna run dev --parallel",
