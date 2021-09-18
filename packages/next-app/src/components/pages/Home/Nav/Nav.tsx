@@ -24,7 +24,6 @@ const cssList = css`
 `
 
 const cssNav = css`
-  border-top: 1px solid white;
   height: 70px;
   position: relative;
   overflow: hidden;
