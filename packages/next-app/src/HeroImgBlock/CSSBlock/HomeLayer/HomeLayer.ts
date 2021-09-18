@@ -42,13 +42,14 @@ class HomeAnimationState {
 }
 
 class HomeLayer extends PageLayer {
+  state: 'in' | 'out'
   animationState: HomeAnimationState
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
-  div1: ReactCSSObjectWrapper<unknown>
-  div2: ReactCSSObjectWrapper<unknown>
-  spriteBox: ReactCSSObjectWrapper<unknown>
+  div1: ReactCSSObjectWrapper<null, null>
+  div2: ReactCSSObjectWrapper<null, null>
+  spriteBox: ReactCSSObjectWrapper<null, null>
   originDiv1Pos: THREE.Vector3
   originDiv2Pos: THREE.Vector3
   outDiv1Pos: THREE.Vector3
@@ -58,12 +59,13 @@ class HomeLayer extends PageLayer {
 
   constructor(parent?: PageLayerParent) {
     super(parent)
+    this.state = 'in'
     this.speed = 2
     this.div1 = new ReactCSSObjectWrapper(Div1)
     this.div2 = new ReactCSSObjectWrapper(Div2)
     this.spriteBox = new ReactCSSObjectWrapper(SpriteBox)
-    this.originDiv1Pos = new THREE.Vector3(-400, 200, 0)
-    this.originDiv2Pos = new THREE.Vector3(400, -200, 0)
+    this.originDiv1Pos = new THREE.Vector3()
+    this.originDiv2Pos = new THREE.Vector3()
     this.originSpriteBoxPos = new THREE.Vector3(-400, -150, 0)
     this.outDiv1Pos = new THREE.Vector3(-1100, 50, 0)
     this.outDiv2Pos = new THREE.Vector3(1100, -50, 0)
@@ -73,16 +75,17 @@ class HomeLayer extends PageLayer {
     this.onComplete = undefined
     this.animationState = new HomeAnimationState()
 
-    this.resetPosition()
+    this.resetOriginPosition()
 
     heroImgState.heroImgEventTarget.addEventListener('resize-hero-img', () => {
-      this.resetPosition()
+      this.resetOriginPosition()
     })
 
     heroImgState.heroImgEventTarget.addEventListener(
       'aspect-ratio-change',
       (e) => {
-        this.resetPosition(e.detail)
+        this.resetOriginPosition(e.detail)
+        this.resetPosition()
       }
     )
 
@@ -97,25 +100,55 @@ class HomeLayer extends PageLayer {
     })
   }
 
-  resetPosition = (detail?: AspectRatioEventDetail): void => {
+  resetOriginPosition = (detail?: AspectRatioEventDetail): void => {
     if (detail === undefined) {
       return
     }
 
     if (detail.value > 0) {
-      this.div1.object.position.set(0, 200, 0)
+      this.originDiv1Pos.set(0, 200, 0)
+      this.originDiv2Pos.set(0, -200, 0)
     }
 
     if (detail.value > 1) {
-      this.div1.object.position.set(-250, 200, 0)
+      this.originDiv1Pos.set(-250, 200, 0)
+      this.originDiv2Pos.set(250, -200, 0)
     }
 
     if (detail.value > 1.4) {
-      this.div1.object.position.set(-400, 200, 0)
+      this.originDiv1Pos.set(-400, 200, 0)
+      this.originDiv2Pos.set(400, -200, 0)
     }
 
     if (detail.value > 1.8) {
-      this.div1.object.position.set(-550, 200, 0)
+      this.originDiv1Pos.set(-550, 200, 0)
+      this.originDiv2Pos.set(550, -200, 0)
+    }
+  }
+
+  resetPosition = (): void => {
+    if (this.state === 'out') {
+      this.div1.object.position.set(
+        this.outDiv1Pos.x,
+        this.outDiv1Pos.y,
+        this.outDiv1Pos.z
+      )
+      this.div2.object.position.set(
+        this.outDiv2Pos.x,
+        this.outDiv2Pos.y,
+        this.outDiv2Pos.z
+      )
+    } else {
+      this.div1.object.position.set(
+        this.originDiv1Pos.x,
+        this.originDiv1Pos.y,
+        this.originDiv1Pos.z
+      )
+      this.div2.object.position.set(
+        this.originDiv2Pos.x,
+        this.originDiv2Pos.y,
+        this.originDiv2Pos.z
+      )
     }
   }
 
@@ -127,45 +160,14 @@ class HomeLayer extends PageLayer {
 
   init = (isInitPage?: boolean): void => {
     if (isInitPage) {
-      this.div1.object.position.set(
-        this.originDiv1Pos.x,
-        this.originDiv1Pos.y,
-        this.originDiv1Pos.z
-      )
-
-      this.div2.object.position.set(
-        this.originDiv2Pos.x,
-        this.originDiv2Pos.y,
-        this.originDiv2Pos.z
-      )
-
-      this.spriteBox.object.position.set(
-        this.originSpriteBoxPos.x,
-        this.originSpriteBoxPos.y,
-        this.originSpriteBoxPos.z
-      )
+      this.state = 'in'
     } else {
-      this.div1.object.position.set(
-        this.outDiv1Pos.x,
-        this.outDiv1Pos.y,
-        this.outDiv1Pos.z
-      )
-
-      this.div2.object.position.set(
-        this.outDiv2Pos.x,
-        this.outDiv2Pos.y,
-        this.outDiv2Pos.z
-      )
-
-      this.spriteBox.object.position.set(
-        this.outSpriteBoxPos.x,
-        this.outSpriteBoxPos.y,
-        this.outSpriteBoxPos.z
-      )
+      this.state = 'out'
     }
+    this.resetPosition()
     this.group.add(this.div1.object)
     this.group.add(this.div2.object)
-    this.group.add(this.spriteBox.object)
+    // this.group.add(this.spriteBox.object)
   }
 
   getDuration = (fromPos: THREE.Vector3, toPos: THREE.Vector3): number => {
@@ -174,6 +176,7 @@ class HomeLayer extends PageLayer {
   }
 
   outAnimation = (onComplete?: () => void): void => {
+    this.state = 'out'
     this.onComplete = onComplete
     this.clearAnimations()
     const div1CurrentPos = this.div1.object.position.clone()
@@ -220,6 +223,7 @@ class HomeLayer extends PageLayer {
   }
 
   inAnimation = (onComplete?: () => void): void => {
+    this.state = 'in'
     this.onComplete = onComplete
     this.clearAnimations()
     const div1CurrentPos = this.div1.object.position.clone()

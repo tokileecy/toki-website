@@ -129,10 +129,10 @@ const navItems = [
     ...pageInfos.work,
     nextLink: false,
   },
-  {
-    ...pageInfos.contact,
-    nextLink: false,
-  },
+  // {
+  //   ...pageInfos.contact,
+  //   nextLink: false,
+  // },
 ]
 
 const Nav = (props: NavProps): JSX.Element => {

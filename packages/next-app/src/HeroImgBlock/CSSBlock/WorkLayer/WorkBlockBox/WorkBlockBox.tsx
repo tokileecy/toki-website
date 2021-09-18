@@ -1,32 +1,40 @@
+import React, { FC, useMemo } from 'react'
 import WorkBlock from '../../../../components/WorkBlock'
+import { css } from '@emotion/css'
+export type Work = {
+  name: string
+  title: string
+  imgSrc: string
+}
 
-const blogImg = '/blog.png'
+export type WorkBlockBoxProps = {
+  works?: Work[]
+}
 
-export default function WorkBlockBox(): JSX.Element {
+const WorkBlockBox: FC<WorkBlockBoxProps> = (
+  props: WorkBlockBoxProps
+): JSX.Element => {
+  const { works = [] } = props
+  const workElements = useMemo(() => {
+    return works.map((work) => ({
+      name: work.name,
+      title: work.title,
+      imgElement: (
+        <img
+          className={css`
+            height: 100%;
+            width: 100%;
+            background-position: center center;
+            background-size: cover;
+            background-image: url(${work.imgSrc});
+          `}
+        />
+      ),
+    }))
+  }, [works])
   return (
     <WorkBlock
-      works={[
-        {
-          name: 'blog',
-          title: 'Blog',
-          imgElement: <img src={blogImg} />,
-        },
-        {
-          name: 'blog1',
-          title: 'Blog',
-          imgElement: <img src={blogImg} />,
-        },
-        {
-          name: 'blog2',
-          title: 'Blog',
-          imgElement: <img src={blogImg} />,
-        },
-        {
-          name: 'blog3',
-          title: 'Blog',
-          imgElement: <img src={blogImg} />,
-        },
-      ]}
+      works={workElements}
       // classes={{
       //   contactFieldset: css`
       //     padding: 20px 50px;
@@ -35,3 +43,5 @@ export default function WorkBlockBox(): JSX.Element {
     />
   )
 }
+
+export default WorkBlockBox
