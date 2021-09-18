@@ -1,4 +1,5 @@
 module.exports = {
+  basePath: '/toki-website',
   requireConfigFile: false,
   future: {
     webpack5: true,
