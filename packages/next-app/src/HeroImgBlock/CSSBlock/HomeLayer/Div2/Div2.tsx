@@ -6,15 +6,21 @@ export function Div2(): JSX.Element {
     <MessageBox
       className={css`
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 250px;
         height: 150px;
       `}
     >
-      {'Wellcome to...'}
-      <br />
-      {'Toki`s Website!'}
+      <span>{'Wellcome to Toki`s Website!'}</span>
+      <div
+        className={css`
+          padding-top: 10px;
+        `}
+      >
+        {'（頁面開發中...）'}
+      </div>
     </MessageBox>
   )
 }

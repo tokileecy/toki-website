@@ -5,22 +5,22 @@ import { CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
 export const ratio = 1
 // export const ratio = 1440 / 489.27
 
-export class ReactCSSObjectWrapper<T> {
+export class ReactCSSObjectWrapper<K, T> {
   actionRef: RefObject<T>
   object: CSS3DSprite
 
   constructor(
-    component: FC<
-      {
-        actionRef?: RefObject<T>
-      } & Record<string, unknown>
-    >
+    component: Parameters<typeof createElement>[0],
+    props?: Parameters<typeof createElement>[1] & {
+      actionRef?: RefObject<T>
+    } & K
   ) {
     const actionRef = createRef<T>()
     const skillBoxContainer = document.createElement('div')
     ReactDom.render(
       createElement(component, {
         actionRef,
+        ...props,
       }),
       skillBoxContainer
     )

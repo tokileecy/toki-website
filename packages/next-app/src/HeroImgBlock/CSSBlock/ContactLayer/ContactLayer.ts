@@ -26,7 +26,7 @@ class ContactLayer extends PageLayer {
   onComplete?: () => void
   animations?: Tween<THREE.Vector3>[]
   speed: number
-  contactFormBox: ReactCSSObjectWrapper<unknown>
+  contactFormBox: ReactCSSObjectWrapper<null, null>
   originContactFormBoxPos: THREE.Vector3
   outContactFormBoxPos: THREE.Vector3
 
