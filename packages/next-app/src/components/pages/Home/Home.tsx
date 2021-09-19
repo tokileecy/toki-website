@@ -33,10 +33,6 @@ const cssHomeContainer = css`
   justify-content: space-between;
   pointer-events: none;
 `
-export type HomePageProps = {
-  syncHistory?: boolean
-  syncTitle?: boolean
-}
 
 const ShadowBox = (): JSX.Element => {
   const hOffset = 0
@@ -61,8 +57,7 @@ const ShadowBox = (): JSX.Element => {
   )
 }
 
-const HomePage = (props: HomePageProps): JSX.Element => {
-  const { syncHistory = true, syncTitle = true } = props
+const HomePage = (): JSX.Element => {
   const router = useRouter()
 
   useEffect(() => {
@@ -94,11 +89,9 @@ const HomePage = (props: HomePageProps): JSX.Element => {
         >
           <Nav
             initPage={router?.pathname}
-            syncHistory={syncHistory}
             onPageChange={(nextPage: Page) => {
               heroImgState.setPage(nextPage)
             }}
-            syncTitle={syncTitle}
           />
         </div>
       </div>

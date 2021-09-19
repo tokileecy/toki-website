@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo } from 'react'
 import { cx, css } from '@emotion/css'
 import NavItem from './NavItem'
-import pageInfos from '../../../../pageInfos'
+import usePageInfos from '../../../../hooks/usePageInfos'
 import { Page } from '../../../../HeroImgBlock//HeroImgState'
 
 const cssCurrent = css`
@@ -104,39 +104,36 @@ export type NavModes = 'default' | 'current' | 'list'
 export interface NavProps {
   mode: NavModes
   initPage?: string
-  syncHistory?: boolean
-  syncTitle?: boolean
   onPageChange?: (nextPage: Page) => void
 }
 
 const defaultProps: NavProps = {
   mode: 'default',
-  syncHistory: false,
-  syncTitle: false,
 }
 
-const navItems = [
-  {
-    ...pageInfos.home,
-    nextLink: false,
-  },
-  {
-    ...pageInfos.about,
-    nextLink: false,
-  },
-  {
-    ...pageInfos.work,
-    nextLink: false,
-  },
-  // {
-  //   ...pageInfos.contact,
-  //   nextLink: false,
-  // },
-]
-
 const Nav = (props: NavProps): JSX.Element => {
-  const { mode, initPage, syncHistory, syncTitle, onPageChange } = props
+  const { mode, initPage, onPageChange } = props
 
+  const pageInfos = usePageInfos()
+
+  const navItems = [
+    {
+      ...pageInfos.home,
+      nextLink: false,
+    },
+    {
+      ...pageInfos.about,
+      nextLink: false,
+    },
+    {
+      ...pageInfos.work,
+      nextLink: false,
+    },
+    // {
+    //   ...pageInfos.contact,
+    //   nextLink: false,
+    // },
+  ]
   const scrollStateRef = useRef<ScrollState>({
     isEnter: false,
     size: 0,
@@ -206,16 +203,10 @@ const Nav = (props: NavProps): JSX.Element => {
                   e.preventDefault()
                   setCurrentSelectedItemIndex(index)
                   scrollStateRef.current.size = 0
-                  syncHistory &&
-                    window.history.pushState(
-                      null,
-                      `page ${item.href}`,
-                      item.href
-                    )
+                  item.pushState?.()
                   if (item.name !== null && item.name !== undefined) {
                     onPageChange?.(item.name)
                   }
-                  syncTitle && (document.title = item?.documentTitle ?? '')
                 }}
               >
                 {item.text}

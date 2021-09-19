@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import HomePage from '../src/components/pages/Home'
-import pageInfos from '../src/pageInfos'
+import usePageInfos from '../src/hooks/usePageInfos'
 
 export default function Home(): JSX.Element {
+  const pageInfos = usePageInfos()
   return (
     <>
       <Head>
