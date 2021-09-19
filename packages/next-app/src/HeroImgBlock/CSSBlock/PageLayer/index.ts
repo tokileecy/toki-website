@@ -6,8 +6,8 @@ class PageLayer {
   parent?: THREE.Object3D
   group: THREE.Group
   init?: (isInitPage?: boolean) => void
-  outAnimation?: () => void
-  inAnimation?: () => void
+  outAnimation?: (onComplete?: () => void) => void
+  inAnimation?: (onComplete?: () => void) => void
 
   constructor(parent?: PageLayerParent) {
     this.parent = parent

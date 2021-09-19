@@ -1,4 +1,7 @@
+const basePath = process.env.NODE_ENV === 'production' ? '/toki-website' : undefined
+
 module.exports = {
+  basePath,
   requireConfigFile: false,
   future: {
     webpack5: true,
@@ -14,5 +17,8 @@ module.exports = {
     })
 
     return config
+  },
+  publicRuntimeConfig: {
+    basePath,
   },
 }

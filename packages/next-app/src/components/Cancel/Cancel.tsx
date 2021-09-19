@@ -1,9 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
-export type CancelProps = {}
+export type CancelProps = Record<string, unknown>
 
-const Cancel = (props: CancelProps): JSX.Element => {
+const Cancel = (): JSX.Element => {
   return (
     <svg
       viewBox="0 0 27 27"

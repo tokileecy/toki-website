@@ -26,15 +26,16 @@ const StyledLabel = (inProps: React.LabelHTMLAttributes<HTMLLabelElement>) => {
   )
 }
 
-const StyledP = (inProps: React.HTMLAttributes<HTMLParagraphElement>) => {
+const StyledDiv = (inProps: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...props } = inProps
   return (
-    <p
+    <div
       {...props}
       className={cx(
         css`
           display: flex;
           flex-direction: row;
+          margin: 1em 0;
         `,
         className
       )}
@@ -82,18 +83,18 @@ const ContactForm = (inProps: ContactFormProps): JSX.Element => {
         )}
       >
         <StyledLegend>Contact</StyledLegend>
-        <StyledP>
+        <StyledDiv>
           <StyledLabel htmlFor="name">Name</StyledLabel>
           <Input id="name" />
-        </StyledP>
-        <StyledP>
+        </StyledDiv>
+        <StyledDiv>
           <StyledLabel htmlFor="email">Email</StyledLabel>
           <Input id="email" />
-        </StyledP>
-        <StyledP>
+        </StyledDiv>
+        <StyledDiv>
           <StyledLabel htmlFor="message">Message</StyledLabel>
           <Input id="message" component="textarea" />
-        </StyledP>
+        </StyledDiv>
       </fieldset>
     </form>
   )

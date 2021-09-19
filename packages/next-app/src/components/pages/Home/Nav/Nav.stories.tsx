@@ -25,4 +25,4 @@ const Template: Story<NavProps> = (args) => (
 
 export const NormalNav = Template.bind({})
 
-NormalNav.args = { mode: 'default', syncHistory: false, syncTitle: false }
+NormalNav.args = { mode: 'default' }

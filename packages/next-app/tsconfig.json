@@ -26,6 +26,10 @@
     "custom.d.ts"
   ],
   "exclude": [
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
     "node_modules",
     "**/__tests__/*",
     "lib"

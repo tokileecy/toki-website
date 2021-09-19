@@ -12,13 +12,11 @@ import ContactLayer from './ContactLayer'
 import WorkLayer from './WorkLayer'
 
 export type PageLayerName = Page
+
 class CSSBlock {
-  clock: THREE.Clock
-  scene: THREE.Scene
   rootElement: HTMLElement
   rootElementRect: DOMRect
   renderer: CSS3DRenderer
-  camera: THREE.PerspectiveCamera
   heroImgState: HeroImgState
   pageLayers: {
     [key in PageLayerName]?: PageLayer
@@ -29,8 +27,7 @@ class CSSBlock {
   group: THREE.Group
   _devicePixelRatio: number
 
-  constructor(clock: THREE.Clock, rootElement: HTMLElement) {
-    this.clock = clock
+  constructor(rootElement: HTMLElement) {
     this.group = new THREE.Group()
     this.pageLayers = {
       home: new HomeLayer(this.group),
@@ -40,52 +37,51 @@ class CSSBlock {
     }
     this.rootElement = rootElement
     this.rootElementRect = rootElement.getBoundingClientRect()
-    this.scene = new THREE.Scene()
 
     this._devicePixelRatio = window.devicePixelRatio ?? 1
-    this.scene.add(this.group)
+    heroImgState.scene.add(this.group)
     this.renderer = new CSS3DRenderer()
 
     this.renderer.domElement.classList.add(css`
       position: absolute;
-      z-index: 10;
+      z-index: 30;
       pointer-events: none;
     `)
 
-    this.camera = new THREE.PerspectiveCamera(0, 0, 0, 0)
     this.heroImgState = heroImgState
     this.requestAnimationFrameId = null
 
     reaction(
       () => this.heroImgState.page,
       (page: Page, prevPage: Page) => {
+        this.animate()
+        const onAnimationComplete = () => {
+          this.stopAnimate()
+        }
         if (prevPage === 'home' && page !== 'home') {
-          this.pageLayers.home?.outAnimation?.()
+          this.pageLayers.home?.outAnimation?.(onAnimationComplete)
         } else if (prevPage === 'about' && page !== 'about') {
-          this.pageLayers.about?.outAnimation?.()
+          this.pageLayers.about?.outAnimation?.(onAnimationComplete)
         } else if (prevPage === 'work' && page !== 'work') {
-          this.pageLayers.work?.outAnimation?.()
+          this.pageLayers.work?.outAnimation?.(onAnimationComplete)
         } else if (prevPage === 'contact' && page !== 'contact') {
-          this.pageLayers.contact?.outAnimation?.()
+          this.pageLayers.contact?.outAnimation?.(onAnimationComplete)
         }
 
         if (prevPage !== 'home' && page === 'home') {
-          this.pageLayers.home?.inAnimation?.()
+          this.pageLayers.home?.inAnimation?.(onAnimationComplete)
         } else if (prevPage !== 'about' && page === 'about') {
-          this.pageLayers.about?.inAnimation?.()
+          this.pageLayers.about?.inAnimation?.(onAnimationComplete)
         } else if (prevPage !== 'work' && page === 'work') {
-          this.pageLayers.work?.inAnimation?.()
+          this.pageLayers.work?.inAnimation?.(onAnimationComplete)
         } else if (prevPage !== 'contact' && page === 'contact') {
-          this.pageLayers.contact?.inAnimation?.()
+          this.pageLayers.contact?.inAnimation?.(onAnimationComplete)
         }
       }
     )
   }
 
   init = (): void => {
-    this.camera.position.z = 3000
-    this.camera.position.y = -100
-
     this.pageLayers.home?.init?.(this.heroImgState.page === 'home')
     this.pageLayers.about?.init?.(this.heroImgState.page === 'about')
     this.pageLayers.contact?.init?.(this.heroImgState.page === 'contact')
@@ -98,25 +94,22 @@ class CSSBlock {
     const renderWidth = this.rootElementRect.width
     const renderHeight = this.rootElementRect.height
 
-    this.camera.fov = 40
-    this.camera.aspect = renderWidth / renderHeight
-    this.camera.near = 1
-    this.camera.far = 10000
-    this.camera.updateProjectionMatrix()
-
     this.renderer.setSize(renderWidth, renderHeight)
     this.render()
   }
 
   render = (): void => {
-    this.renderer.render(this.scene, this.camera)
+    this.renderer.render(heroImgState.scene, heroImgState.camera)
   }
 
-  animate = (time?: number): void => {
+  animate = (): void => {
     this.render()
-    TWEEN.update(time)
+
+    if (this.requestAnimationFrameId !== null) {
+      this.stopAnimate()
+    }
     this.requestAnimationFrameId = requestAnimationFrame((time) => {
-      this.animate(time)
+      this.animate()
     })
   }
 

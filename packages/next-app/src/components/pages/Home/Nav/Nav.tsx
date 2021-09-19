@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useMemo } from 'react'
 import { cx, css } from '@emotion/css'
 import NavItem from './NavItem'
-import pageInfos from '../../../../pageInfos'
+import usePageInfos from '../../../../hooks/usePageInfos'
 import { Page } from '../../../../HeroImgBlock//HeroImgState'
 
 const cssCurrent = css`
@@ -24,7 +24,6 @@ const cssList = css`
 `
 
 const cssNav = css`
-  border-top: 1px solid white;
   height: 70px;
   position: relative;
   overflow: hidden;
@@ -105,38 +104,36 @@ export type NavModes = 'default' | 'current' | 'list'
 export interface NavProps {
   mode: NavModes
   initPage?: string
-  syncHistory?: boolean
-  syncTitle?: boolean
   onPageChange?: (nextPage: Page) => void
 }
 
 const defaultProps: NavProps = {
   mode: 'default',
-  syncHistory: false,
-  syncTitle: false,
 }
 
-const navItems = [
-  {
-    ...pageInfos.home,
-    nextLink: false,
-  },
-  {
-    ...pageInfos.about,
-    nextLink: false,
-  },
-  {
-    ...pageInfos.work,
-    nextLink: false,
-  },
-  {
-    ...pageInfos.contact,
-    nextLink: false,
-  },
-]
-function Nav(props: NavProps): JSX.Element {
-  const { mode, initPage, syncHistory, syncTitle, onPageChange } = props
+const Nav = (props: NavProps): JSX.Element => {
+  const { mode, initPage, onPageChange } = props
 
+  const pageInfos = usePageInfos()
+
+  const navItems = [
+    {
+      ...pageInfos.home,
+      nextLink: false,
+    },
+    {
+      ...pageInfos.about,
+      nextLink: false,
+    },
+    {
+      ...pageInfos.work,
+      nextLink: false,
+    },
+    // {
+    //   ...pageInfos.contact,
+    //   nextLink: false,
+    // },
+  ]
   const scrollStateRef = useRef<ScrollState>({
     isEnter: false,
     size: 0,
@@ -174,17 +171,21 @@ function Nav(props: NavProps): JSX.Element {
     [currentSelectedItemIndex, setCurrentSelectedItemIndex]
   )
 
+  const navHandleMouseEnter = useCallback(() => {
+    scrollStateRef.current.isEnter = true
+  }, [scrollStateRef])
+
+  const navHandleMouseLeave = useCallback(() => {
+    scrollStateRef.current.size = 0
+    scrollStateRef.current.isEnter = false
+  }, [scrollStateRef])
+
   return (
     <nav
       className={cssNav}
       onWheel={handleWheel}
-      onMouseEnter={() => {
-        scrollStateRef.current.isEnter = true
-      }}
-      onMouseLeave={() => {
-        scrollStateRef.current.size = 0
-        scrollStateRef.current.isEnter = false
-      }}
+      onMouseEnter={navHandleMouseEnter}
+      onMouseLeave={navHandleMouseLeave}
     >
       <div className={cx(cssContent, `mode-${mode}`)}>
         <div className={cx(cssCurrent, 'current')}>
@@ -202,16 +203,10 @@ function Nav(props: NavProps): JSX.Element {
                   e.preventDefault()
                   setCurrentSelectedItemIndex(index)
                   scrollStateRef.current.size = 0
-                  syncHistory &&
-                    window.history.pushState(
-                      null,
-                      `page ${item.href}`,
-                      item.href
-                    )
+                  item.pushState?.()
                   if (item.name !== null && item.name !== undefined) {
                     onPageChange?.(item.name)
                   }
-                  syncTitle && (document.title = item?.documentTitle ?? '')
                 }}
               >
                 {item.text}

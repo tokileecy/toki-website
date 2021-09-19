@@ -1,7 +1,5 @@
 import React, {
   RefObject,
-  useImperativeHandle,
-  useRef,
   useState,
   useEffect,
   PropsWithChildren,
@@ -9,6 +7,7 @@ import React, {
 } from 'react'
 import { cx, css, keyframes } from '@emotion/css'
 import Box from '../Box'
+import ScrollableContent from '../ScrollableBox/ScrollableContent'
 
 const whiteBackground = keyframes`
   0% {
@@ -66,6 +65,8 @@ const cssHeader = css`
 `
 
 const cssContent = css`
+  height: 400px;
+  overflow: hidden;
   &.show {
     visibility: visible;
   }
@@ -105,35 +106,46 @@ export interface DialogBoxProps
   extends PropsWithChildren<Record<string, unknown>> {
   className?: string
   title?: string
+  disableAnimation?: boolean
 }
 
 const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
   (props: DialogBoxProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
-    const { className = '', children, title = '', animated = false } = props
+    const {
+      className = '',
+      children,
+      title = '',
+      animated = false,
+      disableAnimation = false,
+    } = props
 
-    const [expandHeader, setExpandHeader] = useState(false)
-    const [expandContent, setExpandContent] = useState(false)
-    const [showContent, setShowContent] = useState(false)
+    const [expandHeader, setExpandHeader] = useState(disableAnimation || false)
+    const [expandContent, setExpandContent] = useState(
+      disableAnimation || false
+    )
+    const [showContent, setShowContent] = useState(disableAnimation || false)
     const [blink, setBlink] = useState(true)
 
-    useEffect(() => {
-      if (animated === true) {
-        // setBlink(true)
-        setTimeout(() => {
-          setExpandHeader(true)
+    if (!disableAnimation) {
+      useEffect(() => {
+        if (animated === true) {
+          // setBlink(true)
           setTimeout(() => {
-            setExpandContent(true)
+            setExpandHeader(true)
             setTimeout(() => {
-              setShowContent(true)
-            }, 1000)
-          }, 500)
-        }, 0)
-      } else {
-        setExpandHeader(false)
-        setExpandContent(false)
-        setShowContent(false)
-      }
-    }, [animated])
+              setExpandContent(true)
+              setTimeout(() => {
+                setShowContent(true)
+              }, 1000)
+            }, 500)
+          }, 0)
+        } else {
+          setExpandHeader(false)
+          setExpandContent(false)
+          setShowContent(false)
+        }
+      }, [animated])
+    }
     return (
       <div
         ref={ref}
@@ -163,8 +175,10 @@ const DialogBox = React.forwardRef<HTMLDivElement, DialogBoxProps>(
               hide: !showContent,
             })}
           >
-            <div className={cssTitle}>{title}</div>
-            {children}
+            <ScrollableContent>
+              <div className={cssTitle}>{title}</div>
+              {children}
+            </ScrollableContent>
           </div>
         </Box>
       </div>
