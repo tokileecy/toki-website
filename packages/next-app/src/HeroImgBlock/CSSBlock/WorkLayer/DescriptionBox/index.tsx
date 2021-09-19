@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { css } from '@emotion/css'
 import MessageBox from '../../../../components/Containers/MessageBox'
+import { cssBaseBox } from '../../styles'
 
 export type DescriptionProps = {
   text?: string
@@ -13,9 +14,9 @@ const Description: FC<DescriptionProps> = (
   return (
     <MessageBox
       className={css`
-        width: 500px;
         min-height: 100px;
         padding: 20px;
+        ${cssBaseBox};
       `}
     >
       {text}

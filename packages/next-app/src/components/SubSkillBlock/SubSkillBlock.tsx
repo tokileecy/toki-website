@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { cx, css } from '@emotion/css'
 import Color from 'color'
+import { mq } from '../../baseStyles'
 
 const bgColor = new Color(0x00ffff)
 
@@ -32,6 +33,14 @@ const cssContent = css`
   min-height: 100px;
   display: flex;
   align-items: flex-start;
+
+  ${mq.xxs} {
+    flex-direction: column;
+  }
+
+  ${mq.sm} {
+    flex-direction: row;
+  }
 `
 
 const cssDescription = css`

@@ -1,6 +1,8 @@
 import React, { FC, useMemo } from 'react'
 import WorkBlock from '../../../../components/WorkBlock'
 import { css } from '@emotion/css'
+import { cssBaseBox } from '../../styles'
+
 export type Work = {
   name: string
   title: string
@@ -35,6 +37,7 @@ const WorkBlockBox: FC<WorkBlockBoxProps> = (
   return (
     <WorkBlock
       works={workElements}
+      className={cssBaseBox}
       // classes={{
       //   contactFieldset: css`
       //     padding: 20px 50px;

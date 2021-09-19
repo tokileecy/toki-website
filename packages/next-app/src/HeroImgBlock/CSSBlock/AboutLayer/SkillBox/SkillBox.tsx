@@ -2,8 +2,7 @@ import React, { FC, useState, useImperativeHandle, RefObject } from 'react'
 import DialogBox from '../../../../components/Containers/DialogBox'
 import SubSkillBlock from '../../../../components/SubSkillBlock'
 import TagSubSkillBlock from '../../../../components/SubSkillBlock/TagSubSkillBlock'
-
-import { css } from '@emotion/css'
+import { cssBaseBox } from '../../styles'
 
 export type SkillBoxRefContent = {
   animate: () => void
@@ -38,9 +37,7 @@ const SkillBox: FC<SkillBoxProps> = React.forwardRef<
       disableAnimation
       animated={animated}
       title="SKILL"
-      className={css`
-        width: 500px;
-      `}
+      className={cssBaseBox}
     >
       <SubSkillBlock
         description="曾因關注新的標準，而學習了 Polymer 與一些 Web Components 的知識，後來工作中主要都使用到 React.js 進行開發，但持續關注 Web Components 的發展。"

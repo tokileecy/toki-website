@@ -1,5 +1,5 @@
 import React, { ReactNode, PropsWithChildren } from 'react'
-import { css } from '@emotion/css'
+import { cx, css } from '@emotion/css'
 import ScrollableBox from '../Containers/ScrollableBox'
 import Color from 'color'
 
@@ -79,18 +79,22 @@ export type Work = {
 
 export type WorkBlockProps = {
   works: Work[]
+  className?: string
 }
 
 const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
-  const { works } = inProps
+  const { works, className } = inProps
   return (
     <ScrollableBox
-      className={css`
-        width: 500px;
-        height: 400px;
-        padding: 5px;
-        background-color: ${new Color('#ffffff').alpha(0.1).toString()};
-      `}
+      className={cx(
+        css`
+          width: 500px;
+          height: 400px;
+          padding: 5px;
+          background-color: ${new Color('#ffffff').alpha(0.1).toString()};
+        `,
+        className
+      )}
     >
       <div
         className={css`

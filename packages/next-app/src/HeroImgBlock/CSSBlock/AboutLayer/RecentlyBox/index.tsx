@@ -1,13 +1,14 @@
 import { css } from '@emotion/css'
 import MessageBox from '../../../../components/Containers/MessageBox'
+import { cssBaseBox } from '../../styles'
 
 export default function RecentlyBox(): JSX.Element {
   return (
     <MessageBox
       className={css`
-        width: 500px;
         min-height: 100px;
         padding: 20px;
+        ${cssBaseBox};
       `}
     >
       <span>
