@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { cx, css } from '@emotion/css'
 import HeroImgBlock from '../../../../HeroImgBlock'
+import ThreeWebglLayer from '@psycholog-studio/ui/ThreeGraphic/ThreeWebglLayer'
+import ThreeGraphic from '@psycholog-studio/ui/ThreeGraphic'
 
 export interface HeroImgProps {
   className: string
@@ -11,6 +13,10 @@ const defaultProps: HeroImgProps = {
 }
 
 const cssHeroImg = css`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
   canvas {
     position: absolute;
     z-index: 3;
@@ -42,7 +48,19 @@ function HeroImg(props: HeroImgProps): JSX.Element {
     }
   }, [])
   return (
-    <div ref={heroImgElementRef} className={cx(cssHeroImg, className)}></div>
+    <div
+      className={css`
+        position: absolute;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+      `}
+    >
+      <ThreeGraphic>
+        <ThreeWebglLayer />
+      </ThreeGraphic>
+      <div ref={heroImgElementRef} className={cx(cssHeroImg, className)}></div>
+    </div>
   )
 }
 
