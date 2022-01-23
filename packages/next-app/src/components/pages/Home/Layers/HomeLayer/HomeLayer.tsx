@@ -1,5 +1,5 @@
 import React from 'react'
-import SpriteBox from './SpriteBox'
+// import SpriteBox from './SpriteBox'
 import ThreeCSSObject from '@psycholog-studio/ui/ThreeGraphic/ThreeCSSLayer/ThreeCSSObject'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import { cx } from '@emotion/css'

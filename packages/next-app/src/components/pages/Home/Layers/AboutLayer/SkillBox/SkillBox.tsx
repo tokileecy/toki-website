@@ -3,7 +3,6 @@ import ScrollableContent from '@psycholog-studio/ui/Containers/ScrollableBox/Scr
 import Box from '@psycholog-studio/ui/Containers/Box'
 import SubSkillBlock from '../../../../../SubSkillBlock'
 import TagSubSkillBlock from '../../../../../SubSkillBlock/TagSubSkillBlock'
-import { cx } from '@emotion/css'
 import * as styles from './SkillBox.styles'
 
 export type SkillBoxProps = {

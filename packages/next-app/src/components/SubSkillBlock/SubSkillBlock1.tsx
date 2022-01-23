@@ -48,17 +48,6 @@ const cssSkills = css`
   /* align-items: flex-end; */
 `
 
-const cssSkill = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-right: 5px;
-
-  &:last-child {
-    padding-right: 0;
-  }
-`
-
 const chartMaxHeight = 70
 
 const cssSkillChart = css`
