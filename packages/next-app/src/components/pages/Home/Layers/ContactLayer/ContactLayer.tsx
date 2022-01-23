@@ -1,9 +1,9 @@
-import React, { useRef, useCallback } from 'react'
+import React from 'react'
 import ThreeCSSObject from '@psycholog-studio/ui/ThreeGraphic/ThreeCSSLayer/ThreeCSSObject'
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
 import { cx } from '@emotion/css'
 import * as styles from './ContactLayer.styles'
 import ContactForm from '../../../../ContactForm'
+import useLayerCSSObjectRef from '../useLayerCSSObjectRef'
 
 export interface HomeLayerProps {
   hide?: boolean
@@ -11,20 +11,11 @@ export interface HomeLayerProps {
 
 const WorkLayer = (props: HomeLayerProps): JSX.Element => {
   const { hide = true } = props
-  const aboutLayerRef = useRef<CSS3DObject | null>(null)
-  const aboutLayerRefCallback = useCallback((obj) => {
-    if (obj) {
-      aboutLayerRef.current = obj
-      obj.position.z = 40
-    }
-  }, [])
+  const [, aboutLayerRefCallback] = useLayerCSSObjectRef()
 
   return (
-    <ThreeCSSObject
-      ref={aboutLayerRefCallback}
-      className={cx(styles.root, { hide })}
-    >
-      <div className={styles.content}>
+    <ThreeCSSObject ref={aboutLayerRefCallback} className={styles.root}>
+      <div className={cx(styles.content, { hide })}>
         <ContactForm
           className={cx(styles.contactFormBox, { hide })}
           classes={{

@@ -1,32 +1,49 @@
 import { css } from '@emotion/css'
-import { baseRoot } from '../styles'
-
-export const root = css`
-  &.hide {
-    pointer-events: none;
-  }
-`
+import { root, baseContent } from '../styles'
+import { mq } from '../../../../../baseStyles'
+export { root }
 
 export const content = css`
-  ${baseRoot};
+  ${baseContent};
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 100px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  ${mq.md} {
+    padding: 100px;
+    justify-content: space-between;
+  }
+
+  ${mq.lg} {
+    padding: 200px;
+    justify-content: space-between;
+  }
 `
 
 export const topBlock = css`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
+
+  ${mq.lg} {
+    justify-content: flex-start;
+  }
 `
 
 export const bottomBlock = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
+
+  ${mq.lg} {
+    justify-content: flex-end;
+  }
 `
 
 export const grettingBox = css`
@@ -36,7 +53,7 @@ export const grettingBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(-100vw);
+    transform: translateX(-130vw);
   }
 `
 
@@ -51,7 +68,7 @@ export const descriptionBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(100vw);
+    transform: translateX(130vw);
   }
 `
 
@@ -63,6 +80,6 @@ export const spriteBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(-100vw);
+    transform: translateX(-130vw);
   }
 `

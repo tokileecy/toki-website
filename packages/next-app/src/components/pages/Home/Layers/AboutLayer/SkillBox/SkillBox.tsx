@@ -14,7 +14,7 @@ const SkillBox = (props: SkillBoxProps): JSX.Element => {
   const { className } = props
 
   return (
-    <Box className={cx(styles.root, className)}>
+    <Box className={className}>
       <ScrollableContent>
         <div className={styles.title}>{'SKILL'}</div>
         <SubSkillBlock

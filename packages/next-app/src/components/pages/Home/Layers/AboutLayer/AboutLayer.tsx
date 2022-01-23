@@ -1,10 +1,10 @@
-import React, { useRef, useCallback } from 'react'
+import React from 'react'
 import ThreeCSSObject from '@psycholog-studio/ui/ThreeGraphic/ThreeCSSLayer/ThreeCSSObject'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
 import { cx } from '@emotion/css'
 import * as styles from './AboutLayer.styles'
 import SkillBox from './SkillBox'
+import useLayerCSSObjectRef from '../useLayerCSSObjectRef'
 
 export interface HomeLayerProps {
   hide?: boolean
@@ -12,21 +12,11 @@ export interface HomeLayerProps {
 
 const AboutLayer = (props: HomeLayerProps): JSX.Element => {
   const { hide = true } = props
-  const aboutLayerRef = useRef<CSS3DObject | null>(null)
-  const aboutLayerRefCallback = useCallback((obj) => {
-    if (obj) {
-      aboutLayerRef.current = obj
-      obj.position.z = 40
-      // obj.scale.set(0.8, 0.8, 0.8)
-    }
-  }, [])
+  const [, aboutLayerRefCallback] = useLayerCSSObjectRef()
 
   return (
-    <ThreeCSSObject
-      className={cx(styles.root, { hide })}
-      ref={aboutLayerRefCallback}
-    >
-      <div className={styles.content}>
+    <ThreeCSSObject className={styles.root} ref={aboutLayerRefCallback}>
+      <div className={cx(styles.content, { hide })}>
         <div className={styles.leftBlock}>
           <MessageBox className={cx(styles.leadRoleBox, { hide })}>
             {'Tokileecy'}

@@ -1,18 +1,16 @@
 import { css } from '@emotion/css'
-import { baseRoot } from '../styles'
+import { root, baseContent } from '../styles'
 
-export const root = css`
-  &.hide {
-    pointer-events: none;
-  }
-`
+export { root }
 
 export const content = css`
-  ${baseRoot};
+  ${baseContent};
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 export const contactFieldset = css`
@@ -22,6 +20,6 @@ export const contactFormBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(100vw);
+    transform: translateX(130vw);
   }
 `

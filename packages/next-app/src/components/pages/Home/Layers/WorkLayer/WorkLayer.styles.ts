@@ -1,35 +1,43 @@
 import { css } from '@emotion/css'
-import { baseRoot, cssBaseBox } from '../styles'
+import { root, baseContent, cssBaseBox } from '../styles'
+import { mq } from '../../../../../baseStyles'
 
-export const root = css`
-  &.hide {
-    pointer-events: none;
-  }
-`
+export { root }
 
 export const content = css`
-  ${baseRoot};
+  ${baseContent};
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  padding: 100px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  ${mq.lg} {
+    padding: 200px;
+    flex-direction: row;
+  }
 `
 
 export const workBlockBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(100vw);
+    transform: translateX(130vw);
   }
 `
 
 export const leftBlock = css`
-  padding: 180px 0;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  ${mq.lg} {
+    padding: 180px 0;
+  }
 `
 
 export const rightBlock = css`
@@ -47,6 +55,6 @@ export const descriptionBox = css`
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
-    transform: translateX(-100vw);
+    transform: translateX(-130vw);
   }
 `
