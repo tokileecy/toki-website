@@ -12,14 +12,19 @@ export interface HomeLayerProps {
 
 const works = [
   {
-    name: 'blog',
-    title: 'Blog',
-    imgSrc: '/blog.png',
-  },
-  {
     name: 'tokisite',
     title: 'TokiSite',
     imgSrc: '/tokisite.png',
+  },
+  {
+    name: 'psycholog-ui',
+    title: 'Psycholog ui',
+    imgSrc: '/psycholog-storybook.png',
+  },
+  {
+    name: 'blog',
+    title: 'Blog',
+    imgSrc: '/blog.png',
   },
 ]
 
