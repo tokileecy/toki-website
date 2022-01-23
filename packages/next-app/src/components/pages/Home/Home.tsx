@@ -1,101 +1,41 @@
-import { css } from '@emotion/css'
-import { useRouter } from 'next/router'
-import HeroImg from './HeroImg'
+import React from 'react'
 import Nav from './Nav'
-import heroImgState, { Page } from '../../../HeroImgBlock/HeroImgState'
-import { useEffect } from 'react'
-import Color from 'color'
+import Layout from '../../../base/Layout'
+import HomeLayer from './Layers/HomeLayer'
+import AboutLayer from './Layers/AboutLayer'
+import WorkLayer from './Layers/WorkLayer'
+import ContactLayer from './Layers/ContactLayer'
+import * as styles from './Home.styles'
+import ShadowBox from './ShadowBox'
+import usePage from '../../../hooks/usePage'
 
-const cssHomePageRoot = css`
-  position: relative;
-  z-index: 20;
-  width: 100%;
-  height: 100%;
-
-  @supports (height: fill-available) or (height: -webkit-fill-available) or
-    (height: -moz-available) {
-    height: fill-available;
-    min-height: fill-available;
-  }
-`
-
-const cssHeroImg = css`
-  flex: 1 0 auto;
-`
-
-const cssHomeContainer = css`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  pointer-events: none;
-`
-
-const ShadowBox = (): JSX.Element => {
-  const hOffset = 0
-  const vOffset = 150
-  const blurRadius = 100
-  const spreadRadius = -100
-  const shdowColor = new Color('#000000').alpha(1).toString()
-  return (
-    <div
-      className={css`
-        pointer-events: none;
-        width: 150%;
-        height: 100%;
-        position: absolute;
-        z-index: 15;
-        box-shadow: inset ${hOffset}px -${vOffset}px ${blurRadius}px ${spreadRadius}px
-            ${shdowColor},
-          inset ${hOffset}px ${vOffset}px ${blurRadius}px ${spreadRadius}px
-            ${shdowColor};
-      `}
-    ></div>
-  )
-}
+export type Page = 'home' | 'about' | 'work' | 'contact'
 
 const HomePage = (): JSX.Element => {
-  const router = useRouter()
-
-  useEffect(() => {
-    const initPage = router?.pathname.replace(/\//g, '')
-    heroImgState.setPage(initPage)
-  }, [])
+  const { page, setPage } = usePage()
 
   return (
-    <div className={cssHomePageRoot}>
-      <div
-        className={css`
-          overflow: hidden;
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          z-index: -10;
-          display: flex;
-          flex-direction: column;
-        `}
-      >
-        <ShadowBox />
-        <HeroImg className={cssHeroImg} />
+    <Layout
+      cssLayerContent={
+        <>
+          <HomeLayer hide={page !== 'home'} />
+          <AboutLayer hide={page !== 'about'} />
+          <WorkLayer hide={page !== 'work'} />
+          <ContactLayer hide={page !== 'contact'} />
+        </>
+      }
+    >
+      <ShadowBox />
+      <div className={styles.navContainer}>
+        <Nav
+          page={page}
+          className={styles.nav}
+          onPageChange={(nextPage: Page) => {
+            setPage?.(nextPage)
+          }}
+        />
       </div>
-      <div className={cssHomeContainer}>
-        <div
-          className={css`
-            pointer-events: auto;
-          `}
-        >
-          <Nav
-            initPage={router?.pathname}
-            onPageChange={(nextPage: Page) => {
-              heroImgState.setPage(nextPage)
-            }}
-          />
-        </div>
-      </div>
-    </div>
+    </Layout>
   )
 }
 

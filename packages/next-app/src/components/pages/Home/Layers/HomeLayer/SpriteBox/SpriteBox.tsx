@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from 'react'
-import { Story, Meta } from '@storybook/react'
-import SpriteWebGLBlock from './Sprite'
+import { useRef, useEffect } from 'react'
+import { cx, css } from '@emotion/css'
 import Box from '@psycholog-studio/ui/Containers/Box'
+import SpriteWebGLBlock from '../../../../../three/Sprite'
 
-export default {
-  title: 'three/shader/Sprite',
-  argTypes: {},
-} as Meta
+export interface SpriteBoxProps {
+  className?: string
+}
 
-const Template: Story = () => {
+const SpriteBox = (props: SpriteBoxProps): JSX.Element => {
+  const { className } = props
   const containerRef = useRef<HTMLDivElement | null>(null)
   const spriteWebGLBlockRef = useRef<SpriteWebGLBlock | null>(null)
 
@@ -21,7 +21,9 @@ const Template: Story = () => {
         rootElement = document.createElement('div')
         console.warn(`graphRoot.current should not be ${containerRef.current}`)
       }
-      spriteWebGLBlockRef.current = new SpriteWebGLBlock(rootElement)
+      spriteWebGLBlockRef.current = new SpriteWebGLBlock(rootElement, {
+        // clock: heroImgState.clock,
+      })
 
       spriteWebGLBlockRef.current.init()
       spriteWebGLBlockRef.current.render()
@@ -36,30 +38,21 @@ const Template: Story = () => {
     }
   }, [])
   return (
-    <div
-      style={{
-        backgroundColor: 'black',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-      }}
-    >
-      <Box
-        style={{
-          backgroundColor: 'transparent',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '250px',
-          height: '250px',
-        }}
-        ref={containerRef}
-      ></Box>
-    </div>
+    <Box
+      className={cx(
+        css`
+          background-color: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 250px;
+          height: 250px;
+        `,
+        className
+      )}
+      ref={containerRef}
+    ></Box>
   )
 }
 
-export const NormalCard = Template.bind({})
-
-NormalCard.args = {}
+export default SpriteBox

@@ -1,6 +1,6 @@
 import React, { ReactNode, PropsWithChildren } from 'react'
 import { cx, css } from '@emotion/css'
-import ScrollableBox from '../Containers/ScrollableBox'
+import ScrollableBox from '@psycholog-studio/ui/Containers/ScrollableBox'
 import Color from 'color'
 
 export type ImgBlockProps = PropsWithChildren<{

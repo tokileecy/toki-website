@@ -1,7 +1,7 @@
 import React, { forwardRef, ForwardedRef } from 'react'
 import { cx, css } from '@emotion/css'
-import Box from '../Containers/Box'
-import { cssScrollableStyle } from '../Containers/ScrollableBox/ScrollableContent'
+import Box from '@psycholog-studio/ui/Containers/Box'
+import { scrollable } from '@psycholog-studio/ui/Containers/ScrollableBox/ScrollableContent/ScrollableContent.styles'
 type BaseInputCategory = React.InputHTMLAttributes<HTMLInputElement> &
   React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
@@ -56,7 +56,7 @@ const Input = forwardRef((inProps: InputProps, ref: InputRef): JSX.Element => {
             ref={ref}
             {...props}
             className={cx(
-              cssScrollableStyle,
+              scrollable,
               css`
                 height: ${textareaHeight}ch;
                 padding: 0 ${scrollBarPadding}ch 0

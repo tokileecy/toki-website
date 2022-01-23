@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Page } from '../HeroImgBlock/HeroImgState'
+import { Page } from '../components/pages/Home'
 import { PageInfosContext } from '../contexts/PageInfosContext'
 
 export type PageInfo = {

@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react'
 
 import { css } from '@emotion/css'
 import WorkBlock, { WorkBlockProps } from './WorkBlock'
-import Content from '../Content'
+import Content from './Content'
 
 export default {
   title: 'next-app/WorkBlock',
