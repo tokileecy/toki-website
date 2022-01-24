@@ -5,26 +5,31 @@ import { cx } from '@emotion/css'
 import * as styles from './WorkLayer.styles'
 import WorkBlockBox from './WorkBlockBox'
 import useLayerCSSObjectRef from '../useLayerCSSObjectRef'
+import getConfig from 'next/config'
 
 export interface HomeLayerProps {
   hide?: boolean
 }
 
+const { publicRuntimeConfig } = getConfig()
+
+const { basePath = '' } = publicRuntimeConfig
+
 const works = [
   {
     name: 'tokisite',
     title: 'TokiSite',
-    imgSrc: '/tokisite.png',
+    imgSrc: `${basePath}/tokisite.png`,
   },
   {
     name: 'psycholog-ui',
     title: 'Psycholog ui',
-    imgSrc: '/psycholog-storybook.png',
+    imgSrc: `${basePath}/psycholog-storybook.png`,
   },
   {
     name: 'blog',
     title: 'Blog',
-    imgSrc: '/blog.png',
+    imgSrc: `${basePath}/blog.png`,
   },
 ]
 
