@@ -15,16 +15,6 @@ import Color from 'color'
 
 // `
 
-export const link = css`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-`
-
 const bgColor = new Color('#ff7e7c').alpha(0.75)
 const bgColor1 = new Color('#c5c5c5').alpha(0.75)
 const bgColor3 = new Color('#26c9f2').alpha(0.8)
@@ -67,14 +57,19 @@ const cssAfter = css`
   /* filter: blur(3px) drop-shadow(0 0px 2px #830db6); */
 `
 
-export const text = css`
-  padding: 0 70px;
+export const link = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* flex-grow: 1; */
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
   border-radius: 3px;
   position: relative;
 

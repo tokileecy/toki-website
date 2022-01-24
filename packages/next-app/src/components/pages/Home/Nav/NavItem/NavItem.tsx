@@ -25,7 +25,7 @@ export function NavItem(props: NavItemProps): JSX.Element {
   return (
     <Link href={href} {...linkProps}>
       <a
-        className={cx(styles.link, className)}
+        className={cx(styles.link, { selected }, className)}
         onClick={(e) => {
           e.preventDefault()
           return onClick?.(e)
@@ -33,9 +33,7 @@ export function NavItem(props: NavItemProps): JSX.Element {
         href={href}
         {...linkProps}
       >
-        <div className={cx(styles.text, { selected })}>
-          <span>{children}</span>
-        </div>
+        <span>{children}</span>
       </a>
     </Link>
   )
