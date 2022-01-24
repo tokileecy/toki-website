@@ -10,14 +10,19 @@ export type ScrollState = {
   size: number
 }
 
+export type NavClassesKey = 'root' | 'navItem'
+
 export interface NavProps {
   className?: string
   page: Page
   onPageChange?: (nextPage: Page) => void
+  classes?: {
+    [k in NavClassesKey]?: string
+  }
 }
 
 const Nav = (props: NavProps): JSX.Element => {
-  const { className, page, onPageChange } = props
+  const { classes = {}, className, page, onPageChange } = props
 
   const pageInfos = usePageInfos()
 
@@ -34,26 +39,25 @@ const Nav = (props: NavProps): JSX.Element => {
   }, [page, navItems])
 
   return (
-    <nav className={cx(styles.nav, className)}>
-      <div className={styles.list}>
-        {navItems.map((item, index) => {
-          return (
-            <NavItem
-              key={item.href}
-              href={item.href}
-              selected={currentSelectedItemIndex === index}
-              onClick={() => {
-                item.pushState?.()
-                if (item.name !== null && item.name !== undefined) {
-                  onPageChange?.(item.name)
-                }
-              }}
-            >
-              {item.text}
-            </NavItem>
-          )
-        })}
-      </div>
+    <nav className={cx(styles.root, classes.root, className)}>
+      {navItems.map((item, index) => {
+        return (
+          <NavItem
+            className={classes.navItem}
+            key={item.href}
+            href={item.href}
+            selected={currentSelectedItemIndex === index}
+            onClick={() => {
+              item.pushState?.()
+              if (item.name !== null && item.name !== undefined) {
+                onPageChange?.(item.name)
+              }
+            }}
+          >
+            {item.text}
+          </NavItem>
+        )
+      })}
     </nav>
   )
 }

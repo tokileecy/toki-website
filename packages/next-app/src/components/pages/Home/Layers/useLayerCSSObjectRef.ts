@@ -11,21 +11,21 @@ const useLayerCSSObjectRef = (
       ref.current = obj
       func?.(obj)
 
-      // const changeScale = () => {
-      //   const height = document.body.clientHeight
+      const changeScale = () => {
+        const height = document.body.clientHeight
 
-      //   obj.scale.set(
-      //     (413 * 2) / height,
-      //     (413 * 2) / height,
-      //     (413 * 2) / height
-      //   )
-      // }
+        obj.scale.set(
+          (413 * 2) / height,
+          (413 * 2) / height,
+          (413 * 2) / height
+        )
+      }
 
-      // changeScale()
+      changeScale()
 
-      // window.addEventListener('resize', () => {
-      //   changeScale()
-      // })
+      window.addEventListener('resize', () => {
+        changeScale()
+      })
     }
   }, [])
 

@@ -4,6 +4,7 @@ import { cx } from '@emotion/css'
 import * as styles from './NavItem.styles'
 
 export interface NavItemProps extends Omit<LinkProps, 'href'> {
+  className?: string
   href?: string
   children?: React.ReactNode
   selected?: boolean
@@ -13,6 +14,7 @@ export interface NavItemProps extends Omit<LinkProps, 'href'> {
 
 export function NavItem(props: NavItemProps): JSX.Element {
   const {
+    className,
     children,
     selected = false,
     onClick,
@@ -23,7 +25,7 @@ export function NavItem(props: NavItemProps): JSX.Element {
   return (
     <Link href={href} {...linkProps}>
       <a
-        className={styles.link}
+        className={cx(styles.link, className)}
         onClick={(e) => {
           e.preventDefault()
           return onClick?.(e)
