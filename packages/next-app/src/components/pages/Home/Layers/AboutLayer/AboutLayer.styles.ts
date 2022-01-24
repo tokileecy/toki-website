@@ -1,38 +1,13 @@
 import { css } from '@emotion/css'
-import { root, baseContent, cssBaseBox } from '../styles'
+import { cssBaseBox } from '../styles'
 import { mq } from '../../../../../baseStyles'
 
-export { root }
-
 const mobilePadding = 50
-
-const padding = css`
-  padding: ${mobilePadding * 2}px 0;
-
-  ${mq.lg} {
-    padding: ${mobilePadding * 2}px;
-  }
-`
 
 const paddingTop = css`
   padding-top: ${mobilePadding}px;
   ${mq.lg} {
     padding-top: 0px;
-  }
-`
-
-export const content = css`
-  ${baseContent};
-  ${padding}
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  ${mq.lg} {
-    flex-direction: row;
   }
 `
 
