@@ -14,6 +14,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@psycholog-studio'
+      - name: set package token
+        run: |
+          echo "${PSYCHOLOG_NPM_TOKEN}"
+          yarn config set npmScopes.psycholog-studio.npmRegistryServer "https://npm.pkg.github.com"
+          yarn config set npmScopes.psycholog-studio.npmAuthToken "$PSYCHOLOG_NPM_TOKEN"
+        env:
+          PSYCHOLOG_NPM_TOKEN: ${{ secrets.PSYCHOLOG_NPM_TOKEN }}
       - name: eslint check
         run: |
           yarn install --silent
