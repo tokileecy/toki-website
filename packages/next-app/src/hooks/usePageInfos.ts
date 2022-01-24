@@ -10,9 +10,7 @@ export type PageInfo = {
   pushState: () => void
 }
 
-const usePageInfos = (): {
-  [key in Page]?: PageInfo
-} => {
+const usePageInfos = () => {
   const pageInfos = useContext(PageInfosContext)
 
   return pageInfos

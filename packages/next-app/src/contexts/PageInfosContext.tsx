@@ -16,8 +16,9 @@ export interface PageInfosProviderProps {
 }
 
 const PageInfosContext = createContext<{
-  [key: string]: PageInfo
-}>({})
+  pageInfoByPage: { [key: string]: PageInfo }
+  pages: Page[]
+}>({ pageInfoByPage: {}, pages: [] })
 
 const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
   const { children } = props
@@ -81,7 +82,12 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
   } as const
 
   return (
-    <PageInfosContext.Provider value={pageInfoByPage}>
+    <PageInfosContext.Provider
+      value={{
+        pageInfoByPage,
+        pages: ['home', 'about', 'work'],
+      }}
+    >
       {children}
     </PageInfosContext.Provider>
   )

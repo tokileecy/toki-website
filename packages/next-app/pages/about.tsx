@@ -15,7 +15,7 @@ export default function About(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{pageInfos.about.documentTitle}</title>
+        <title>{pageInfos.pageInfoByPage.about.documentTitle}</title>
       </Head>
       <HomePage />
     </>

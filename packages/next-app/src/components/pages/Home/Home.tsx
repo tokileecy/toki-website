@@ -6,16 +6,25 @@ import AboutLayer from './Layers/AboutLayer'
 import WorkLayer from './Layers/WorkLayer'
 import ContactLayer from './Layers/ContactLayer'
 import * as styles from './Home.styles'
-import ShadowBox from './ShadowBox'
 import usePage from '../../../hooks/usePage'
+import usePageInfos from '../../../hooks/usePageInfos'
 
 export type Page = 'home' | 'about' | 'work' | 'contact'
 
 const HomePage = (): JSX.Element => {
   const { page, setPage } = usePage()
+  const pageInfo = usePageInfos()
+
+  const handlePageChange = (nextPage: Page) => {
+    setPage?.(nextPage)
+  }
 
   return (
     <Layout
+      classes={{
+        webglLayer: styles.webglLayer,
+        uiLayer: styles.uiLayer,
+      }}
       cssLayerContent={
         <>
           <HomeLayer hide={page !== 'home'} />
@@ -25,15 +34,11 @@ const HomePage = (): JSX.Element => {
         </>
       }
     >
-      <ShadowBox />
       <div className={styles.navContainer}>
-        <Nav
-          page={page}
-          className={styles.nav}
-          onPageChange={(nextPage: Page) => {
-            setPage?.(nextPage)
-          }}
-        />
+        <div className={styles.pageLabel}>
+          {pageInfo.pageInfoByPage[page]?.text}
+        </div>
+        <Nav page={page} onPageChange={handlePageChange} />
       </div>
     </Layout>
   )

@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{pageInfos.home.documentTitle}</title>
+        <title>{pageInfos.pageInfoByPage.home.documentTitle}</title>
       </Head>
       <HomePage />
     </>
