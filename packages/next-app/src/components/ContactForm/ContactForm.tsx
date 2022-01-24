@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from '../Input'
+import Input from '@psycholog-studio/ui/Input'
 import { css, cx } from '@emotion/css'
 
 const cssBaseFontStyle = css`
