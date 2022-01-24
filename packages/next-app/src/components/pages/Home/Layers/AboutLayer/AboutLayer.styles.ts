@@ -2,25 +2,17 @@ import { css } from '@emotion/css'
 import { cssBaseBox } from '../styles'
 import { mq } from '../../../../../baseStyles'
 
-const mobilePadding = 50
-
-const paddingTop = css`
-  padding-top: ${mobilePadding}px;
-  ${mq.lg} {
-    padding-top: 0px;
-  }
-`
-
 export const leftBlock = css`
   ${cssBaseBox};
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${paddingTop}
+  padding-top: 10px;
 
-  ${mq.sm} {
+  ${mq.md} {
     flex-basis: 45%;
+    padding-top: 0px;
   }
 
   ${mq.lg} {
@@ -46,22 +38,25 @@ export const rightBlock = css`
 export const leadRoleBox = css`
   width: 100%;
   padding: 10px;
-
+  margin-bottom: 20px;
   transition: transform 1s;
   transform: translateX(0);
+
   &.hide {
     transform: translateX(-130vw);
   }
 
-  ${mq.sm} {
+  ${mq.md} {
+    font-size: 30px;
     width: 500px;
+    height: 60px;
   }
 `
 
 export const recentlyBox = css`
   width: 100%;
   padding: 10px;
-
+  margin-bottom: 20px;
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
@@ -69,6 +64,7 @@ export const recentlyBox = css`
   }
 
   ${mq.lg} {
+    margin-bottom: 0;
     width: 500px;
     padding: 20px;
   }
@@ -76,24 +72,16 @@ export const recentlyBox = css`
 
 export const skillBox = css`
   padding: 10px;
-
+  height: initial;
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
     transform: translateX(130vw);
   }
 
-  ${mq.xs} {
-    height: 280px;
-  }
-
-  ${mq.sm} {
-    height: 300px;
-  }
-
   ${mq.lg} {
-    height: 450px;
     width: 500px;
+    height: 450px;
     padding: 20px;
     flex-direction: row;
     justify-content: space-between;

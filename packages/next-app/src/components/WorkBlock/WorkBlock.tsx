@@ -2,6 +2,7 @@ import React, { ReactNode, PropsWithChildren } from 'react'
 import { cx, css } from '@emotion/css'
 import ScrollableBox from '@psycholog-studio/ui/Containers/ScrollableBox'
 import Color from 'color'
+import { mq } from '../../baseStyles'
 
 export type ImgBlockProps = PropsWithChildren<{
   title?: string
@@ -17,7 +18,7 @@ const ImgContainer = (inProps: ImgBlockProps) => {
         overflow: hidden;
         margin: 0;
         background-color: black;
-        height: 150px;
+        height: 100px;
         width: 100%;
         margin-top: 10px;
         color: white;
@@ -63,6 +64,10 @@ const ImgContainer = (inProps: ImgBlockProps) => {
             opacity: 0.2;
           }
         }
+
+        ${mq.sm} {
+          height: 150px;
+        }
       `}
     >
       <div className="title">{title}</div>
@@ -89,9 +94,12 @@ const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
       className={cx(
         css`
           width: 500px;
-          height: 400px;
           padding: 5px;
           background-color: ${new Color('#ffffff').alpha(0.1).toString()};
+
+          ${mq.sm} {
+            height: 400px;
+          }
         `,
         className
       )}

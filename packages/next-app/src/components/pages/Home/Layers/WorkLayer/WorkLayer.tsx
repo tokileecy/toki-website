@@ -34,7 +34,7 @@ const WorkLayer = (props: WorkLayerProps): JSX.Element => {
   const { hide } = props
 
   return (
-    <BaseLayer hide={hide}>
+    <BaseLayer hide={hide} classes={{ content: styles.layerContent }}>
       <div className={styles.leftBlock}>
         <MessageBox
           className={cx(styles.descriptionBox, { hide })}

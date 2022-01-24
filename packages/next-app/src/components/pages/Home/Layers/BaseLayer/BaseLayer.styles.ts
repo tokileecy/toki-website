@@ -6,8 +6,6 @@ export const root = css`
   pointer-events: none;
 `
 
-const mobilePadding = 50
-
 export const content = css`
   width: 100vw;
   height: 100vh;
@@ -15,20 +13,23 @@ export const content = css`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  overflow-y: auto;
+  overflow-y; ;
   overflow-x: hidden;
   pointer-events: auto;
-  padding: ${mobilePadding * 2}px 0;
+  padding: 40px 0;
 
   &.hide {
     pointer-events: none;
   }
-
-  ${mq.lg} {
-    padding: ${mobilePadding * 2}px;
+  
+  ${mq.sm} {
+    padding: 100px 0;  
   }
 
+
   ${mq.lg} {
+    padding: 100px;
     flex-direction: row;
   }
+
 `

@@ -3,22 +3,30 @@ import { mq } from '../../../../../baseStyles'
 
 export const topBlock = css`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 30px;
 
-  ${mq.lg} {
+  ${mq.md} {
+    height: 100%;
+    align-items: flex-start;
     justify-content: flex-start;
   }
 `
 
 export const bottomBlock = css`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 50px;
 
-  ${mq.lg} {
+  ${mq.md} {
+    height: 100%;
+    align-items: flex-end;
     justify-content: flex-end;
   }
 `

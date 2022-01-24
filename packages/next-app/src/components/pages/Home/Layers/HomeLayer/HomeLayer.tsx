@@ -1,5 +1,4 @@
 import React from 'react'
-// import SpriteBox from './SpriteBox'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import { cx } from '@emotion/css'
 import * as styles from './HomeLayer.styles'
@@ -22,11 +21,6 @@ const HomeLayer = (props: HomeLayerProps): JSX.Element => {
         </MessageBox>
       </div>
       <div className={styles.bottomBlock}>
-        {/* <SpriteBox
-            className={cx(styles.spriteBox, {
-              hide,
-            })}
-          /> */}
         <MessageBox
           className={cx(styles.descriptionBox, {
             hide,

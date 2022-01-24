@@ -2,14 +2,23 @@ import { css } from '@emotion/css'
 import { cssBaseBox } from '../styles'
 import { mq } from '../../../../../baseStyles'
 
+export const layerContent = css`
+  ${mq.md} {
+    align-items: center;
+    justify-content: center;
+  }
+`
+
 export const leftBlock = css`
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  display: none;
 
   ${mq.lg} {
+    display: initial;
     padding: 180px 0;
   }
 `
@@ -19,6 +28,11 @@ export const rightBlock = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+
+  ${mq.md} {
+    height: initial;
+  }
 `
 
 export const workBlockBox = css`
@@ -26,6 +40,14 @@ export const workBlockBox = css`
   transform: translateX(0);
   &.hide {
     transform: translateX(130vw);
+  }
+
+  ${mq.md} {
+    height: initial;
+  }
+
+  ${mq.lg} {
+    height: 450px;
   }
 `
 
