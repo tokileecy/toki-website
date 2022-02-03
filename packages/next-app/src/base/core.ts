@@ -2,6 +2,7 @@ import ThreeManager from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager'
 import LayerController from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager/LayerController'
 import TWEEN from '@tweenjs/tween.js'
 import scene from './scene'
+import scene1 from './scene/scene1'
 
 export const layerController = new LayerController({
   isAutoSize: true,
@@ -29,7 +30,7 @@ threeManager.layerController.camera.fov = FOV
 threeManager.layerController.camera.near = NEAR
 threeManager.layerController.camera.far = FAR
 
-threeManager.layerController.setScene(scene)
+threeManager.layerController.setScene(scene1)
 
 threeManager.layerController.addEventListener('frame-changed', (e) => {
   if (e.detail?.time) {

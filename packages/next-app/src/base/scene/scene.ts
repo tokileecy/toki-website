@@ -17,7 +17,7 @@ const baseGrid = new THREE.LineSegments(baseGridGeo, baseGridShaderMaterail)
 baseGrid.position.set(0, 0, 400)
 scene.add(baseGrid)
 
-const contentGridGeo = createGrid3D(1200, 1200, 400, 10, 10, 10)
+const contentGridGeo = createGrid3D(1200, 1200, 400, 7, 7, 10)
 const contentGrid = new THREE.LineSegments(contentGridGeo, gridShaderMaterail)
 contentGrid.position.set(0, 0, 200)
 scene.add(contentGrid)
