@@ -3,7 +3,7 @@ import TWEEN from '@tweenjs/tween.js'
 import createGrid3D from './createGrid3D'
 import createTrain from './createTrain'
 import container3D from './container3D'
-import { trainShaderMaterail, gridShaderMaterail } from './materials'
+import { gridShaderMaterail, baseGridShaderMaterail } from './materials'
 
 const scene = new THREE.Scene()
 
@@ -13,7 +13,7 @@ scene.add(container3D)
 // grid
 
 const baseGridGeo = createGrid3D(1200, 1200, 900, 3, 3, 3)
-const baseGrid = new THREE.LineSegments(baseGridGeo, trainShaderMaterail)
+const baseGrid = new THREE.LineSegments(baseGridGeo, baseGridShaderMaterail)
 baseGrid.position.set(0, 0, 400)
 scene.add(baseGrid)
 

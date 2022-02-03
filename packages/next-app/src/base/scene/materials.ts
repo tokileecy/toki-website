@@ -20,7 +20,26 @@ export const gridShaderMaterail = new THREE.ShaderMaterial({
   fog: true,
   linewidth: 1,
 })
+
 export const trainShaderMaterail = new THREE.ShaderMaterial({
+  uniforms: THREE.UniformsUtils.merge([
+    THREE.UniformsLib.fog,
+    {
+      lineWidth: { value: 1 },
+      alpha: {
+        value: 1,
+      },
+      color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+    },
+  ]),
+  vertexShader: gridVertShader,
+  fragmentShader: gridFragShader,
+  transparent: true,
+  fog: true,
+  linewidth: 1,
+})
+
+export const baseGridShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
     THREE.UniformsLib.fog,
     {
