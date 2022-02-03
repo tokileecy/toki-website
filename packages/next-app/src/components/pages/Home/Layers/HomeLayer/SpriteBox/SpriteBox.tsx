@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { cx, css } from '@emotion/css'
-import Box from '@psycholog-studio/ui/Containers/Box'
+import Box from '../../../../../Box'
 import SpriteWebGLBlock from '../../../../../three/Sprite'
 
 export interface SpriteBoxProps {

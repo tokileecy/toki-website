@@ -1,6 +1,6 @@
 import React from 'react'
 import ScrollableContent from '@psycholog-studio/ui/Containers/ScrollableBox/ScrollableContent'
-import Box from '@psycholog-studio/ui/Containers/Box'
+import Box from '../../../../../Box'
 import SubSkillBlock from '../../../../../SubSkillBlock'
 import TagSubSkillBlock from '../../../../../SubSkillBlock/TagSubSkillBlock'
 import * as styles from './SkillBox.styles'

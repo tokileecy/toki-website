@@ -1,10 +1,10 @@
 html {
   background-color: black;
   overflow: hidden;
-  @supports (height: fill-available) or (height: -webkit-fill-available) or (height: -moz-available)  {
+  @supports (height: fill-available) or (height: -webkit-fill-available) or
+    (height: -moz-available) {
     height: fill-available;
   }
-
 }
 
 html,
@@ -32,4 +32,63 @@ body.hide {
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+/* h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 40px;
+}
+
+h4 {
+  font-size: 36px;
+}
+
+h5 {
+  font-size: 32px;
+}
+
+h6 {
+  font-size: 24px;
+} */
+
+@media screen and (min-width: 600px) { 
+  body {
+    font-size: 16px;
+  }
+  
+  h1 {
+    font-size: 56px;
+  }
+  
+  h2 {
+    font-size: 48px;
+  }
+  
+  h3 {
+    font-size: 40px;
+  }
+  
+  h4 {
+    font-size: 36px;
+  }
+  
+  h5 {
+    font-size: 32px;
+  }
+  
+  h6 {
+    font-size: 24px;
+  }
+  
 }

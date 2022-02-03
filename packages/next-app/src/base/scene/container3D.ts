@@ -5,6 +5,7 @@ import Color from 'color'
 import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three'
 import createGrid3D from './createGrid3D'
+import { colors } from '../../baseStyles'
 
 const container3D = new THREE.Group()
 
@@ -15,7 +16,9 @@ const uniforms = THREE.UniformsUtils.merge([
       value: 1,
     },
     color: {
-      value: new THREE.Color(new Color('#02f1fa').darken(0.5).rgb().toString()),
+      value: new THREE.Color(
+        new Color(colors.primaryDefault).darken(0.5).rgb().toString()
+      ),
     },
   },
 ])

@@ -21,6 +21,7 @@ export const mediaQuerys = !isNode
       xl: window.matchMedia(`(min-width: ${breakpoints.xl}px)`),
     }
   : null
+
 export const mq = {
   /**  \@media (min-width: (breakpoints.xxs)px) */
   xxs: `@media (min-width: ${breakpoints.xxs}px)`,
@@ -34,6 +35,31 @@ export const mq = {
   lg: `@media (min-width: ${breakpoints.lg}px)`,
   /**  \@media (min-width: (breakpoints.xl)px) */
   xl: `@media (min-width: ${breakpoints.xl}px)`,
+}
+
+export enum colors {
+  // Primary
+  primaryDefault = 0x01ecf9,
+  primaryDark = 0x66dbff,
+  primaryTint = 0xc2faf1,
+
+  // Warning
+  warningDefault = 0xe40c42,
+  warningTint = 0xff7e7c,
+
+  // Complementary
+  complementaryPurple = 0xc890f9,
+  complementaryOrange = 0xe0a27e,
+}
+
+export enum fontSizes {
+  body = 16,
+  h1 = 56,
+  h2 = 48,
+  h3 = 40,
+  h4 = 36,
+  h5 = 32,
+  h6 = 24,
 }
 
 export default breakpoints

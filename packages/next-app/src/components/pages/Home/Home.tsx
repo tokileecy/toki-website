@@ -43,7 +43,7 @@ const HomePage = (): JSX.Element => {
     >
       <div className={styles.uiLayerWrapper}>
         <header className={styles.header}>
-          <div>{pageInfo.pageInfoByPage[page]?.text}</div>
+          <h1>{pageInfo.pageInfoByPage[page]?.text}</h1>
           <div className={styles.menu} onClick={handleMenuClick}>
             Menu
           </div>

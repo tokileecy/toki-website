@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import Color from 'color'
-
+import { colors } from '../../../../../baseStyles'
 // const cssAfter = css`
 //     content: '';
 //     position: absolute;
@@ -14,12 +14,6 @@ import Color from 'color'
 //     filter: blur(3px) drop-shadow(0 0px 2px #830db6);
 
 // `
-
-const bgColor = new Color('#ff7e7c').alpha(0.75)
-const bgColor1 = new Color('#c5c5c5').alpha(0.75)
-const bgColor3 = new Color('#26c9f2').alpha(0.8)
-// const bgColor4 = new Color('#edd100').alpha(0.75)
-const bgColor2 = new Color('#343434')
 
 const createBefore = (color1: Color, color2: Color) => {
   return css`
@@ -57,6 +51,18 @@ const cssAfter = css`
   /* filter: blur(3px) drop-shadow(0 0px 2px #830db6); */
 `
 
+const darkColor = new Color('#343434')
+
+const baseButtonColor = Color(colors.primaryDark)
+const normalButtonColor = baseButtonColor.darken(0.35)
+const hoverButtonColor = baseButtonColor.darken(0.2)
+const activeButtonColor = baseButtonColor
+
+const baseSelectedColor = Color(colors.complementaryOrange)
+const normalSelectedColor = baseSelectedColor
+const hoverSelectedColor = baseSelectedColor
+const activeSelectedColor = baseSelectedColor.lighten(0.1)
+
 export const link = css`
   display: flex;
   flex-direction: column;
@@ -75,22 +81,36 @@ export const link = css`
 
   &::before {
     transition: background-image 0.2s ease-in-out;
-    ${createBefore(bgColor1, bgColor2)}
-  }
-
-  &::after {
-    ${cssAfter}
+    ${createBefore(normalButtonColor, darkColor)}
   }
 
   &:hover {
     &::before {
-      ${createBefore(bgColor, bgColor2)}
+      ${createBefore(hoverButtonColor, darkColor)}
+    }
+  }
+
+  &:active {
+    &::before {
+      ${createBefore(activeButtonColor, darkColor)}
     }
   }
 
   &.selected {
     &::before {
-      ${createBefore(bgColor3, bgColor2)}
+      ${createBefore(normalSelectedColor, darkColor)}
     }
+
+    &:hover::before {
+      ${createBefore(hoverSelectedColor, darkColor)}
+    }
+
+    &:active::before {
+      ${createBefore(activeSelectedColor, darkColor)}
+    }
+  }
+
+  &::after {
+    ${cssAfter}
   }
 `

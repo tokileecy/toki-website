@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import { mq } from '../../../baseStyles'
+import { mq, fontSizes } from '../../../baseStyles'
 
 export const uiLayer = css`
   ${mq.md} {
@@ -57,8 +57,8 @@ export const header = css`
   justify-content: space-between;
   color: white;
   font-weight: bold;
-  background-color: rgba(10, 10, 10, 0.9);
-  box-shadow: 0 0 20px 10px rgba(200, 255, 230, 0.07);
+  background-color: rgba(10, 10, 10, 0.75);
+  box-shadow: 0 0 20px 10px rgba(200, 255, 230, 0.1);
   border-radius: 3px;
   width: 100%;
   font-size: 20px;
@@ -70,23 +70,31 @@ export const header = css`
   }
 
   ${mq.md} {
-    padding: 0;
+    padding: 0 16px;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
-    height: 34px;
-    width: 350px;
+    font-size: ${fontSizes.h1}px;
+    height: 1.2em;
+    min-width: 350px;
+    margin-top: 8px;
+
+    justify-content: space-between;
+    &::before {
+      height: 100%;
+      content: '[';
+    }
+
+    &::after {
+      height: 100%;
+      content: ']';
+    }
   }
 
   ${mq.lg} {
-    font-size: 32px;
-    height: 42px;
     width: 500px;
   }
 
   ${mq.xl} {
-    font-size: 36px;
-    height: 50px;
     width: 500px;
   }
 `
@@ -127,6 +135,8 @@ export const menu = css`
   transform: scaleX(0.9);
   font-weight: 600;
   font-size: 18px;
+  color: white;
+  cursor: pointer;
 
   ${mq.md} {
     display: none;

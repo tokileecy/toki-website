@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
+import { colors } from '../../baseStyles'
 
 export const gridShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
@@ -11,7 +12,9 @@ export const gridShaderMaterail = new THREE.ShaderMaterial({
       alpha: {
         value: 0.1,
       },
-      color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+      color: {
+        value: new THREE.Color(new Color(colors.primaryDefault).toString()),
+      },
     },
   ]),
   vertexShader: gridVertShader,
@@ -29,7 +32,9 @@ export const trainShaderMaterail = new THREE.ShaderMaterial({
       alpha: {
         value: 1,
       },
-      color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+      color: {
+        value: new THREE.Color(new Color(colors.primaryDefault).toString()),
+      },
     },
   ]),
   vertexShader: gridVertShader,
@@ -45,9 +50,11 @@ export const baseGridShaderMaterail = new THREE.ShaderMaterial({
     {
       lineWidth: { value: 1 },
       alpha: {
-        value: 1,
+        value: 0.3,
       },
-      color: { value: new THREE.Color(new Color('#02f1fa').toString()) },
+      color: {
+        value: new THREE.Color(new Color(colors.primaryDefault).toString()),
+      },
     },
   ]),
   vertexShader: gridVertShader,
