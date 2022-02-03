@@ -1,6 +1,10 @@
 import { css } from '@emotion/css'
 import { mq, fontSizes } from '../../../baseStyles'
 
+export const verticlePaddingPercentageMd = 4
+export const verticlePaddingPercentageLg = 7
+export const verticlePaddingPercentageXl = 10
+
 export const uiLayer = css`
   ${mq.md} {
     padding: 2% 0;
@@ -16,24 +20,24 @@ export const uiLayer = css`
 
 export const webglLayer = css`
   ${mq.md} {
-    top: 4%;
-    height: 92%;
+    top: ${verticlePaddingPercentageMd}%;
+    height: ${100 - 2 * verticlePaddingPercentageMd}%;
     border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;
   }
 
   ${mq.lg} {
-    top: 7%;
-    height: 86%;
+    top: ${verticlePaddingPercentageLg}%;
+    height: ${100 - 2 * verticlePaddingPercentageLg}%;
     border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;
   }
 
   ${mq.xl} {
-    top: 10%;
-    height: 80%;
+    top: ${verticlePaddingPercentageXl}%;
+    height: ${100 - 2 * verticlePaddingPercentageXl}%;
     border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;

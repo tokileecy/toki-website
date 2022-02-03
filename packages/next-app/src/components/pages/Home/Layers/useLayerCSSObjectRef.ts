@@ -15,9 +15,9 @@ const useLayerCSSObjectRef = (
         const height = document.body.clientHeight
 
         obj.scale.set(
-          (413 * 2) / height,
-          (413 * 2) / height,
-          (413 * 2) / height
+          (413 * 2.502) / height,
+          (413 * 2.502) / height,
+          (413 * 2.502) / height
         )
       }
 

@@ -1,11 +1,30 @@
 import { css } from '@emotion/css'
 import { mq } from '../../../../../baseStyles'
-
+import {
+  verticlePaddingPercentageMd,
+  verticlePaddingPercentageLg,
+  verticlePaddingPercentageXl,
+} from '../../Home.styles'
 export const root = css`
   overflow: hidden;
   pointer-events: none;
 `
 
+export const layerHeight = css`
+  ${mq.md} {
+    height: ${100 - 2 * verticlePaddingPercentageMd}vh;
+  }
+
+  ${mq.lg} {
+    height: ${100 - 2 * verticlePaddingPercentageLg}vh;
+  }
+
+  ${mq.xl} {
+    height: ${100 - 2 * verticlePaddingPercentageXl}vh;
+  }
+`
+
+const verticlePadding = 100
 export const content = css`
   width: 100vw;
   height: 100vh;
@@ -23,13 +42,23 @@ export const content = css`
   }
   
   ${mq.sm} {
-    padding: 100px 0;  
+    padding: ${verticlePadding}px 0;  
   }
+
+  /* ${mq.md} {
+    height: calc(100vh - ${verticlePaddingPercentageMd}%);
+  } */
 
 
   ${mq.lg} {
-    padding: 100px;
+    padding: ${verticlePadding}px;
+    /* height: calc(100vh - ${verticlePaddingPercentageLg}%); */
     flex-direction: row;
   }
 
+  /* ${mq.lg} {
+    height: calc(100vh - ${verticlePaddingPercentageXl}%);
+  } */
+
+  ${layerHeight};
 `
