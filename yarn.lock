@@ -3627,29 +3627,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@psycholog-studio/ui@npm:0.2.0-alpha.13":
-  version: 0.2.0-alpha.13
-  resolution: "@psycholog-studio/ui@npm:0.2.0-alpha.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40psycholog-studio%2Fui%2F0.2.0-alpha.13%2F3c05bb6821451c59eab67bfd38afc2d94321b6a726e3642e6ea8c458aa5d333a"
+"@psycholog-studio/ui@npm:0.2.1":
+  version: 0.2.1
+  resolution: "@psycholog-studio/ui@npm:0.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40psycholog-studio%2Fui%2F0.2.1%2Fc9203e642a1a7b0a3f49db5af8f152cdc85c0a08a43d186f0f10d3bda1f18652"
   dependencies:
     "@emotion/css": ^11.5.0
-    "@psycholog-studio/utils": ^0.2.0-alpha.13
+    "@psycholog-studio/utils": ^0.2.1
     color: ^3.2.0
     pixi.js: ^6.2.1
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
     three: ^0.136.0
-  checksum: ee939c3a2c2712d1d236bd0878fa1b04a8f98f9c2ccd05978ccbd6db748aa36394aee1083caef60564e537d9b4d5f28582b47dd2c841d855e86e5c37d03b0563
+  checksum: ba2c4f94f6d414f5008c4963866dc33f47b0b468319268f368295287ccf73340bb5d9756d1b83d56ba8051147984f3bd589aca4b272933112fbfac76dc355c70
   languageName: node
   linkType: hard
 
-"@psycholog-studio/utils@npm:^0.2.0-alpha.13":
-  version: 0.2.0-alpha.13
-  resolution: "@psycholog-studio/utils@npm:0.2.0-alpha.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40psycholog-studio%2Futils%2F0.2.0-alpha.13%2Fcd6c48f3ea994550384b5c2b93115b5a29af79509a8f64e232960b013aa514e1"
+"@psycholog-studio/utils@npm:0.2.1, @psycholog-studio/utils@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@psycholog-studio/utils@npm:0.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40psycholog-studio%2Futils%2F0.2.1%2F9cf9bd4d6fafdaf1f997dd62fc4aa68c03fc3b3c53720e90e0c924b680c8cc48"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 93c40428b4e055662262450c5e755c1c97327526ba864c8bbc8e96fdd4fd99fe07872825841af799242bf81adee7d39f5e0aa93264b8fce91fad62cf3ae460a5
+  checksum: f5951722648b2c3c4fb021117564ee9e0233865b41344363523b9bad4457d2a961738ed8f2841c7c2162ad0022283655bb90995744c40c414f4c47e0f2cc8dd2
   languageName: node
   linkType: hard
 
@@ -4928,8 +4928,8 @@ __metadata:
   resolution: "@toki-website/next-app@workspace:packages/next-app"
   dependencies:
     "@emotion/css": ^11.1.3
-    "@psycholog-studio/ui": 0.2.0-alpha.13
-    "@psycholog-studio/utils": ^0.2.0-alpha.13
+    "@psycholog-studio/ui": 0.2.1
+    "@psycholog-studio/utils": 0.2.1
     "@tweenjs/tween.js": ^18.6.4
     "@types/color": ^3.0.2
     "@types/d3": ^6.7.0

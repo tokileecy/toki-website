@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import '@psycholog-studio/ui/reset.css'
 import '../styles/main.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
