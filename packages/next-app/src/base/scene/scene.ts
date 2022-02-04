@@ -1,67 +1,54 @@
 import * as THREE from 'three'
 import TWEEN from '@tweenjs/tween.js'
 import createGrid3D from './createGrid3D'
-import createTrain from './createTrain'
+import createTrain, {
+  trainAnimation,
+  trainInvertAnimation,
+} from './createTrain'
 import container3D from './container3D'
 import { gridShaderMaterail, baseGridShaderMaterail } from './materials'
-
+import wireframe3D, {
+  wireframeAnimation,
+  wireframeInvertAnimation,
+} from './wireframe3D'
+import { train1, train2, train3 } from './trains'
+import { grid3D, grid3DAnimation, grid3DInvertAnimation } from './grid3D'
 const scene = new THREE.Scene()
+scene.fog = new THREE.Fog(0x000000, 800, 1700)
+
+scene.add(wireframe3D)
 
 // container
-scene.add(container3D)
+// scene.add(container3D)
 
-// grid
+// // grid
 
-const baseGridGeo = createGrid3D(1200, 1200, 900, 3, 3, 3)
-const baseGrid = new THREE.LineSegments(baseGridGeo, baseGridShaderMaterail)
-baseGrid.position.set(0, 0, 400)
-scene.add(baseGrid)
+// const baseGridGeo = createGrid3D(1200, 1200, 900, 3, 3, 3)
+// const baseGrid = new THREE.LineSegments(baseGridGeo, baseGridShaderMaterail)
+// baseGrid.position.set(0, 0, 400)
+// scene.add(baseGrid)
 
-const contentGridGeo = createGrid3D(1200, 1200, 400, 7, 7, 10)
-const contentGrid = new THREE.LineSegments(contentGridGeo, gridShaderMaterail)
-contentGrid.position.set(0, 0, 200)
-scene.add(contentGrid)
+scene.add(grid3D)
 
-// train1
-const train1 = createTrain()
-train1.position.set(150, 0, 1500)
-
-new TWEEN.Tween(train1.position)
-  .to(new THREE.Vector3(150, 0, -800), 5000)
-  .easing(TWEEN.Easing.Linear.None)
-  .start()
-  .repeat(Infinity)
-
+// trains
 scene.add(train1)
-
-// train2
-const train2 = createTrain()
-train2.position.set(-1000, 100, 500)
-train2.rotation.y = Math.PI / 2
-
-setTimeout(() => {
-  new TWEEN.Tween(train2.position)
-    .to(new THREE.Vector3(1000, 100, 500), 5000)
-    .easing(TWEEN.Easing.Linear.None)
-    .start()
-    .repeat(Infinity)
-}, 2500)
-
 scene.add(train2)
-
-// train3
-const train3 = createTrain()
-train3.position.set(-1000, -200, 500)
-train3.rotation.y = Math.PI / 2
-
-setTimeout(() => {
-  new TWEEN.Tween(train3.position)
-    .to(new THREE.Vector3(1000, -200, 500), 5000)
-    .easing(TWEEN.Easing.Linear.None)
-    .start()
-    .repeat(Infinity)
-}, 3000)
-
 scene.add(train3)
 
+export const animation = () => {
+  trainAnimation()
+  wireframeAnimation()
+  grid3DAnimation()
+}
+
+export const invertAnimation = () => {
+  trainInvertAnimation()
+  wireframeInvertAnimation()
+  grid3DInvertAnimation()
+}
+
+if (typeof window !== 'undefined') {
+  window.a5 = animation
+  window.a6 = invertAnimation
+}
 export default scene

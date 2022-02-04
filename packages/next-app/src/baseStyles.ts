@@ -50,6 +50,19 @@ export enum colors {
   // Complementary
   complementaryPurple = 0xc890f9,
   complementaryOrange = 0xe0a27e,
+
+  // Black
+  black0 = 0xfcfcfc,
+  black100 = 0xf7f7f7,
+  black200 = 0xe8e8e8,
+  black300 = 0xd6d6d6,
+  black400 = 0xc2c2c2,
+  black500 = 0x9e9e9e,
+  black600 = 0x808080,
+  black700 = 0x616161,
+  black800 = 0x424242,
+  black900 = 0x212121,
+  black1000 = 0x050505,
 }
 
 export enum fontSizes {

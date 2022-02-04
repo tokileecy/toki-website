@@ -2,6 +2,18 @@ import { css } from '@emotion/css'
 import { cssBaseBox } from '../styles'
 import { mq } from '../../../../../baseStyles'
 
+const transitionDelay = css`
+  transition-delay: 0s;
+
+  &.from-home {
+    transition-delay: 1.5s;
+  }
+
+  &.hide {
+    transition-delay: 0s;
+  }
+`
+
 export const leftBlock = css`
   ${cssBaseBox};
   flex-basis: 50%;
@@ -41,6 +53,7 @@ export const leadRoleBox = css`
   margin-bottom: 20px;
   transition: transform 1s;
   transform: translateX(0);
+  ${transitionDelay};
 
   &.hide {
     transform: translateX(-130vw);
@@ -59,6 +72,8 @@ export const recentlyBox = css`
   margin-bottom: 20px;
   transition: transform 1s;
   transform: translateX(0);
+  ${transitionDelay};
+
   &.hide {
     transform: translateX(-130vw);
   }
@@ -75,6 +90,8 @@ export const skillBox = css`
   height: initial;
   transition: transform 1s;
   transform: translateX(0);
+  ${transitionDelay};
+
   &.hide {
     transform: translateX(130vw);
   }

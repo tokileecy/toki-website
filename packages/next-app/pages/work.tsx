@@ -1,14 +1,6 @@
 import Head from 'next/head'
 import usePageInfos from '../src/hooks/usePageInfos'
-import dynamic, { LoaderComponent } from 'next/dynamic'
-
-const HomePage = dynamic(
-  () =>
-    import('../src/components/pages/Home').then(
-      (mod) => mod.default
-    ) as LoaderComponent,
-  { ssr: false }
-)
+import HomePage from '../src/components/pages/Home'
 
 export default function Blog(): JSX.Element {
   const pageInfos = usePageInfos()

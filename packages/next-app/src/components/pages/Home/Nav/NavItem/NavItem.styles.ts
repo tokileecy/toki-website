@@ -46,7 +46,7 @@ const cssAfter = css`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(10, 10, 10, 0.8);
+  background-color: rgba(10, 10, 10, 0.2);
   box-shadow: 0 0 20px 10px rgba(200, 255, 230, 0.1);
   /* filter: blur(3px) drop-shadow(0 0px 2px #830db6); */
 `

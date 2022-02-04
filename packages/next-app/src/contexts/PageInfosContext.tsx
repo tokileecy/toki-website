@@ -2,6 +2,7 @@ import { createContext, ReactNode } from 'react'
 import getConfig from 'next/config'
 import path from 'path'
 import { Page } from '../components/pages/Home'
+import { animation, invertAnimation } from '../base/scene'
 
 export type PageInfo = {
   name: Page
@@ -35,6 +36,8 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       pushState: (): void => {
         window.history.pushState(null, `page home`, path.resolve(basePath))
         document.title = 'Tokileecy'
+
+        invertAnimation()
       },
     },
     about: {
@@ -43,6 +46,7 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       text: 'About',
       documentTitle: 'About | Tokileecy',
       pushState: (): void => {
+        animation()
         window.history.pushState(
           null,
           `page about`,

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React from 'react'
 import '@psycholog-studio/ui/reset.css'
 import '../styles/main.css'
 import { AppProps } from 'next/app'
@@ -7,10 +7,6 @@ import { PageInfosProvider } from '../src/contexts/PageInfosContext'
 
 import { AppProvider } from '../src/contexts/AppContext'
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  useEffect(() => {
-    document.body.classList.remove('hide')
-  }, [])
-
   return (
     <PageInfosProvider>
       <Head>

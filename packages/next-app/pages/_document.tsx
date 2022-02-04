@@ -6,7 +6,8 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-
+import { colors } from '../src/baseStyles'
+import Color from 'color'
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -18,9 +19,13 @@ class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html>
+      <Html
+        style={{
+          backgroundColor: Color(colors.black1000).toString(),
+        }}
+      >
         <Head />
-        <body className="hide">
+        <body>
           <Main />
           <NextScript />
         </body>

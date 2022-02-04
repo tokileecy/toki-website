@@ -1,11 +1,26 @@
 import { css } from '@emotion/css'
-import { mq, fontSizes } from '../../../baseStyles'
-
+import Color from 'color'
+import { mq, fontSizes, colors } from '../../../baseStyles'
 export const verticlePaddingPercentageMd = 4
 export const verticlePaddingPercentageLg = 7
 export const verticlePaddingPercentageXl = 10
 
+const hide = css`
+  opacity: 0;
+  z-index: -1000;
+  pointer-events: none;
+  user-select: none;
+`
+
+export const root = css`
+  background-color: ${Color(colors.black1000).toString()};
+`
+
 export const uiLayer = css`
+  &.hide {
+    ${hide};
+  }
+
   ${mq.md} {
     padding: 2% 0;
   }
@@ -18,11 +33,20 @@ export const uiLayer = css`
   }
 `
 
+export const cssLayer = css`
+  &.hide {
+    ${hide};
+  }
+`
+
 export const webglLayer = css`
+  &.hide {
+    ${hide};
+  }
+
   ${mq.md} {
     top: ${verticlePaddingPercentageMd}%;
     height: ${100 - 2 * verticlePaddingPercentageMd}%;
-    border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;
   }
@@ -30,7 +54,6 @@ export const webglLayer = css`
   ${mq.lg} {
     top: ${verticlePaddingPercentageLg}%;
     height: ${100 - 2 * verticlePaddingPercentageLg}%;
-    border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;
   }
@@ -38,13 +61,21 @@ export const webglLayer = css`
   ${mq.xl} {
     top: ${verticlePaddingPercentageXl}%;
     height: ${100 - 2 * verticlePaddingPercentageXl}%;
-    border: solid 2px rgba(255, 255, 255, 0.8);
     border-left: 0;
     border-right: 0;
   }
 `
 
+export const originUILayer = css`
+  position: relative;
+  color: ${Color(colors.black0).toString()};
+  &.hide {
+    ${hide};
+  }
+`
+
 export const uiLayerWrapper = css`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -53,6 +84,10 @@ export const uiLayerWrapper = css`
   justify-content: space-between;
   pointer-events: none;
   overflow: hidden;
+
+  &.hide {
+    ${hide};
+  }
 `
 
 export const header = css`
@@ -103,6 +138,15 @@ export const header = css`
   }
 `
 
+export const main = css`
+  pointer-events: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: white;
+`
+
 export const footer = css`
   position: relative;
   bottom: 0;
@@ -112,6 +156,10 @@ export const footer = css`
   /* background-color: rgb(120, 160, 200, 0.9); */
   transition: transform 0.5s;
   transform: translateX(0);
+
+  &.hide1 {
+    ${hide};
+  }
 
   &.hide {
     transform: translateX(50%);
@@ -168,7 +216,7 @@ export const nav = css`
     width: 100%;
     z-index: -5;
     /* background-color: rgb(120, 160, 200, 1); */
-    background-color: rgba(10, 10, 10, 0.9);
+    /* background-color: rgba(10, 10, 10, 0.9); */
   }
 
   ${mq.md} {

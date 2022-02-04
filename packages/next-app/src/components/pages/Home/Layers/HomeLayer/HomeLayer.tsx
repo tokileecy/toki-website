@@ -12,23 +12,23 @@ const HomeLayer = (props: HomeLayerProps): JSX.Element => {
   return (
     <BaseLayer hide={hide}>
       <div className={styles.topBlock}>
-        <MessageBox
+        {/* <MessageBox
           className={cx(styles.grettingBox, {
             hide,
           })}
         >
           {" HI !  I'm tokileecy"}
-        </MessageBox>
+        </MessageBox> */}
       </div>
       <div className={styles.bottomBlock}>
-        <MessageBox
+        {/* <MessageBox
           className={cx(styles.descriptionBox, {
             hide,
           })}
         >
           <span>{'Wellcome to Toki`s Website!'}</span>
           <div className={styles.developing}>{'（頁面開發中...）'}</div>
-        </MessageBox>
+        </MessageBox> */}
       </div>
     </BaseLayer>
   )
