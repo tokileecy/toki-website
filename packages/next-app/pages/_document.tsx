@@ -26,7 +26,7 @@ class MyDocument extends Document {
       >
         <Head />
         <script src="/scripts/justfont.js"></script>
-        <body>
+        <body className="hide">
           <Main />
           <NextScript />
         </body>

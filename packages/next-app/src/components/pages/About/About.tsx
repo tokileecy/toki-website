@@ -6,15 +6,19 @@ import SkillBox from './SkillBox'
 import { BasePageProps } from '../types'
 
 const About = (props: BasePageProps): JSX.Element => {
-  const { hide } = props
+  const { show } = props
 
   return (
     <div className={styles.root}>
       <div className={styles.leftBlock}>
-        <MessageBox className={cx(styles.leadRoleBox, { hide })}>
+        <MessageBox
+          className={cx(styles.leadRoleBox, { show, hide: show === false })}
+        >
           {'Tokileecy'}
         </MessageBox>
-        <MessageBox className={cx(styles.recentlyBox, { hide })}>
+        <MessageBox
+          className={cx(styles.recentlyBox, { show, hide: show === false })}
+        >
           <span>
             <p>
               {
@@ -27,10 +31,10 @@ const About = (props: BasePageProps): JSX.Element => {
           </span>
         </MessageBox>
       </div>
-      <div className={cx(styles.rightBlock, { hide })}>
+      <div className={styles.rightBlock}>
         <SkillBox
           classes={{
-            root: cx(styles.skillBox, { hide }),
+            root: cx(styles.skillBox, { show, hide: show === false }),
             scrollableContent: styles.skillBoxContent,
           }}
         />

@@ -5,22 +5,11 @@ export const verticlePaddingPercentageMd = 4
 export const verticlePaddingPercentageLg = 7
 export const verticlePaddingPercentageXl = 10
 
-const hide = css`
-  opacity: 0;
-  z-index: -1000;
-  pointer-events: none;
-  user-select: none;
-`
-
 export const root = css`
   background-color: ${Color(colors.black1000).toString()};
 `
 
 export const uiLayer = css`
-  &.hide {
-    ${hide};
-  }
-
   ${mq.md} {
     padding: 2% 0;
   }
@@ -33,17 +22,7 @@ export const uiLayer = css`
   }
 `
 
-export const cssLayer = css`
-  &.hide {
-    ${hide};
-  }
-`
-
 export const webglLayer = css`
-  &.hide {
-    ${hide};
-  }
-
   ${mq.md} {
     top: ${verticlePaddingPercentageMd}%;
     height: ${100 - 2 * verticlePaddingPercentageMd}%;
@@ -66,14 +45,6 @@ export const webglLayer = css`
   }
 `
 
-export const originUILayer = css`
-  position: relative;
-  color: ${Color(colors.black0).toString()};
-  &.hide {
-    ${hide};
-  }
-`
-
 export const uiLayerWrapper = css`
   position: relative;
   width: 100%;
@@ -84,10 +55,6 @@ export const uiLayerWrapper = css`
   justify-content: space-between;
   pointer-events: none;
   overflow: hidden;
-
-  &.hide {
-    ${hide};
-  }
 `
 
 export const header = css`
@@ -103,13 +70,7 @@ export const header = css`
   font-size: 20px;
   padding: 4px 24px;
   pointer-events: auto;
-
-  transition: transform 1s;
-  transform: translateY(0);
-
-  /* ${mq.sm} {
-    height: 36px;
-  } */
+  transition: none;
 
   ${mq.md} {
     height: 32px;
@@ -122,8 +83,15 @@ export const header = css`
     min-width: 350px;
     margin-top: 8px;
     justify-content: space-between;
+    transform: translateY(-100px);
+
+    &.show {
+      transition: transform 1s;
+      transform: translateY(0);
+    }
 
     &.hide {
+      transition: transform 1s;
       transform: translateY(-100px);
     }
 
@@ -167,15 +135,12 @@ export const footer = css`
   height: 100%;
   overflow: hidden;
   padding-top: 40px;
-  /* background-color: rgb(120, 160, 200, 0.9); */
-  transition: transform 0.5s;
-  transform: translateX(0);
+  transition: none;
+  transform: translateX(50%);
 
-  transition: transform 1s;
-  transform: translateY(0);
-
-  &.hide {
-    transform: translateX(50%);
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
   }
 
   ${mq.md} {
@@ -183,13 +148,20 @@ export const footer = css`
     padding-top: 0;
     height: 40px;
     width: 100%;
+    transform: translateY(100px);
 
     &.hide {
       transform: translateX(0);
     }
 
     &.hide2 {
+      transition: transform 1s;
       transform: translateY(100px);
+    }
+
+    &.show2 {
+      transition: transform 1s;
+      transform: translateY(0);
     }
   }
 

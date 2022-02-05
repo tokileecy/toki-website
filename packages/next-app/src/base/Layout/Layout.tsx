@@ -12,22 +12,27 @@ import usePageInfos from '../../hooks/usePageInfos'
 export type LayoutProps = Omit<
   BaseLayoutProps,
   'threeManagerRef' | 'threeManager' | 'classes'
->
+> & {
+  isStartup?: boolean
+}
 
 export type Page = 'home' | 'about' | 'work' | 'contact'
 
-const Layout = (inProps: BaseLayoutProps): JSX.Element => {
-  const { children, ...props } = inProps
+const Layout = (inProps: LayoutProps): JSX.Element => {
+  const { isStartup = false, children, ...props } = inProps
   const { page } = usePage()
   const pageInfo = usePageInfos()
 
-  const [hideFooter, setHideFooter] = useState(true)
+  const [showFooter, setShowFooter] = useState(false)
 
   const handleMenuClick = () => {
-    setHideFooter((prev) => !prev)
+    setShowFooter((prev) => !prev)
   }
 
-  const hide = page === pageInfo.pageInfoByPage['home'].name
+  const show = isStartup
+    ? page !== pageInfo.pageInfoByPage['home'].name
+    : undefined
+
   return (
     <BaseLayout
       {...props}
@@ -35,18 +40,14 @@ const Layout = (inProps: BaseLayoutProps): JSX.Element => {
       classes={{
         root: styles.root,
         webglLayer: cx(styles.webglLayer),
-        cssLayer: cx(styles.cssLayer),
         uiLayer: cx(styles.uiLayer),
       }}
     >
-      <div
-        className={cx(styles.uiLayerWrapper, {
-          hide: false,
-        })}
-      >
+      <div className={styles.uiLayerWrapper}>
         <header
           className={cx(styles.header, {
-            hide,
+            show,
+            hide: show === false,
           })}
         >
           <h1>{pageInfo.pageInfoByPage[page]?.text}</h1>
@@ -57,8 +58,9 @@ const Layout = (inProps: BaseLayoutProps): JSX.Element => {
         <main className={styles.main}>{children}</main>
         <footer
           className={cx(styles.footer, {
-            hide: hideFooter,
-            hide2: hide,
+            show: showFooter,
+            show2: show,
+            hide2: show === false,
           })}
         >
           <Nav

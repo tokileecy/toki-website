@@ -34,9 +34,6 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       text: 'Home',
       documentTitle: 'Tokileecy',
       pushState: (): void => {
-        window.history.pushState(null, `page home`, path.resolve(basePath))
-        document.title = 'Tokileecy'
-
         invertAnimation()
       },
     },
@@ -47,12 +44,6 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       documentTitle: 'About | Tokileecy',
       pushState: (): void => {
         animation()
-        window.history.pushState(
-          null,
-          `page about`,
-          path.resolve(basePath, 'about')
-        )
-        document.title = 'About | Tokileecy'
       },
     },
     work: {
@@ -61,12 +52,7 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       text: 'Work',
       documentTitle: 'Work | Tokileecy',
       pushState: (): void => {
-        window.history.pushState(
-          null,
-          `page work`,
-          path.resolve(basePath, 'work')
-        )
-        document.title = 'Work | Tokileecy'
+        animation()
       },
     },
     contact: {
@@ -74,14 +60,6 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       href: '/contact',
       text: 'Contact',
       documentTitle: 'Contact | Tokileecy',
-      pushState: (): void => {
-        window.history.pushState(
-          null,
-          `page contact`,
-          path.resolve(basePath, 'contact')
-        )
-        document.title = 'Contact | Tokileecy'
-      },
     },
   } as const
 

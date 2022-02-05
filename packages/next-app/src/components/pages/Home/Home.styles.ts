@@ -11,15 +11,17 @@ export const content = css`
 `
 
 export const greeting = css`
-  transition: transform 1s;
-  transform: translateX(0);
-  &.hide {
-    transform: translateX(-130vw);
+  transform: translateX(-130vw);
+  transition: none;
+
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
   }
 
-  ${mq.md} {
-    /* padding-left: 180px;
-    padding-right: 180px; */
+  &.hide {
+    transition: transform 1s;
+    transform: translateX(-130vw);
   }
 `
 
@@ -69,10 +71,16 @@ export const buttonWrap = css`
   align-items: center;
   justify-content: flex-end;
   margin-top: 96px;
-  transition: transform 1s;
-  transform: translateX(0);
+  transform: translateX(130vw);
+  transition: none;
+
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
 
   &.hide {
+    transition: transform 1s;
     transform: translateX(130vw);
   }
 `

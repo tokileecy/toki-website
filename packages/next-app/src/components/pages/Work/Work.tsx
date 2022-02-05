@@ -31,22 +31,15 @@ const works = [
 ]
 
 const Work = (props: BasePageProps): JSX.Element => {
-  const { hide } = props
+  const { show } = props
 
   return (
-    <>
-      {/* <div className={styles.leftBlock}>
-        <MessageBox
-          className={cx(styles.descriptionBox, { hide })}
-        ></MessageBox>
-      </div> */}
-      <div className={cx(styles.rightBlock, { hide })}>
-        <WorkBlockBox
-          className={cx(styles.workBlockBox, { hide })}
-          works={works}
-        />
-      </div>
-    </>
+    <div className={styles.rightBlock}>
+      <WorkBlockBox
+        className={cx(styles.workBlockBox, { show, hide: show === false })}
+        works={works}
+      />
+    </div>
   )
 }
 

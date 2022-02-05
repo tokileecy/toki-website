@@ -1,18 +1,6 @@
 import { css } from '@emotion/css'
 import { mq } from '../../../baseStyles'
 
-const transitionDelay = css`
-  transition-delay: 0s;
-
-  &.from-home {
-    transition-delay: 1.5s;
-  }
-
-  &.hide {
-    transition-delay: 0s;
-  }
-`
-
 export const root = css`
   display: flex;
   flex-direction: column;
@@ -21,7 +9,6 @@ export const root = css`
   ${mq.lg} {
     flex-direction: row;
     align-items: center;
-    /* justify-content: center; */
     justify-content: space-between;
   }
 
@@ -76,11 +63,16 @@ export const leadRoleBox = css`
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  transition: transform 1s;
-  transform: translateX(0);
-  ${transitionDelay};
+  transition: none;
+  transform: translateX(-130vw);
+
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
 
   &.hide {
+    transition: transform 1s;
     transform: translateX(-130vw);
   }
 
@@ -94,15 +86,20 @@ export const recentlyBox = css`
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  transition: transform 1s;
-  transform: translateX(0);
-  ${transitionDelay};
+  transition: none;
+  transform: translateX(-130vw);
 
   p {
     padding: 0.5em;
   }
 
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
+
   &.hide {
+    transition: transform 1s;
     transform: translateX(-130vw);
   }
 
@@ -116,16 +113,20 @@ export const recentlyBox = css`
 export const skillBox = css`
   padding: 5px;
   height: initial;
-  transition: transform 1s;
-  transform: translateX(0);
-  ${transitionDelay};
+  transition: none;
+  transform: translateX(130vw);
+
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
 
   &.hide {
+    transition: transform 1s;
     transform: translateX(130vw);
   }
 
   ${mq.lg} {
-    /* width: 500px; */
     height: 450px;
     flex-direction: row;
     justify-content: space-between;

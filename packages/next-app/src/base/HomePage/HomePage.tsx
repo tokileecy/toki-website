@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import usePageInfos from '../../hooks/usePageInfos'
 import usePage from '../../hooks/usePage'
 import BaseHome from '../../components/pages/Home'
@@ -8,11 +8,11 @@ import Layout from '../Layout'
 import { cx } from '@emotion/css'
 import * as styles from './HomePage.styles'
 
-const useWrapper = (Comp: FC<{ hide?: boolean }>) => {
-  const CompWithWrapper = ({ hide = false }: { hide?: boolean }) => {
+const useWrapper = (Comp: FC<{ show?: boolean }>) => {
+  const CompWithWrapper = ({ show }: { show?: boolean }) => {
     return (
-      <div className={cx(styles.wrapper, { hide })}>
-        <Comp hide={hide} />
+      <div className={cx(styles.wrapper, { hide: !show })}>
+        <Comp show={show} />
       </div>
     )
   }
@@ -25,14 +25,37 @@ const Work = useWrapper(BaseWork)
 
 const HomePage = (): JSX.Element => {
   const { page } = usePage()
+  const [isStartup, setIsStartup] = useState(false)
   const pageInfos = usePageInfos()
 
+  useEffect(() => {
+    setIsStartup(true)
+  }, [])
+
   return (
-    <Layout>
+    <Layout isStartup={isStartup}>
       <div className={styles.layoutWrap}>
-        <Home hide={page !== pageInfos.pageInfoByPage['home'].name} />
-        <About hide={page !== pageInfos.pageInfoByPage['about'].name} />
-        <Work hide={page !== pageInfos.pageInfoByPage['work'].name} />
+        <Home
+          show={
+            !isStartup
+              ? undefined
+              : page === pageInfos.pageInfoByPage['home'].name
+          }
+        />
+        <About
+          show={
+            !isStartup
+              ? undefined
+              : page === pageInfos.pageInfoByPage['about'].name
+          }
+        />
+        <Work
+          show={
+            !isStartup
+              ? undefined
+              : page === pageInfos.pageInfoByPage['work'].name
+          }
+        />
       </div>
     </Layout>
   )

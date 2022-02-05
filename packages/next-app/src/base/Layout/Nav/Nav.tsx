@@ -15,14 +15,13 @@ export type NavClassesKey = 'root' | 'navItem'
 export interface NavProps {
   className?: string
   page: Page
-  onPageChange?: (nextPage: Page) => void
   classes?: {
     [k in NavClassesKey]?: string
   }
 }
 
 const Nav = (props: NavProps): JSX.Element => {
-  const { classes = {}, className, page, onPageChange } = props
+  const { classes = {}, className, page } = props
 
   const pageInfos = usePageInfos()
 
@@ -49,9 +48,6 @@ const Nav = (props: NavProps): JSX.Element => {
             selected={currentSelectedItemIndex === index}
             onClick={() => {
               item.pushState?.()
-              if (item.name !== null && item.name !== undefined) {
-                onPageChange?.(item.name)
-              }
             }}
           >
             {item.text}

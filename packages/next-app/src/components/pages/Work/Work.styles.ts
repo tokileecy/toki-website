@@ -36,11 +36,17 @@ export const rightBlock = css`
 `
 
 export const workBlockBox = css`
-  transition: transform 1s;
-  transform: translateX(0);
   width: 100%;
+  transform: translateX(130vw);
+  transition: none;
+
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
 
   &.hide {
+    transition: transform 1s;
     transform: translateX(130vw);
   }
 
@@ -51,6 +57,7 @@ export const workBlockBox = css`
   ${mq.lg} {
     height: 450px;
   }
+
   ${mq.xl} {
     height: 600px;
   }
@@ -59,10 +66,16 @@ export const workBlockBox = css`
 export const descriptionBox = css`
   min-height: 100px;
   padding: 20px;
+  transform: translateX(-130vw);
+  transition: none;
 
-  transition: transform 1s;
-  transform: translateX(0);
+  &.show {
+    transition: transform 1s;
+    transform: translateX(0);
+  }
+
   &.hide {
+    transition: transform 1s;
     transform: translateX(-130vw);
   }
 `

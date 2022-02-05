@@ -36,7 +36,6 @@ if (typeof window !== 'undefined') {
 
   threeManager.layerController.subscribeAnimate(() => {
     threeManager.layerController.renderCss()
-    // console.log('?')
   })
   threeManager.layerController.setScene(scene)
 

@@ -6,6 +6,8 @@ html {
   height: -webkit-fill-available;
   height: -moz-available;
   height: stretch;
+
+
 }
 
 html,
@@ -18,6 +20,9 @@ body {
   height: 100%;
 }
 
+body.hide {
+  opacity: 0;
+}
 
 #__next {
   display: flex;

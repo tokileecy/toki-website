@@ -1,3 +1,3 @@
 export interface BasePageProps {
-  hide?: boolean
+  show?: boolean
 }
