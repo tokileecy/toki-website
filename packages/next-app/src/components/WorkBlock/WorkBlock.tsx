@@ -68,6 +68,10 @@ const ImgContainer = (inProps: ImgBlockProps) => {
         ${mq.sm} {
           height: 150px;
         }
+
+        ${mq.lg} {
+          min-height: 200px;
+        }
       `}
     >
       <div className="title">{title}</div>

@@ -29,6 +29,7 @@ export const rightBlock = css`
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
 
   ${mq.md} {
     height: initial;
@@ -38,6 +39,8 @@ export const rightBlock = css`
 export const workBlockBox = css`
   transition: transform 1s;
   transform: translateX(0);
+  width: 100%;
+
   &.hide {
     transform: translateX(130vw);
   }
@@ -48,6 +51,9 @@ export const workBlockBox = css`
 
   ${mq.lg} {
     height: 450px;
+  }
+  ${mq.xl} {
+    height: 600px;
   }
 `
 

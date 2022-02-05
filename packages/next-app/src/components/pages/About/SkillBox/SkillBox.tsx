@@ -4,17 +4,24 @@ import Box from '../../../Box'
 import SubSkillBlock from '../../../SubSkillBlock'
 import TagSubSkillBlock from '../../../SubSkillBlock/TagSubSkillBlock'
 import * as styles from './SkillBox.styles'
+import { cx } from '@emotion/css'
 
+export type SkillBoxClassesKey = 'root' | 'scrollableContent'
 export type SkillBoxProps = {
   className?: string
+  classes?: {
+    [k in SkillBoxClassesKey]?: string
+  }
 }
 
 const SkillBox = (props: SkillBoxProps): JSX.Element => {
-  const { className } = props
+  const { className, classes = {} } = props
 
   return (
-    <Box className={className}>
-      <ScrollableContent>
+    <Box className={cx(className, classes.root)}>
+      <ScrollableContent
+        className={cx(styles.scrollableContent, classes.scrollableContent)}
+      >
         <div className={styles.title}>{'SKILL'}</div>
         <SubSkillBlock
           description="曾因關注新的標準，而學習了 Polymer 與一些 Web Components 的知識，後來工作中主要都使用到 React.js 進行開發，但持續關注 Web Components 的發展。"

@@ -1,6 +1,6 @@
 import isNode from 'detect-node'
 
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export enum breakpoints {
   xxs = 0,
@@ -9,6 +9,7 @@ export enum breakpoints {
   md = 960,
   lg = 1280,
   xl = 1440,
+  xxl = 1920,
 }
 
 export const mediaQuerys = !isNode
@@ -19,6 +20,7 @@ export const mediaQuerys = !isNode
       md: window.matchMedia(`(min-width: ${breakpoints.md}px)`),
       lg: window.matchMedia(`(min-width: ${breakpoints.lg}px)`),
       xl: window.matchMedia(`(min-width: ${breakpoints.xl}px)`),
+      xxl: window.matchMedia(`(min-width: ${breakpoints.xxl}px)`),
     }
   : null
 
@@ -35,6 +37,8 @@ export const mq = {
   lg: `@media (min-width: ${breakpoints.lg}px)`,
   /**  \@media (min-width: (breakpoints.xl)px) */
   xl: `@media (min-width: ${breakpoints.xl}px)`,
+  /**  \@media (min-width: (breakpoints.xxl)px) */
+  xxl: `@media (min-width: ${breakpoints.xxl}px)`,
 }
 
 export enum colors {

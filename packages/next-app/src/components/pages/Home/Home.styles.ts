@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import Color from 'color'
-import { colors } from '../../../baseStyles'
+import { mq, colors } from '../../../baseStyles'
 
 export const content = css`
   width: 100%;
@@ -11,30 +11,56 @@ export const content = css`
 `
 
 export const greeting = css`
-  padding-left: 180px;
-  padding-right: 180px;
-
   transition: transform 1s;
   transform: translateX(0);
   &.hide {
     transform: translateX(-130vw);
   }
+
+  ${mq.md} {
+    /* padding-left: 180px;
+    padding-right: 180px; */
+  }
 `
 
 export const h2 = css`
-  font-size: 128px;
+  font-size: 44px;
   text-shadow: 0 0 1em ${Color(colors.primaryTint).alpha(0.55).toString()};
   color: ${Color(colors.black100).toString()};
-  font-weight: bold;
+  font-weight: 800;
   line-height: 1.2em;
+
+  ${mq.md} {
+    font-size: 64px;
+  }
+
+  ${mq.lg} {
+    font-size: 96px;
+  }
+
+  ${mq.xxl} {
+    font-size: 128px;
+  }
 `
 
 export const h3 = css`
-  font-size: 48px;
+  font-size: 20px;
   text-shadow: 0 0 1em ${Color(colors.primaryTint).alpha(0.55).toString()};
   color: ${Color(colors.black100).toString()};
-  font-weight: bold;
+  font-weight: 800;
   line-height: 1.2em;
+
+  ${mq.md} {
+    font-size: 28px;
+  }
+
+  ${mq.lg} {
+    font-size: 38px;
+  }
+
+  ${mq.xxl} {
+    font-size: 48px;
+  }
 `
 
 export const buttonWrap = css`
@@ -43,7 +69,6 @@ export const buttonWrap = css`
   align-items: center;
   justify-content: flex-end;
   margin-top: 96px;
-  padding-right: 180px;
   transition: transform 1s;
   transform: translateX(0);
 
@@ -53,11 +78,27 @@ export const buttonWrap = css`
 `
 
 export const button = css`
-  width: 460px;
-  height: 100px;
-  font-size: 64px;
-  font-weight: bold;
+  width: 300px;
+  height: 80px;
+  font-size: 44px;
+  font-weight: 800;
   border-radius: 4px;
 
   color: ${Color(colors.black100).toString()};
+
+  ${mq.md} {
+    width: 400px;
+    height: 80px;
+    font-size: 48px;
+  }
+
+  ${mq.lg} {
+    font-size: 48px;
+  }
+
+  ${mq.xxl} {
+    width: 460px;
+    height: 100px;
+    font-size: 64px;
+  }
 `

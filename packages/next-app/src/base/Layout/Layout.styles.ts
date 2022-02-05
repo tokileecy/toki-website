@@ -106,24 +106,27 @@ export const header = css`
 
   transition: transform 1s;
   transform: translateY(0);
-  &.hide {
-    transform: translateY(-100px);
-  }
 
-  ${mq.sm} {
+  /* ${mq.sm} {
     height: 36px;
-  }
+  } */
 
   ${mq.md} {
+    height: 32px;
     padding: 0 16px;
     align-items: center;
     justify-content: center;
-    font-size: ${fontSizes.h1}px;
+    font-size: 36px;
     height: 1.2em;
+    width: 700px;
     min-width: 350px;
     margin-top: 8px;
-
     justify-content: space-between;
+
+    &.hide {
+      transform: translateY(-100px);
+    }
+
     &::before {
       height: 100%;
       content: '[';
@@ -137,6 +140,7 @@ export const header = css`
 
   ${mq.lg} {
     width: 500px;
+    font-size: ${fontSizes.h1}px;
   }
 
   ${mq.xl} {
@@ -150,14 +154,20 @@ export const main = css`
   align-items: center;
   flex-grow: 1;
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: auto;
+  padding: 20px 0;
 `
 
 export const footer = css`
-  position: relative;
+  position: absolute;
+  z-index: 5;
   bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  padding-top: 40px;
   /* background-color: rgb(120, 160, 200, 0.9); */
   transition: transform 0.5s;
   transform: translateX(0);
@@ -170,6 +180,8 @@ export const footer = css`
   }
 
   ${mq.md} {
+    position: relative;
+    padding-top: 0;
     height: 40px;
     width: 100%;
 
@@ -197,6 +209,10 @@ export const menu = css`
   font-size: 18px;
   color: white;
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
   ${mq.md} {
     display: none;
@@ -208,7 +224,7 @@ export const nav = css`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  position: absolute;
+  position: relative;
   z-index: 5;
   width: 40%;
   height: 120px;
@@ -224,7 +240,7 @@ export const nav = css`
     width: 100%;
     z-index: -5;
     /* background-color: rgb(120, 160, 200, 1); */
-    /* background-color: rgba(10, 10, 10, 0.9); */
+    background-color: ${Color(colors.black1000).alpha(0.9).toString()};
   }
 
   ${mq.md} {
@@ -236,6 +252,10 @@ export const nav = css`
     height: 100%;
     top: initial;
     left: initial;
+
+    &::after {
+      background-color: none;
+    }
   }
 `
 
@@ -249,17 +269,25 @@ export const navItem = css`
   }
 
   ${mq.md} {
-    font-size: 20px;
+    font-size: 24px;
     width: 200px;
   }
 
   ${mq.lg} {
-    font-size: 24px;
+    font-size: 28px;
     width: 250px;
+    height: 30px;
   }
 
   ${mq.xl} {
-    font-size: 28px;
+    font-size: 32px;
     width: 300px;
+    height: 40px;
+  }
+
+  ${mq.xxl} {
+    font-size: 36px;
+    width: 320px;
+    height: 42px;
   }
 `

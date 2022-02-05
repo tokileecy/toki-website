@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <PageInfosProvider>
       <Head>
         <meta name="description" content="Tokileecy's website" />
+        <script src="/scripts/justfont.js"></script>
       </Head>
       <AppProvider>
         <HomePage />

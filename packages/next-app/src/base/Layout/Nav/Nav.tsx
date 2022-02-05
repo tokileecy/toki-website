@@ -46,7 +46,6 @@ const Nav = (props: NavProps): JSX.Element => {
             className={classes.navItem}
             key={item.href}
             href={item.href}
-            // as={item.name}
             selected={currentSelectedItemIndex === index}
             onClick={() => {
               item.pushState?.()

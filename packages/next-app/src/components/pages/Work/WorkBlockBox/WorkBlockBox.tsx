@@ -1,7 +1,6 @@
 import React, { FC, useMemo } from 'react'
 import WorkBlock from '../../../WorkBlock'
-import { cx, css } from '@emotion/css'
-import { cssBaseBox } from '../../../Layers/styles'
+import { css } from '@emotion/css'
 
 export type Work = {
   name: string
@@ -37,9 +36,7 @@ const WorkBlockBox: FC<WorkBlockBoxProps> = (
       ),
     }))
   }, [works])
-  return (
-    <WorkBlock works={workElements} className={cx(cssBaseBox, className)} />
-  )
+  return <WorkBlock works={workElements} className={className} />
 }
 
 export default WorkBlockBox

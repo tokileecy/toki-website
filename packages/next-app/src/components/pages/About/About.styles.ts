@@ -1,5 +1,4 @@
 import { css } from '@emotion/css'
-import { cssBaseBox } from '../../Layers/styles'
 import { mq } from '../../../baseStyles'
 
 const transitionDelay = css`
@@ -14,12 +13,29 @@ const transitionDelay = css`
   }
 `
 
+export const root = css`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  ${mq.lg} {
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+    justify-content: space-between;
+  }
+
+  ${mq.xl} {
+    width: 100%;
+    justify-content: space-around;
+  }
+`
+
 export const leftBlock = css`
-  ${cssBaseBox};
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-top: 10px;
 
   ${mq.md} {
@@ -29,13 +45,18 @@ export const leftBlock = css`
 
   ${mq.lg} {
     height: 450px;
+    flex-basis: 45%;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  ${mq.xl} {
+    max-width: 700px;
   }
 `
 
 export const rightBlock = css`
-  ${cssBaseBox};
   display: flex;
   flex-basis: 55%;
   flex-direction: column;
@@ -43,7 +64,11 @@ export const rightBlock = css`
   justify-content: center;
 
   ${mq.lg} {
-    flex-basis: 50%;
+    flex-basis: 45%;
+  }
+
+  ${mq.xl} {
+    max-width: 700px;
   }
 `
 
@@ -61,7 +86,6 @@ export const leadRoleBox = css`
 
   ${mq.md} {
     font-size: 30px;
-    width: 500px;
     height: 60px;
   }
 `
@@ -74,19 +98,23 @@ export const recentlyBox = css`
   transform: translateX(0);
   ${transitionDelay};
 
+  p {
+    padding: 0.5em;
+  }
+
   &.hide {
     transform: translateX(-130vw);
   }
 
-  ${mq.lg} {
+  ${mq.xl} {
     margin-bottom: 0;
-    width: 500px;
+    /* width: 500px; */
     padding: 20px;
   }
 `
 
 export const skillBox = css`
-  padding: 10px;
+  padding: 5px;
   height: initial;
   transition: transform 1s;
   transform: translateX(0);
@@ -97,10 +125,17 @@ export const skillBox = css`
   }
 
   ${mq.lg} {
-    width: 500px;
+    /* width: 500px; */
     height: 450px;
-    padding: 20px;
     flex-direction: row;
     justify-content: space-between;
+  }
+`
+
+export const skillBoxContent = css`
+  padding: 10px;
+
+  ${mq.lg} {
+    padding: 20px;
   }
 `
