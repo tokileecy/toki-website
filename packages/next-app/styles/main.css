@@ -3,10 +3,9 @@
 html {
   background-color: black;
   overflow: hidden;
-  @supports (height: fill-available) or (height: -webkit-fill-available) or
-    (height: -moz-available) {
-    height: fill-available;
-  }
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
 }
 
 html,
