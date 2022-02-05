@@ -42,4 +42,13 @@ if (typeof window !== 'undefined') {
       TWEEN.update(e.detail.time)
     }
   })
+
+  const resizeEvent =
+    'onorientationchange' in window ? 'orientationchange' : 'resize'
+  const resize = () => {
+    layerController.recalculateSize()
+  }
+  window.addEventListener(resizeEvent, resize)
+
+  resize()
 }
