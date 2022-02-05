@@ -12,6 +12,9 @@ export const wrapper = css`
   pointer-events: auto;
   padding: 0 20px;
 
+  overflow-y: auto;
+  overflow-x: hidden;
+
   &.hide {
     pointer-events: none;
     user-select: none;

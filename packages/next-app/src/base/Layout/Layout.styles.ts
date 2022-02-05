@@ -154,8 +154,7 @@ export const main = css`
   align-items: center;
   flex-grow: 1;
   width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   pointer-events: auto;
   padding: 20px 0;
 `
