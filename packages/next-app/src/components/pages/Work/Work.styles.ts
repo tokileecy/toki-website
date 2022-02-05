@@ -1,5 +1,4 @@
 import { css } from '@emotion/css'
-import { cssBaseBox } from '../../Layers/styles'
 import { mq } from '../../../baseStyles'
 
 export const layerContent = css`
@@ -60,7 +59,6 @@ export const workBlockBox = css`
 export const descriptionBox = css`
   min-height: 100px;
   padding: 20px;
-  ${cssBaseBox};
 
   transition: transform 1s;
   transform: translateX(0);
