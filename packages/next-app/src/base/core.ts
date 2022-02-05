@@ -18,9 +18,12 @@ if (typeof window !== 'undefined') {
   layerController.renderer.extensions.get('EXT_color_buffer_float')
   layerController.renderer.setClearColor(0xffffff, 0)
 
-  layerController.renderer.domElement.addEventListener('wheel', (e) => {
-    e.preventDefault()
-  })
+  layerController.renderer.domElement.addEventListener(
+    'wheel',
+    (e: WheelEvent) => {
+      e.preventDefault()
+    }
+  )
 
   const FOV = 45
   const NEAR = 10

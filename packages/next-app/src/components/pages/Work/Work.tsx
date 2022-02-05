@@ -1,7 +1,6 @@
 import React from 'react'
 import { cx } from '@emotion/css'
 import * as styles from './Work.styles'
-import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import WorkBlockBox from './WorkBlockBox'
 import getConfig from 'next/config'
 import { BasePageProps } from '../types'

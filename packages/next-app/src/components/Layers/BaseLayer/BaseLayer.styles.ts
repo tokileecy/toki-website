@@ -4,7 +4,8 @@ import {
   verticlePaddingPercentageMd,
   verticlePaddingPercentageLg,
   verticlePaddingPercentageXl,
-} from '../../pages/Home/Home.styles'
+} from '../../../base/Layout/Layout.styles'
+
 export const root = css`
   overflow: hidden;
   pointer-events: none;
