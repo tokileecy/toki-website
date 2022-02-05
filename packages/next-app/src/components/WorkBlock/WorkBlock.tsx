@@ -80,6 +80,7 @@ export type Work = {
   name: string
   imgElement: ReactNode
   title?: string
+  url?: string
 }
 
 export type WorkBlockProps = {
@@ -109,11 +110,22 @@ const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
           padding: 10px 0;
         `}
       >
-        {works.map(({ name, title, imgElement }) => {
+        {works.map(({ name, title, url, imgElement }) => {
           return (
-            <ImgContainer key={name} title={title}>
-              {imgElement}
-            </ImgContainer>
+            <a
+              className={css`
+                display: flex;
+                padding: 5px 0;
+              `}
+              key={name}
+              href={url}
+              onClick={(e) => {
+                e.preventDefault()
+                window.open(url)
+              }}
+            >
+              <ImgContainer title={title}>{imgElement}</ImgContainer>
+            </a>
           )
         })}
       </div>

@@ -15,16 +15,19 @@ const works = [
     name: 'tokisite',
     title: 'TokiSite',
     imgSrc: `${basePath}/tokisite.png`,
+    url: `${basePath}/`,
   },
   {
     name: 'psycholog-ui',
     title: 'Psycholog ui',
     imgSrc: `${basePath}/psycholog-storybook.png`,
+    url: `https://psycholog-studio.github.io/psycholog/`,
   },
   {
     name: 'blog',
     title: 'Blog',
     imgSrc: `${basePath}/blog.png`,
+    url: `https://tokileecy.medium.com/`,
   },
 ]
 
@@ -33,11 +36,11 @@ const Work = (props: BasePageProps): JSX.Element => {
 
   return (
     <>
-      <div className={styles.leftBlock}>
+      {/* <div className={styles.leftBlock}>
         <MessageBox
           className={cx(styles.descriptionBox, { hide })}
         ></MessageBox>
-      </div>
+      </div> */}
       <div className={cx(styles.rightBlock, { hide })}>
         <WorkBlockBox
           className={cx(styles.workBlockBox, { hide })}

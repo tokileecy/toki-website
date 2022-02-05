@@ -7,6 +7,7 @@ export type Work = {
   name: string
   title: string
   imgSrc: string
+  url?: string
 }
 
 export type WorkBlockBoxProps = {
@@ -22,6 +23,7 @@ const WorkBlockBox: FC<WorkBlockBoxProps> = (
     return works.map((work) => ({
       name: work.name,
       title: work.title,
+      url: work.url,
       imgElement: (
         <img
           className={css`
@@ -36,15 +38,7 @@ const WorkBlockBox: FC<WorkBlockBoxProps> = (
     }))
   }, [works])
   return (
-    <WorkBlock
-      works={workElements}
-      className={cx(cssBaseBox, className)}
-      // classes={{
-      //   contactFieldset: css`
-      //     padding: 20px 50px;
-      //   `,
-      // }}
-    />
+    <WorkBlock works={workElements} className={cx(cssBaseBox, className)} />
   )
 }
 
