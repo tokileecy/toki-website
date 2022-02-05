@@ -2,7 +2,6 @@ import ThreeManager from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager'
 import LayerController from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager/LayerController'
 import TWEEN from '@tweenjs/tween.js'
 import scene from './scene'
-import scene1 from './scene/scene1'
 
 export const layerController = new LayerController({
   isAutoSize: true,

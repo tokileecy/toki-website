@@ -1,12 +1,6 @@
 import * as THREE from 'three'
-import TWEEN from '@tweenjs/tween.js'
-import createGrid3D from './createGrid3D'
-import createTrain, {
-  trainAnimation,
-  trainInvertAnimation,
-} from './createTrain'
-import container3D from './container3D'
-import { gridShaderMaterail, baseGridShaderMaterail } from './materials'
+import { trainAnimation, trainInvertAnimation } from './createTrain'
+
 import wireframe3D, {
   wireframeAnimation,
   wireframeInvertAnimation,
@@ -47,8 +41,4 @@ export const invertAnimation = () => {
   grid3DInvertAnimation()
 }
 
-if (typeof window !== 'undefined') {
-  window.a5 = animation
-  window.a6 = invertAnimation
-}
 export default scene

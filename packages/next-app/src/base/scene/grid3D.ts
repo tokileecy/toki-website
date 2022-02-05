@@ -36,10 +36,6 @@ export const grid3DAnimation = () => {
     .to({ value: 0.0 }, 500)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start()
-  // new TWEEN.Tween(wireframe.position)
-  //   .to({ z: 500 }, 1000)
-  //   .easing(TWEEN.Easing.Quadratic.InOut)
-  //   .start()
 }
 
 export const grid3DInvertAnimation = () => {
@@ -47,13 +43,4 @@ export const grid3DInvertAnimation = () => {
     .to({ value: 0.1 }, 500)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start()
-  // new TWEEN.Tween(wireframe.position)
-  //   .to({ z: 900 }, 500)
-  //   .easing(TWEEN.Easing.Quadratic.InOut)
-  //   .start()
-}
-
-if (typeof window !== 'undefined') {
-  window.a3 = grid3DAnimation
-  window.a4 = grid3DInvertAnimation
 }

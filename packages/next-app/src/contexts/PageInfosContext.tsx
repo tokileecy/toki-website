@@ -1,7 +1,7 @@
 import { createContext, ReactNode } from 'react'
 import getConfig from 'next/config'
 import path from 'path'
-import { Page } from '../components/pages/Home'
+import { Page } from '../base/Layout'
 import { animation, invertAnimation } from '../base/scene'
 
 export type PageInfo = {

@@ -1,17 +1,12 @@
-import React, {
-  ReactNode,
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from 'react'
+import React, { ReactNode, createContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { Page } from '../components/pages/Home'
+import { Page } from '../base/Layout'
 
 export interface AppContextContent {
   page: Page
-  setPage?: Dispatch<SetStateAction<Page>>
+  // setPage?: Dispatch<SetStateAction<Page>>
+  setPage?: (page: Page) => void
 }
 
 const AppContext = createContext<AppContextContent>({
@@ -27,9 +22,11 @@ export const AppProvider = (props: AppProviderProps): JSX.Element => {
 
   const router = useRouter()
   const currentPagePath = router?.pathname.replace(/\//g, '')
-  const initPage = (currentPagePath === '' ? 'home' : currentPagePath) as Page
+  const page = (currentPagePath === '' ? 'home' : currentPagePath) as Page
 
-  const [page, setPage] = useState<Page>(initPage)
+  const setPage = (page: Page) => {
+    router.push(page)
+  }
 
   return (
     <AppContext.Provider

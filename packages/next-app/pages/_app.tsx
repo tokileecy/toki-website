@@ -4,8 +4,9 @@ import '../styles/main.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { PageInfosProvider } from '../src/contexts/PageInfosContext'
-
 import { AppProvider } from '../src/contexts/AppContext'
+import HomePage from '../src/base/HomePage'
+
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <PageInfosProvider>
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="description" content="Tokileecy's website" />
       </Head>
       <AppProvider>
+        <HomePage />
         <Component {...pageProps} />
       </AppProvider>
     </PageInfosProvider>
