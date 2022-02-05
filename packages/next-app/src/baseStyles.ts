@@ -1,5 +1,3 @@
-import isNode from 'detect-node'
-
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export enum breakpoints {
@@ -12,17 +10,18 @@ export enum breakpoints {
   xxl = 1920,
 }
 
-export const mediaQuerys = !isNode
-  ? {
-      xxs: window.matchMedia(`(min-width: ${breakpoints.xxs}px)`),
-      xs: window.matchMedia(`(min-width: ${breakpoints.xs}px)`),
-      sm: window.matchMedia(`(min-width: ${breakpoints.sm}px)`),
-      md: window.matchMedia(`(min-width: ${breakpoints.md}px)`),
-      lg: window.matchMedia(`(min-width: ${breakpoints.lg}px)`),
-      xl: window.matchMedia(`(min-width: ${breakpoints.xl}px)`),
-      xxl: window.matchMedia(`(min-width: ${breakpoints.xxl}px)`),
-    }
-  : null
+export const mediaQuerys =
+  typeof window !== 'undefined'
+    ? {
+        xxs: window.matchMedia(`(min-width: ${breakpoints.xxs}px)`),
+        xs: window.matchMedia(`(min-width: ${breakpoints.xs}px)`),
+        sm: window.matchMedia(`(min-width: ${breakpoints.sm}px)`),
+        md: window.matchMedia(`(min-width: ${breakpoints.md}px)`),
+        lg: window.matchMedia(`(min-width: ${breakpoints.lg}px)`),
+        xl: window.matchMedia(`(min-width: ${breakpoints.xl}px)`),
+        xxl: window.matchMedia(`(min-width: ${breakpoints.xxl}px)`),
+      }
+    : null
 
 export const mq = {
   /**  \@media (min-width: (breakpoints.xxs)px) */
