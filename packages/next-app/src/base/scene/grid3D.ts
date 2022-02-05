@@ -1,24 +1,40 @@
 import * as THREE from 'three'
 import TWEEN from '@tweenjs/tween.js'
 import createGrid3D from './createGrid3D'
-
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
 import { colors } from '../../baseStyles'
+import { getInitPage } from './utils'
+
+const originUniforms = {
+  alpha: {
+    value: 0.1,
+  },
+}
+
+const targetUniforms = {
+  alpha: {
+    value: 0.0,
+  },
+}
+
+const initPage = getInitPage()
+
+const initUniforms = JSON.parse(
+  JSON.stringify(initPage === 'home' ? originUniforms : targetUniforms)
+)
 
 const gridShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
     THREE.UniformsLib.fog,
     {
       lineWidth: { value: 1 },
-      alpha: {
-        value: 0.1,
-      },
       color: {
         value: new THREE.Color(new Color(colors.primaryDefault).toString()),
       },
     },
+    initUniforms,
   ]),
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,

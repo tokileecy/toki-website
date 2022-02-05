@@ -4,21 +4,43 @@ import gridFragShader from '../shaders/wireframe/frag.glsl'
 import Color from 'color'
 import { colors } from '../../baseStyles'
 import TWEEN from '@tweenjs/tween.js'
+import { getInitPage } from './utils'
+
+const initPage = getInitPage()
+
+const originUniforms = {
+  zScale: { value: 0.0 },
+  alpha: {
+    value: 0.08,
+  },
+}
+
+const targetUniforms = {
+  zScale: { value: 1.0 },
+  alpha: {
+    value: 0.3,
+  },
+}
+
+const originPosition = { z: 900 }
+const targetPosition = { z: 500 }
+
+const initUniforms = JSON.parse(
+  JSON.stringify(initPage === 'home' ? originUniforms : targetUniforms)
+)
+
+const initPosition = initPage === 'home' ? originPosition : targetPosition
 
 export const planeShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
     THREE.UniformsLib.fog,
     {
-      zScale: { value: 0.0 },
-      pScale: { value: 0.07 },
-      alpha: {
-        value: 0.08,
-      },
       color: {
-        // value: new THREE.Color(new Color(0xffffff).darken(0.1).toString()),
         value: new THREE.Color(new Color(colors.primaryDefault).toString()),
       },
+      pScale: { value: 0.07 },
     },
+    initUniforms,
   ]),
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
@@ -31,44 +53,29 @@ const geometry = new THREE.BoxGeometry(3000, 2500, 1000, 60, 50, 60)
 const wireframeGeo = new THREE.WireframeGeometry(geometry)
 
 const wireframe = new THREE.LineSegments(wireframeGeo, planeShaderMaterail)
-wireframe.position.z = 900
-// line.material.depthTest = false
-// line.material.opacity = 0.2
-// line.material.transparent = true
+wireframe.position.z = initPosition.z
 
 export const wireframeAnimation = () => {
-  new TWEEN.Tween(planeShaderMaterail.uniforms.zScale)
-    .to({ value: 1.0 }, 2000)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
-  new TWEEN.Tween(planeShaderMaterail.uniforms.alpha)
-    .to({ value: 0.3 }, 2000)
+  new TWEEN.Tween(planeShaderMaterail.uniforms)
+    .to(targetUniforms, 2000)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start()
   new TWEEN.Tween(wireframe.position)
-    .to({ z: 500 }, 1000)
+    .to(targetPosition, 1000)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start()
 }
 
 export const wireframeInvertAnimation = () => {
-  new TWEEN.Tween(planeShaderMaterail.uniforms.zScale)
-    .to({ value: 0.0 }, 500)
+  new TWEEN.Tween(planeShaderMaterail.uniforms)
+    .to(originUniforms, 500)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .start()
-  new TWEEN.Tween(planeShaderMaterail.uniforms.alpha)
-    .to({ value: 0.07 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
-  new TWEEN.Tween(wireframe.position)
-    .to({ z: 900 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
-}
 
-if (typeof window !== 'undefined') {
-  window.a1 = wireframeAnimation
-  window.a2 = wireframeInvertAnimation
+  new TWEEN.Tween(wireframe.position)
+    .to(originPosition, 500)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .start()
 }
 
 export default wireframe
