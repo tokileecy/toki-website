@@ -210,7 +210,6 @@ export const nav = css`
     height: 100%;
     width: 100%;
     z-index: -5;
-    /* background-color: rgb(120, 160, 200, 1); */
     background-color: ${Color(colors.black1000).alpha(0.9).toString()};
   }
 
@@ -225,7 +224,7 @@ export const nav = css`
     left: initial;
 
     &::after {
-      background-color: none;
+      content: none;
     }
   }
 `
