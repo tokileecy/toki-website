@@ -12,4 +12,6 @@
 	],
 	"stylelint.packageManager": "yarn",
 	"editor.fontLigatures": true,
+	"editor.bracketPairColorization.enabled": true,
+	"editor.guides.bracketPairs":"active"
 }
