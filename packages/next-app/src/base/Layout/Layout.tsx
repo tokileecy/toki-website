@@ -16,7 +16,7 @@ export type LayoutProps = Omit<
   isStartup?: boolean
 }
 
-export type Page = 'home' | 'about' | 'work' | 'contact'
+export type Page = 'home' | 'about' | 'work'
 
 const Layout = (inProps: LayoutProps): JSX.Element => {
   const { isStartup = false, children, ...props } = inProps

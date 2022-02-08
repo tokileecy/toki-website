@@ -55,12 +55,6 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
         animation()
       },
     },
-    contact: {
-      name: 'contact',
-      href: '/contact',
-      text: 'Contact',
-      documentTitle: 'Contact | Tokileecy',
-    },
   } as const
 
   return (
