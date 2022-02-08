@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import { mq } from '../../../baseStyles'
+import { mq } from '../../../styles/baseStyles'
 
 export const layerContent = css`
   ${mq.md} {

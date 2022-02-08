@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
-import { colors } from '../../baseStyles'
+import { colors } from '../../styles/baseStyles'
 
 export const planeShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([

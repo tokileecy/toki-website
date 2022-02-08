@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import usePageInfos from '../src/hooks/usePageInfos'
+import usePageInfos from '../hooks/usePageInfos'
 
 const About = (): JSX.Element => {
   const pageInfos = usePageInfos()

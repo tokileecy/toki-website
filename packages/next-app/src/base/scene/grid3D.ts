@@ -4,7 +4,7 @@ import createGrid3D from './createGrid3D'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
-import { colors } from '../../baseStyles'
+import { colors } from '../../styles/baseStyles'
 import { getInitPage } from './utils'
 
 const originUniforms = {

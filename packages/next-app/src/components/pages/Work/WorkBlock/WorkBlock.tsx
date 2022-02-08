@@ -2,7 +2,7 @@ import React, { ReactNode, PropsWithChildren } from 'react'
 import { cx, css } from '@emotion/css'
 import ScrollableBox from '@psycholog-studio/ui/Containers/ScrollableBox'
 import Color from 'color'
-import { mq } from '../../baseStyles'
+import { mq } from '../../../../styles/baseStyles'
 
 export type ImgBlockProps = PropsWithChildren<{
   title?: string

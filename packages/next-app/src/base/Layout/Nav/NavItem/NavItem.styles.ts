@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import Color from 'color'
-import { colors } from '../../../../baseStyles'
+import { colors } from '../../../../styles/baseStyles'
 // const cssAfter = css`
 //     content: '';
 //     position: absolute;

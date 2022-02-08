@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import gridVertShader from '../shaders/wireframe/vert.glsl'
 import gridFragShader from '../shaders/wireframe/frag.glsl'
 import Color from 'color'
-import { colors } from '../../baseStyles'
+import { colors } from '../../styles/baseStyles'
 import TWEEN from '@tweenjs/tween.js'
 import { getInitPage } from './utils'
 

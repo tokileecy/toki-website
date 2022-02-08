@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import WorkBlock from '../../../WorkBlock'
+import WorkBlock from '../WorkBlock'
 import { css } from '@emotion/css'
 
 export type Work = {

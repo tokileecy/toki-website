@@ -3,9 +3,9 @@ import '@psycholog-studio/ui/reset.css'
 import '../styles/main.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { PageInfosProvider } from '../src/contexts/PageInfosContext'
-import { AppProvider } from '../src/contexts/AppContext'
-import HomePage from '../src/base/HomePage'
+import { PageInfosProvider } from '../contexts/PageInfosContext'
+import { AppProvider } from '../contexts/AppContext'
+import HomePage from '../base/HomePage'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {

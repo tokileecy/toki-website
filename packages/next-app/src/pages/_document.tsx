@@ -6,7 +6,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-import { colors } from '../src/baseStyles'
+import { colors } from '../styles/baseStyles'
 import Color from 'color'
 class MyDocument extends Document {
   static async getInitialProps(

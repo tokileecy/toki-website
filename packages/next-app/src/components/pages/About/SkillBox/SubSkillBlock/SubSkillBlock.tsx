@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { cx, css } from '@emotion/css'
 import Color from 'color'
-import { mq, fontSizes } from '../../baseStyles'
+import { mq, fontSizes } from '../../../../../styles/baseStyles'
 
 const bgColor = new Color(0x00ffff)
 

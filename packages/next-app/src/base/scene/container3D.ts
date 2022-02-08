@@ -5,7 +5,7 @@ import Color from 'color'
 import TWEEN from '@tweenjs/tween.js'
 import { Vector3 } from 'three'
 import createGrid3D from './createGrid3D'
-import { colors } from '../../baseStyles'
+import { colors } from '../../styles/baseStyles'
 
 const container3D = new THREE.Group()
 
