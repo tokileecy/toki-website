@@ -9,40 +9,36 @@
     "react": {
       "version": "detect"
     },
-    "import/ignore": ["node_modules/*"],
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx"]
-      }
-    }
+        "extensions": [".ts", ".tsx"]
+      },
+      "typescript": {}
+    },
+    "import/ignore": ["node_modules/*"]
   },
   "extends": [
     "standard",
     "eslint:recommended",
     "plugin:react/recommended",
-    "prettier",
-    "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier"
   ],
   "globals": {
     "globalThis": false,
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    },
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "requireConfigFile": false,
     "sourceType": "module"
   },
   "plugins": [
-    "jsdoc",
     "react",
     "prettier",
     "import"
@@ -70,25 +66,30 @@
     "quote-props": ["error", "consistent"],
     "dot-notation": "off",
     "template-curly-spacing": "off",
-    "indent": "off"
+    "indent": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.test.ts", "*.test.tsx"],
       "settings": {
         "import/resolver": {
           "typescript": {}
         }
       },
       "extends": [
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:jest/recommended",
+        "plugin:jest-dom/recommended",
+        "plugin:testing-library/dom"
       ],
-      "parser": "@typescript-eslint/parser",
-      "rules": {
-        "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"]
-      }
+      "plugins": [
+        "prettier",
+        "jest",
+        "jest-dom",
+        "testing-library"
+      ]
     }
   ]
 }
