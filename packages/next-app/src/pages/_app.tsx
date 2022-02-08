@@ -4,8 +4,7 @@ import '../styles/main.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { PageInfosProvider } from '../contexts/PageInfosContext'
-import { AppProvider } from '../contexts/AppContext'
-import HomePage from '../base/HomePage'
+import HomePage from '../components/pages/HomePage'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
@@ -18,10 +17,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="description" content="Tokileecy's website" />
         <script src="/scripts/justfont.js"></script>
       </Head>
-      <AppProvider>
-        <HomePage />
-        <Component {...pageProps} />
-      </AppProvider>
+      <HomePage />
+      <Component {...pageProps} />
     </PageInfosProvider>
   )
 }

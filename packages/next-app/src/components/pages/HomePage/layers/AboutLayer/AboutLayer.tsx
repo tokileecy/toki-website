@@ -1,11 +1,11 @@
 import React from 'react'
 import { cx } from '@emotion/css'
-import * as styles from './About.styles'
+import * as styles from './AboutLayer.styles'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import SkillBox from './SkillBox'
 import { BasePageProps } from '../types'
 
-const About = (props: BasePageProps): JSX.Element => {
+const AboutLayer = (props: BasePageProps): JSX.Element => {
   const { show } = props
 
   return (
@@ -43,4 +43,4 @@ const About = (props: BasePageProps): JSX.Element => {
   )
 }
 
-export default About
+export default AboutLayer

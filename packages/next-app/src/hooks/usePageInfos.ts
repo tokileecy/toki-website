@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Page } from '../base/Layout'
+import { Page } from '../components/Layout'
 import { PageInfosContext } from '../contexts/PageInfosContext'
 
 export type PageInfo = {

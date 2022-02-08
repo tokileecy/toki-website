@@ -1,8 +1,6 @@
 import { createContext, ReactNode } from 'react'
-import getConfig from 'next/config'
-import path from 'path'
-import { Page } from '../base/Layout'
-import { animation, invertAnimation } from '../base/scene'
+import { Page } from '../components/Layout'
+import { animation, invertAnimation } from '../graphic/scene'
 
 export type PageInfo = {
   name: Page
@@ -23,9 +21,6 @@ const PageInfosContext = createContext<{
 
 const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
   const { children } = props
-  const { publicRuntimeConfig } = getConfig()
-
-  const { basePath = '' } = publicRuntimeConfig
 
   const pageInfoByPage = {
     home: {

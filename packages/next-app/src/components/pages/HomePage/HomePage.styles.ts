@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import { mq } from '../../styles/baseStyles'
+import { mq } from '../../../styles/baseStyles'
 
 export const wrapper = css`
   z-index: 5;

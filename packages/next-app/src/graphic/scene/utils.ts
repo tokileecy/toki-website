@@ -1,5 +1,5 @@
 import getConfig from 'next/config'
-import { Page } from '../Layout'
+import { Page } from '../../components/Layout'
 const { publicRuntimeConfig } = getConfig()
 const { basePath = '' } = publicRuntimeConfig
 

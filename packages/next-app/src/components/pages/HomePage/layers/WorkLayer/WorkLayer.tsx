@@ -1,6 +1,6 @@
 import React from 'react'
 import { cx } from '@emotion/css'
-import * as styles from './Work.styles'
+import * as styles from './WorkLayer.styles'
 import WorkBlockBox from './WorkBlockBox'
 import getConfig from 'next/config'
 import { BasePageProps } from '../types'
@@ -30,7 +30,7 @@ const works = [
   },
 ]
 
-const Work = (props: BasePageProps): JSX.Element => {
+const WorkLayer = (props: BasePageProps): JSX.Element => {
   const { show } = props
 
   return (
@@ -43,4 +43,4 @@ const Work = (props: BasePageProps): JSX.Element => {
   )
 }
 
-export default Work
+export default WorkLayer

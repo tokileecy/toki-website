@@ -1,10 +1,24 @@
-import { useContext } from 'react'
-import AppContext, { AppContextContent } from '../contexts/AppContext'
+import { useRouter } from 'next/router'
+import { Page } from '../components/Layout'
 
-const usePage = (): AppContextContent => {
-  const appContext = useContext(AppContext)
+interface PageUtils {
+  page: Page
+  setPage?: (page: Page) => void
+}
 
-  return appContext
+const usePage = (): PageUtils => {
+  const router = useRouter()
+  const currentPagePath = router?.pathname.replace(/\//g, '')
+  const page = (currentPagePath === '' ? 'home' : currentPagePath) as Page
+
+  const setPage = (page: Page) => {
+    router.push(page)
+  }
+
+  return {
+    page,
+    setPage,
+  }
 }
 
 export default usePage

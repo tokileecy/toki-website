@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import Color from 'color'
-import { colors } from '../../styles/baseStyles'
+import { colors } from '../../../styles/baseStyles'
 const backgroundColor = new Color(colors.primaryDark)
 
 export const root = css`

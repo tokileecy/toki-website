@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import BaseLayout, {
   BaseLayoutProps,
 } from '@psycholog-studio/ui/Layouts/BaseLayout'
-import { threeManager } from '../core'
+import { threeManager } from '../../graphic/core'
 import { cx } from '@emotion/css'
 import Nav from './Nav'
 import * as styles from './Layout.styles'

@@ -1,11 +1,9 @@
 import React, { ReactNode, createContext } from 'react'
 import { useRouter } from 'next/router'
-
-import { Page } from '../base/Layout'
+import { Page } from '../components/Layout'
 
 export interface AppContextContent {
   page: Page
-  // setPage?: Dispatch<SetStateAction<Page>>
   setPage?: (page: Page) => void
 }
 

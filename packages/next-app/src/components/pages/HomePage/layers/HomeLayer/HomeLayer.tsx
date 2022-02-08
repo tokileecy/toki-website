@@ -1,12 +1,11 @@
 import React from 'react'
 import { cx } from '@emotion/css'
-import { Page } from '../../../base/Layout'
-import * as styles from './Home.styles'
-import usePageInfos from '../../../hooks/usePageInfos'
-import NavItem from '../../../base/Layout/Nav/NavItem'
+import * as styles from './HomeLayer.styles'
+import usePageInfos from '../../../../../hooks/usePageInfos'
+import NavItem from '../../../../Layout/Nav/NavItem'
 import { BasePageProps } from '../types'
 
-const Home = (props: BasePageProps): JSX.Element => {
+const HomeLayer = (props: BasePageProps): JSX.Element => {
   const { show = false } = props
   const pageInfos = usePageInfos()
 
@@ -48,4 +47,4 @@ const Home = (props: BasePageProps): JSX.Element => {
   )
 }
 
-export default Home
+export default HomeLayer

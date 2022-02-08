@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import Color from 'color'
-import { mq, colors } from '../../../styles/baseStyles'
+import { mq, colors } from '../../../../../styles/baseStyles'
 
 export const content = css`
   width: 100%;
