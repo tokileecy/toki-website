@@ -51,15 +51,15 @@ export const workBlockBox = css`
   }
 
   ${mq.md} {
-    height: initial;
+    max-height: initial;
   }
 
   ${mq.lg} {
-    height: 450px;
+    max-height: 450px;
   }
 
   ${mq.xl} {
-    height: 600px;
+    max-height: 600px;
   }
 `
 

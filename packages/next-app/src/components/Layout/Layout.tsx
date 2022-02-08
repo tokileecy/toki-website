@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import BaseLayout, {
   BaseLayoutProps,
 } from '@psycholog-studio/ui/Layouts/BaseLayout'
@@ -50,7 +51,11 @@ const Layout = (inProps: LayoutProps): JSX.Element => {
             hide: show === false,
           })}
         >
+          <Link href="/">
+            <span className={styles.siteTitle}>Toki</span>
+          </Link>
           <h1>{pageInfo.pageInfoByPage[page]?.text}</h1>
+          {/* <h1>{pageInfo.pageInfoByPage[page]?.text}</h1> */}
           <div className={styles.menu} onClick={handleMenuClick}>
             Menu
           </div>

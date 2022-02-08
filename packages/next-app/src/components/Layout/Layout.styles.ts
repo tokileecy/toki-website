@@ -68,9 +68,26 @@ export const header = css`
   border-radius: 3px;
   width: 100%;
   font-size: 20px;
-  padding: 4px 24px;
+  padding: 8px 24px;
   pointer-events: auto;
   transition: none;
+
+  h1 {
+    user-select: none;
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 960px) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    h1 {
+      font-size: 56px;
+    }
+  }
 
   ${mq.md} {
     height: 32px;
@@ -116,6 +133,14 @@ export const header = css`
   }
 `
 
+export const siteTitle = css`
+  cursor: pointer;
+  font-size: 24px;
+  ${mq.md} {
+    display: none;
+  }
+`
+
 export const main = css`
   display: flex;
   justify-content: center;
@@ -135,11 +160,10 @@ export const footer = css`
   height: 100%;
   overflow: hidden;
   padding-top: 40px;
-  transition: none;
+  transition: transform 1s;
   transform: translateX(50%);
 
   &.show {
-    transition: transform 1s;
     transform: translateX(0);
   }
 
