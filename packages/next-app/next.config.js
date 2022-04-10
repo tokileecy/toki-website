@@ -1,4 +1,6 @@
-const basePath = process.env.NODE_ENV === 'production' ? '/toki-website' : undefined
+require('dotenv').config()
+
+const basePath = process.env.BASE_PATH ?? ''
 
 module.exports = {
   basePath,

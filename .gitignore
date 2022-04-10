@@ -57,3 +57,7 @@ Thumbs.db
 !.yarn/sdks
 !.yarn/versions
 # .pnp.*
+
+# custom
+
+.env
