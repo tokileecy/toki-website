@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { cx, css } from '@emotion/css'
+import { css } from '@emotion/css'
 import * as styles from './Skill.styles'
 import Color from 'color'
 import { colors } from '../../../../../../../../styles/baseStyles'

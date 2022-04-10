@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import { cx, css } from '@emotion/css'
 import * as styles from './SubSkillBlock.styles'
 import Skill from './Skill'
 
