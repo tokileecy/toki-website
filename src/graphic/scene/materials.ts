@@ -20,9 +20,10 @@ export const planeShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+planeShaderMaterail.fog = true
 
 export const gridShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
@@ -40,9 +41,10 @@ export const gridShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+gridShaderMaterail.fog = true
 
 export const trainShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
@@ -60,9 +62,10 @@ export const trainShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+trainShaderMaterail.fog = true
 
 export const baseGridShaderMaterail = new THREE.ShaderMaterial({
   uniforms: THREE.UniformsUtils.merge([
@@ -80,6 +83,7 @@ export const baseGridShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+baseGridShaderMaterail.fog = true

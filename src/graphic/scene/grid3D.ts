@@ -39,9 +39,10 @@ const gridShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+gridShaderMaterail.fog = true
 
 const grid3DGeo = createGrid3D(1500, 1200, 2000, 7, 9, 30)
 export const grid3D = new THREE.LineSegments(grid3DGeo, gridShaderMaterail)

@@ -45,9 +45,10 @@ export const planeShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+planeShaderMaterail.fog = true
 
 const geometry = new THREE.BoxGeometry(3000, 2500, 1000, 60, 50, 60)
 const wireframeGeo = new THREE.WireframeGeometry(geometry)

@@ -38,9 +38,10 @@ const trainShaderMaterail = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+trainShaderMaterail.fog = true
 
 const createTrain = () => {
   const cubeGeo = new THREE.BoxGeometry(50, 50, 400, 1, 1, 10)

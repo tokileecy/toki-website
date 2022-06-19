@@ -28,9 +28,10 @@ const containerMaterial = new THREE.ShaderMaterial({
   vertexShader: gridVertShader,
   fragmentShader: gridFragShader,
   transparent: true,
-  fog: true,
   linewidth: 1,
 })
+
+containerMaterial.fog = true
 
 // content
 const contentGeo = createGrid3D(1000, 1000, 4000, 10, 10, 10, {
