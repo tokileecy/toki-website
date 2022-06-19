@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import TWEEN from '@tweenjs/tween.js'
+import gsap from 'gsap'
 import createGrid3D from './createGrid3D'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
@@ -49,15 +49,21 @@ export const grid3D = new THREE.LineSegments(grid3DGeo, gridShaderMaterail)
 grid3D.position.set(0, 0, 200)
 
 export const grid3DAnimation = () => {
-  new TWEEN.Tween(gridShaderMaterail.uniforms.alpha)
-    .to({ value: 0.0 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(gridShaderMaterail.uniforms.alpha, {
+      value: 0.0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
 }
 
 export const grid3DInvertAnimation = () => {
-  new TWEEN.Tween(gridShaderMaterail.uniforms.alpha)
-    .to({ value: 0.1 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(gridShaderMaterail.uniforms.alpha, {
+      value: 0.1,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
 }

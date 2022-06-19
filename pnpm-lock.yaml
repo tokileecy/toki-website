@@ -7,13 +7,11 @@ specifiers:
   '@psycholog-studio/base': 0.4.3
   '@psycholog-studio/ui': 0.4.3
   '@psycholog-studio/utils': 0.4.3
-  '@tweenjs/tween.js': ^18.6.4
   '@types/color': ^3.0.3
   '@types/node': ^18.0.0
   '@types/react': ^18.0.14
   '@types/react-dom': ^18.0.5
   '@types/three': ^0.141.0
-  '@types/tweenjs': ^1.0.4
   '@typescript-eslint/eslint-plugin': ^5.18.0
   '@typescript-eslint/parser': ^5.18.0
   babel-loader: ^8.2.4
@@ -33,6 +31,7 @@ specifiers:
   eslint-plugin-react: ^7.29.4
   eslint-plugin-testing-library: ^5.2.1
   glslify-loader: ^2.0.0
+  gsap: ^3.10.4
   lerna: ^5.1.4
   next: 12.1.6
   prettier: ^2.6.2
@@ -49,11 +48,11 @@ dependencies:
   '@psycholog-studio/base': 0.4.3_three@0.141.0
   '@psycholog-studio/ui': 0.4.3_65ozb7bbtakcsu6wb4y26lm7mm
   '@psycholog-studio/utils': 0.4.3_biqbaboplfbrettd7655fr4n2y
-  '@tweenjs/tween.js': 18.6.4
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
   color: 4.2.3
   dotenv: 16.0.1
+  gsap: 3.10.4
   next: 12.1.6_4cc5zw5azim2bix77d63le72su
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -65,7 +64,6 @@ devDependencies:
   '@types/color': 3.0.3
   '@types/node': 18.0.0
   '@types/three': 0.141.0
-  '@types/tweenjs': 1.0.4
   '@typescript-eslint/eslint-plugin': 5.28.0_py5roj3ykd3sga4gtxlmfvv4pa
   '@typescript-eslint/parser': 5.28.0_b5e7v2qnwxfo6hmiq56u52mz3e
   babel-loader: 8.2.5_te6ollfzjcco6mbxjl755ucqke
@@ -2095,10 +2093,6 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@tweenjs/tween.js/18.6.4:
-    resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
-    dev: false
-
   /@types/aria-query/4.2.2:
     resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
     dev: true
@@ -2117,10 +2111,6 @@ packages:
     resolution: {integrity: sha512-X//qzJ3d3Zj82J9sC/C18ZY5f43utPbAJ6PhYt/M7uG6etcF6MRpKdN880KBy43B0BMzSfeT96MzrsNjFI3GbA==}
     dependencies:
       '@types/color-convert': 2.0.0
-    dev: true
-
-  /@types/createjs-lib/0.0.29:
-    resolution: {integrity: sha512-SjceOhvNEqweSfWNMT6wu4DsH09X0phnlzCCj5s+VAwLXuTsb8YS+vAmngg+DTuWu75vcF3qFsqxZQ85KZ3/Lw==}
     dev: true
 
   /@types/earcut/2.1.1:
@@ -2202,12 +2192,6 @@ packages:
     resolution: {integrity: sha512-OJdKDgTPVBUgc+s74DYoy4aLznbFFC38Xm4ElmU1YwGNgR7GGFVvFCX7lpVgOsT6S1zSJtGdajTsOYE8/xY9nA==}
     dependencies:
       '@types/webxr': 0.4.0
-    dev: true
-
-  /@types/tweenjs/1.0.4:
-    resolution: {integrity: sha512-UnGcZRjGYz2w+2LB/70QkzWjtqOcTu4Nxa/Cy9YZ4I8HU44kcayNgbXZYMQu4ll7z+1GP7r1+viqLKNv7+Mrzw==}
-    dependencies:
-      '@types/createjs-lib': 0.0.29
     dev: true
 
   /@types/webxr/0.4.0:
@@ -4562,6 +4546,10 @@ packages:
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
+
+  /gsap/3.10.4:
+    resolution: {integrity: sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==}
+    dev: false
 
   /handlebars/4.7.7:
     resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}

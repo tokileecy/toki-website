@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
-import TWEEN from '@tweenjs/tween.js'
+import gsap from 'gsap'
 import { Vector3 } from 'three'
 import createGrid3D from './createGrid3D'
 import { colors } from '../../styles/baseStyles'
@@ -57,19 +57,20 @@ const targetRotation = new Vector3(0.4, 0.8, 0)
 container3D.position.set(0, 0, 700)
 container3D.rotation.set(originRotation.x, originRotation.y, originRotation.z)
 
-const duration = 2500
-const easing = TWEEN.Easing.Quadratic.InOut
-const startAnimate = new TWEEN.Tween(container3D.rotation)
-  .to(targetRotation, duration)
-  .easing(easing)
-  .start()
+const duration = 2.5
+const ease = 'power2.inOut'
+const startAnimate = gsap.to(container3D.rotation, {
+  ...targetRotation,
+  duration,
+  ease,
+})
 
-const reverseAnimation = new TWEEN.Tween(container3D.rotation)
-  .to(originRotation, duration)
-  .easing(easing)
+const reverseAnimation = gsap.to(container3D.rotation, {
+  ...originRotation,
+  duration,
+  ease,
+})
 
-startAnimate.chain(reverseAnimation)
-reverseAnimation.chain(startAnimate)
-startAnimate.start()
+gsap.timeline().add(startAnimate).add(reverseAnimation).repeat(-1)
 
 export default container3D

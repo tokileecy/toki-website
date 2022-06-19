@@ -1,6 +1,5 @@
 import ThreeManager from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager'
 import LayerController from '@psycholog-studio/ui/ThreeGraphic/core/ThreeManager/LayerController'
-import TWEEN from '@tweenjs/tween.js'
 import scene from './scene'
 
 export const layerController = new LayerController({
@@ -41,7 +40,7 @@ if (typeof window !== 'undefined') {
 
   threeManager.layerController.addEventListener('frame-changed', (e) => {
     if (e.detail?.time) {
-      TWEEN.update(e.detail.time)
+      // TODO pause all gasp animation
     }
   })
 

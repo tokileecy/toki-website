@@ -3,7 +3,7 @@ import gridVertShader from '../shaders/wireframe/vert.glsl'
 import gridFragShader from '../shaders/wireframe/frag.glsl'
 import Color from 'color'
 import { colors } from '../../styles/baseStyles'
-import TWEEN from '@tweenjs/tween.js'
+import gsap from 'gsap'
 import { getInitPage } from './utils'
 
 const initPage = getInitPage()
@@ -57,26 +57,51 @@ const wireframe = new THREE.LineSegments(wireframeGeo, planeShaderMaterail)
 wireframe.position.z = initPosition.z
 
 export const wireframeAnimation = () => {
-  new TWEEN.Tween(planeShaderMaterail.uniforms)
-    .to(targetUniforms, 2000)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
-  new TWEEN.Tween(wireframe.position)
-    .to(targetPosition, 1000)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(planeShaderMaterail.uniforms.zScale, {
+      ...targetUniforms.zScale,
+      duration: 2,
+      ease: 'power2.inOut',
+    })
+    .play()
+  gsap
+    .to(planeShaderMaterail.uniforms.alpha, {
+      ...targetUniforms.alpha,
+      duration: 2,
+      ease: 'power2.inOut',
+    })
+    .play()
+  gsap
+    .to(wireframe.position, {
+      ...targetPosition,
+      duration: 1,
+      ease: 'power2.inOut',
+    })
+    .play()
 }
 
 export const wireframeInvertAnimation = () => {
-  new TWEEN.Tween(planeShaderMaterail.uniforms)
-    .to(originUniforms, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
-
-  new TWEEN.Tween(wireframe.position)
-    .to(originPosition, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(planeShaderMaterail.uniforms.zScale, {
+      ...originUniforms.zScale,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
+  gsap
+    .to(planeShaderMaterail.uniforms.alpha, {
+      ...originUniforms.alpha,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
+  gsap
+    .to(wireframe.position, {
+      ...originPosition,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
 }
 
 export default wireframe

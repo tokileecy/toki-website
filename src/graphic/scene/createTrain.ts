@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import TWEEN from '@tweenjs/tween.js'
+import gsap from 'gsap'
 import gridVertShader from '../shaders/grid/vert.glsl'
 import gridFragShader from '../shaders/grid/frag.glsl'
 import Color from 'color'
@@ -51,17 +51,23 @@ const createTrain = () => {
 }
 
 export const trainAnimation = () => {
-  new TWEEN.Tween(trainShaderMaterail.uniforms.alpha)
-    .to({ value: 0.0 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(trainShaderMaterail.uniforms.alpha, {
+      value: 0.0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
 }
 
 export const trainInvertAnimation = () => {
-  new TWEEN.Tween(trainShaderMaterail.uniforms.alpha)
-    .to({ value: 1.0 }, 500)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .start()
+  gsap
+    .to(trainShaderMaterail.uniforms.alpha, {
+      value: 1.0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    })
+    .play()
 }
 
 export default createTrain
