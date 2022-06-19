@@ -14,4 +14,4 @@ next.config.js
 /examples
 /docs
 .next
-/packages/next-app/public
+/public

@@ -2,7 +2,6 @@
   "compilerOptions": {
     "jsx": "preserve",
     "target": "es5",
-    "module": "commonjs",
     "esModuleInterop": true,
     "declaration": true,
     "allowJs": true,
@@ -13,6 +12,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "module": "esnext",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -22,17 +22,11 @@
     "incremental": true
   },
   "include": [
-    "src",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
     "type-glsl.d.ts",
     "custom.d.ts"
   ],
-  "exclude": [
-    "**/*.stories.ts",
-    "**/*.stories.tsx",
-    "**/*.stories.js",
-    "**/*.stories.jsx",
-    "node_modules",
-    "**/__tests__/*",
-    "lib"
-  ]
+  "exclude": ["node_modules"]
 }
