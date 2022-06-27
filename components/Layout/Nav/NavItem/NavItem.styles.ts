@@ -58,6 +58,7 @@ const normalButtonColor = baseButtonColor.darken(0.35)
 const hoverButtonColor = baseButtonColor.darken(0.2)
 const activeButtonColor = baseButtonColor
 
+const disableColor = Color(colors.black200)
 const baseSelectedColor = Color(colors.complementaryOrange)
 const normalSelectedColor = baseSelectedColor
 const hoverSelectedColor = baseSelectedColor
@@ -78,6 +79,7 @@ export const link = css`
   justify-content: center;
   border-radius: 3px;
   position: relative;
+  user-select: none;
 
   &::before {
     transition: background-image 0.2s ease-in-out;
@@ -112,5 +114,22 @@ export const link = css`
 
   &::after {
     ${cssAfter}
+  }
+
+  &.disable {
+    cursor: not-allowed;
+    pointer-events: none;
+
+    /* &::before {
+      ${createBefore(disableColor, darkColor)}
+    }
+
+    &:hover::before {
+      ${createBefore(disableColor, darkColor)}
+    }
+
+    &:active::before {
+      ${createBefore(disableColor, darkColor)}
+    } */
   }
 `

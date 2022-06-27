@@ -35,16 +35,16 @@ scene.add(train1)
 scene.add(train2)
 scene.add(train3)
 
-export const animation = () => {
-  trainAnimation()
-  wireframeAnimation()
-  grid3DAnimation()
+export const animation = async () => {
+  await Promise.all([trainAnimation(), wireframeAnimation(), grid3DAnimation()])
 }
 
-export const invertAnimation = () => {
-  trainInvertAnimation()
-  wireframeInvertAnimation()
-  grid3DInvertAnimation()
+export const invertAnimation = async () => {
+  await Promise.all([
+    trainInvertAnimation(),
+    wireframeInvertAnimation(),
+    grid3DInvertAnimation(),
+  ])
 }
 
 export default scene

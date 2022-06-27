@@ -3,24 +3,25 @@ import Link from 'next/link'
 import BaseLayout, {
   BaseLayoutProps,
 } from '@psycholog-studio/ui/Layouts/BaseLayout'
-import { threeManager } from '../../graphic/core'
+import { threeManager } from '@/manager/core'
 import { cx } from '@emotion/css'
 import Nav from './Nav'
 import * as styles from './Layout.styles'
-import usePage from '../../hooks/usePage'
-import usePageInfos from '../../hooks/usePageInfos'
+import usePage from '@/hooks/usePage'
+import usePageInfos from '@/hooks/usePageInfos'
 
 export type LayoutProps = Omit<
   BaseLayoutProps,
   'threeManagerRef' | 'threeManager' | 'classes'
 > & {
   isStartup?: boolean
+  disableNavClick?: boolean
 }
 
 export type Page = 'home' | 'about' | 'work'
 
 const Layout = (inProps: LayoutProps): JSX.Element => {
-  const { isStartup = false, children, ...props } = inProps
+  const { isStartup = false, children, disableNavClick, ...props } = inProps
   const { page } = usePage()
   const pageInfo = usePageInfos()
 
@@ -73,6 +74,7 @@ const Layout = (inProps: LayoutProps): JSX.Element => {
               root: styles.nav,
               navItem: styles.navItem,
             }}
+            disableNavClick={disableNavClick}
             page={page}
           />
         </footer>

@@ -1,14 +1,15 @@
-import React, { ReactNode, createContext } from 'react'
-import { useRouter } from 'next/router'
-import { Page } from '../components/Layout'
+import React, { ReactNode, createContext, useState } from 'react'
 
 export interface AppContextContent {
-  page: Page
-  setPage?: (page: Page) => void
+  isAnimating: boolean
+  setIsAnimating: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AppContext = createContext<AppContextContent>({
-  page: 'home',
+export const AppContext = createContext<AppContextContent>({
+  isAnimating: false,
+  setIsAnimating: () => {
+    return null
+  },
 })
 
 export interface AppProviderProps {
@@ -17,20 +18,13 @@ export interface AppProviderProps {
 
 export const AppProvider = (props: AppProviderProps): JSX.Element => {
   const { children } = props
-
-  const router = useRouter()
-  const currentPagePath = router?.pathname.replace(/\//g, '')
-  const page = (currentPagePath === '' ? 'home' : currentPagePath) as Page
-
-  const setPage = (page: Page) => {
-    router.push(page)
-  }
+  const [isAnimating, setIsAnimating] = useState(false)
 
   return (
     <AppContext.Provider
       value={{
-        page,
-        setPage,
+        isAnimating,
+        setIsAnimating,
       }}
     >
       {children}

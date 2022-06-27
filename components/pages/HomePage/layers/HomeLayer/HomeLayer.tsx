@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { cx } from '@emotion/css'
 import * as styles from './HomeLayer.styles'
-import usePageInfos from '../../../../../hooks/usePageInfos'
+import usePageInfos from '@/hooks/usePageInfos'
 import NavItem from '../../../../Layout/Nav/NavItem'
 import { BasePageProps } from '../types'
+import AppContext from '@/contexts/AppContext'
 
 const HomeLayer = (props: BasePageProps): JSX.Element => {
   const { show = false } = props
   const pageInfos = usePageInfos()
+  const { isAnimating } = useContext(AppContext)
 
   return (
     <div className={styles.content}>
@@ -30,6 +32,7 @@ const HomeLayer = (props: BasePageProps): JSX.Element => {
           className={styles.button}
           key={pageInfos.pageInfoByPage['about'].href}
           href={pageInfos.pageInfoByPage['about'].href}
+          disable={isAnimating}
           onClick={() => {
             pageInfos.pageInfoByPage['about'].pushState?.()
             if (

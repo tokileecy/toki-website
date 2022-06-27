@@ -67,21 +67,31 @@ gsap
   .repeat(-1)
 
 export const grid3DAnimation = () => {
-  gsap
-    .to(gridShaderMaterail.uniforms.alpha, {
-      value: 0.0,
-      duration: 0.5,
-      ease: 'power2.inOut',
-    })
-    .play()
+  return new Promise((resolve) => {
+    gsap
+      .to(gridShaderMaterail.uniforms.alpha, {
+        value: 0.0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      })
+      .play()
+      .then(() => {
+        resolve(null)
+      })
+  })
 }
 
 export const grid3DInvertAnimation = () => {
-  gsap
-    .to(gridShaderMaterail.uniforms.alpha, {
-      value: 0.1,
-      duration: 0.5,
-      ease: 'power2.inOut',
-    })
-    .play()
+  return new Promise((resolve) => {
+    gsap
+      .to(gridShaderMaterail.uniforms.alpha, {
+        value: 0.1,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      })
+      .play()
+      .then(() => {
+        resolve(null)
+      })
+  })
 }

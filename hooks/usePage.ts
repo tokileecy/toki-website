@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Page } from '../components/Layout'
+import { Page } from '@/components/Layout'
 
 interface PageUtils {
   page: Page

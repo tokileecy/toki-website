@@ -51,23 +51,33 @@ const createTrain = () => {
 }
 
 export const trainAnimation = () => {
-  gsap
-    .to(trainShaderMaterail.uniforms.alpha, {
-      value: 0.0,
-      duration: 0.5,
-      ease: 'power2.inOut',
-    })
-    .play()
+  return new Promise((resolve) => {
+    gsap
+      .to(trainShaderMaterail.uniforms.alpha, {
+        value: 0.0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      })
+      .play()
+      .then(() => {
+        resolve(null)
+      })
+  })
 }
 
 export const trainInvertAnimation = () => {
-  gsap
-    .to(trainShaderMaterail.uniforms.alpha, {
-      value: 1.0,
-      duration: 0.5,
-      ease: 'power2.inOut',
-    })
-    .play()
+  return new Promise((resolve) => {
+    gsap
+      .to(trainShaderMaterail.uniforms.alpha, {
+        value: 1.0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      })
+      .play()
+      .then(() => {
+        resolve(null)
+      })
+  })
 }
 
 export default createTrain

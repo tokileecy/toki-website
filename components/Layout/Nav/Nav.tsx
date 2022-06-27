@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { cx } from '@emotion/css'
 import NavItem from './NavItem'
-import usePageInfos from '../../../hooks/usePageInfos'
+import usePageInfos from '@/hooks/usePageInfos'
 import { Page } from '../Layout'
 import * as styles from './Nav.styles'
 
@@ -14,6 +14,7 @@ export type NavClassesKey = 'root' | 'navItem'
 
 export interface NavProps {
   className?: string
+  disableNavClick?: boolean
   page: Page
   classes?: {
     [k in NavClassesKey]?: string
@@ -21,7 +22,7 @@ export interface NavProps {
 }
 
 const Nav = (props: NavProps): JSX.Element => {
-  const { classes = {}, className, page } = props
+  const { classes = {}, className, page, disableNavClick = false } = props
 
   const pageInfos = usePageInfos()
 
@@ -45,6 +46,7 @@ const Nav = (props: NavProps): JSX.Element => {
             className={classes.navItem}
             key={item.href}
             href={item.href}
+            disable={disableNavClick}
             selected={currentSelectedItemIndex === index}
             onClick={() => {
               item.pushState?.()

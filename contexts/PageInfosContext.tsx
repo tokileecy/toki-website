@@ -1,6 +1,7 @@
-import { createContext, ReactNode } from 'react'
-import { Page } from '../components/Layout'
-import { animation, invertAnimation } from '../graphic/scene'
+import { createContext, ReactNode, useContext } from 'react'
+import { AppContext } from '@/contexts/AppContext'
+import { Page } from '@/components/Layout'
+import { animation, invertAnimation } from '@/manager/scene'
 
 export type PageInfo = {
   name: Page
@@ -22,14 +23,18 @@ const PageInfosContext = createContext<{
 const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
   const { children } = props
 
+  const { setIsAnimating } = useContext(AppContext)
+
   const pageInfoByPage = {
     home: {
       name: 'home',
       href: '/',
       text: 'Home',
       documentTitle: 'Tokileecy',
-      pushState: (): void => {
-        invertAnimation()
+      pushState: async (): Promise<void> => {
+        setIsAnimating(true)
+        await invertAnimation()
+        setIsAnimating(false)
       },
     },
     about: {
@@ -37,8 +42,10 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       href: '/about',
       text: 'About',
       documentTitle: 'About | Tokileecy',
-      pushState: (): void => {
-        animation()
+      pushState: async (): Promise<void> => {
+        setIsAnimating(true)
+        await animation()
+        setIsAnimating(false)
       },
     },
     work: {
@@ -46,8 +53,10 @@ const PageInfosProvider = (props: PageInfosProviderProps): JSX.Element => {
       href: '/work',
       text: 'Work',
       documentTitle: 'Work | Tokileecy',
-      pushState: (): void => {
-        animation()
+      pushState: async (): Promise<void> => {
+        setIsAnimating(true)
+        await animation()
+        setIsAnimating(false)
       },
     },
   } as const
