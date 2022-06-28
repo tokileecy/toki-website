@@ -9,6 +9,17 @@ export const root = css`
   background-color: ${Color(colors.black1000).toString()};
 `
 
+export const link = css`
+  text-decoration: none;
+  color: white;
+  user-select: none;
+
+  &.disable {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+`
+
 export const uiLayer = css`
   ${mq.md} {
     padding: 2% 0;
