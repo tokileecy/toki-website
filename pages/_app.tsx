@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <PageInfosProvider>
         <Head>
           <meta name="description" content="Tokileecy's website" />
+          <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
           <script src="/scripts/justfont.js"></script>
         </Head>
         <HomePage />
