@@ -65,7 +65,6 @@ const Layout = (inProps: LayoutProps): JSX.Element => {
             </a>
           </Link>
           <h1>{pageInfo.pageInfoByPage[page]?.text}</h1>
-          {/* <h1>{pageInfo.pageInfoByPage[page]?.text}</h1> */}
           <div className={styles.menu} onClick={handleMenuClick}>
             Menu
           </div>

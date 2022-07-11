@@ -18,6 +18,10 @@ export const link = css`
     cursor: not-allowed;
     pointer-events: none;
   }
+
+  ${mq.md} {
+    display: none;
+  }
 `
 
 export const uiLayer = css`
@@ -28,6 +32,7 @@ export const uiLayer = css`
   ${mq.lg} {
     padding: 3.5% 0;
   }
+
   ${mq.xl} {
     padding: 5% 0;
   }
