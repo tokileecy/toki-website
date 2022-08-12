@@ -1,5 +1,5 @@
 import React from 'react'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import * as styles from './WorkLayer.styles'
 import WorkBlockBox from './WorkBlockBox'
 import getConfig from 'next/config'

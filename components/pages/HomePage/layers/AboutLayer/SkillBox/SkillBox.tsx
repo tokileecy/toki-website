@@ -4,7 +4,7 @@ import Box from '../../../../../base/Box'
 import SubSkillBlock from './SubSkillBlock'
 import TagSubSkillBlock from './SubSkillBlock/TagSubSkillBlock'
 import * as styles from './SkillBox.styles'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 
 export type SkillBoxClassesKey = 'root' | 'scrollableContent'
 export type SkillBoxProps = {

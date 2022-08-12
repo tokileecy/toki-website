@@ -1,6 +1,6 @@
 import React from 'react'
 import Link, { LinkProps } from 'next/link'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import * as styles from './NavItem.styles'
 
 export interface NavItemProps extends Omit<LinkProps, 'href'> {

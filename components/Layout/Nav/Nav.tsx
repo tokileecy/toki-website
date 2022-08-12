@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import NavItem from './NavItem'
 import usePageInfos from '@/hooks/usePageInfos'
 import { Page } from '../Layout'

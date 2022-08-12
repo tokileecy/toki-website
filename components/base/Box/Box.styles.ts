@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import Color from 'color'
 import { colors } from '@/styles/baseStyles'
 const backgroundColor = new Color(colors.primaryDark)

@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import { mq } from '@/styles/baseStyles'
 
 export const layerContent = css`

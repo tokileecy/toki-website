@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import { fontSizes, mq } from '@/styles/baseStyles'
 import Color from 'color'
 

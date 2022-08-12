@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react'
 import WorkBlock from '../WorkBlock'
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 
 export type Work = {
   name: string

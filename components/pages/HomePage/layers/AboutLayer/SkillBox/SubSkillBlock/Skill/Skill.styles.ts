@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import { fontSizes } from '@/styles/baseStyles'
 export const root = css`
   display: flex;

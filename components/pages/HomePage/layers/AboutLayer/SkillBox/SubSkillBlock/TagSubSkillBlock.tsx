@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import Color from 'color'
 
 const bgColor = new Color(0x00ffff)

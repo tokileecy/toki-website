@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import * as styles from './useWrapper.styles'
 
 const useWrapper = (Comp: FC<{ show?: boolean }>) => {

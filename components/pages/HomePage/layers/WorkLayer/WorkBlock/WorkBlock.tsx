@@ -1,5 +1,5 @@
 import React, { ReactNode, PropsWithChildren } from 'react'
-import { cx, css } from '@emotion/css'
+import { cx, css } from '@/styles/cssInstance'
 import ScrollableBox from '@psycholog-studio/ui/Containers/ScrollableBox'
 import Color from 'color'
 import { mq } from '@/styles/baseStyles'

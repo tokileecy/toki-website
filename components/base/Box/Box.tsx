@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import * as styles from './Box.styles'
 import BaseBox, { BoxProps, BoxRef } from '@psycholog-studio/ui/Containers/Box'
 

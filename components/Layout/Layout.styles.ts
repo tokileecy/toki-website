@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@/styles/cssInstance'
 import Color from 'color'
 import { mq, fontSizes, colors } from '@/styles/baseStyles'
 export const verticlePaddingPercentageMd = 4

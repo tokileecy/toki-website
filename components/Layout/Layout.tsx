@@ -4,7 +4,7 @@ import BaseLayout, {
   BaseLayoutProps,
 } from '@psycholog-studio/ui/Layouts/BaseLayout'
 import { threeManager } from '@/manager/core'
-import { cx } from '@emotion/css'
+import { cx } from '@/styles/cssInstance'
 import Nav from './Nav'
 import * as styles from './Layout.styles'
 import usePage from '@/hooks/usePage'
