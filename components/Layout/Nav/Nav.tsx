@@ -56,6 +56,13 @@ const Nav = (props: NavProps): JSX.Element => {
           </NavItem>
         )
       })}
+      <NavItem
+        className={classes.navItem}
+        href="https://tokileecy.medium.com/"
+        disable={disableNavClick}
+      >
+        Blog
+      </NavItem>
     </nav>
   )
 }

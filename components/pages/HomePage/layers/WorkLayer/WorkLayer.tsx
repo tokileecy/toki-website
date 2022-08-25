@@ -23,10 +23,10 @@ const works = [
     url: `https://psycholog-studio.github.io/psycholog/`,
   },
   {
-    name: 'blog',
-    title: 'Blog',
-    imgSrc: `${basePath}/blog.png`,
-    url: `https://tokileecy.medium.com/`,
+    name: 'TokiNotes',
+    title: 'Toki Notes(Stage)',
+    imgSrc: `${basePath}/toki-notes-stage.png`,
+    url: `https://notes.stage.tokileecy.com/`,
   },
 ]
 
