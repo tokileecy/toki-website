@@ -12,7 +12,7 @@ export const root = css`
 `
 
 export const title = css`
-  padding: ${paddingRight}px;
+  padding: ${paddingRight}px ${paddingRight}px ${paddingRight}px 0;
   color: white;
   width: 100%;
   min-height: 20px;
@@ -25,7 +25,7 @@ export const title = css`
 `
 
 export const content = css`
-  padding: ${paddingRight}px;
+  padding: ${paddingRight}px ${paddingRight}px ${paddingRight}px 0;
   color: white;
   padding-right: 0;
   min-height: 100px;
@@ -36,7 +36,7 @@ export const content = css`
 
 export const header = css`
   background-color: ${bgColor.rgb().toString()};
-  width: calc(100% - ${paddingRight * 2}px);
+  width: 100%;
   height: 2px;
   margin: auto;
 `

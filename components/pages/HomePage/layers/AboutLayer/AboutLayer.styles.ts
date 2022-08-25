@@ -84,13 +84,13 @@ export const leadRoleBox = css`
 
 export const recentlyBox = css`
   width: 100%;
-  padding: 10px;
+  padding: 16px;
   margin-bottom: 20px;
   transition: none;
   transform: translateX(-130vw);
 
   p {
-    padding: 0.5em;
+    padding: 0.5em 0;
   }
 
   &.show {
@@ -103,15 +103,16 @@ export const recentlyBox = css`
     transform: translateX(-130vw);
   }
 
+  ${mq.sm} {
+    padding: 24px;
+  }
+
   ${mq.xl} {
     margin-bottom: 0;
-    /* width: 500px; */
-    padding: 20px;
   }
 `
 
 export const skillBox = css`
-  padding: 5px;
   height: initial;
   transition: none;
   transform: translateX(130vw);

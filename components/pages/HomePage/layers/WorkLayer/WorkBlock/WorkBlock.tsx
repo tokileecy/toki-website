@@ -96,10 +96,12 @@ const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
   const { works, className } = inProps
   return (
     <ScrollableBox
+      style={{
+        padding: 0,
+      }}
       className={cx(
         css`
           width: 500px;
-          padding: 5px;
           background-color: ${new Color('#ffffff').alpha(0.1).toString()};
 
           ${mq.sm} {
@@ -111,7 +113,7 @@ const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
     >
       <div
         className={css`
-          padding: 10px 0;
+          padding: 16px;
         `}
       >
         {works.map(({ name, title, url, imgElement }) => {
