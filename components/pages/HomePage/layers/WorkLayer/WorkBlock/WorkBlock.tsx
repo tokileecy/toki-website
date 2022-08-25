@@ -46,7 +46,7 @@ const ImgContainer = (inProps: ImgBlockProps) => {
 
         > .title {
           position: absolute;
-
+          font-size: 16px;
           top: 20%;
           left: 10%;
           line-height: 1em;
@@ -67,10 +67,18 @@ const ImgContainer = (inProps: ImgBlockProps) => {
 
         ${mq.sm} {
           height: 150px;
+
+          .title {
+            font-size: 28px;
+          }
         }
 
         ${mq.lg} {
           min-height: 200px;
+
+          .title {
+            font-size: 36px;
+          }
         }
       `}
     >
