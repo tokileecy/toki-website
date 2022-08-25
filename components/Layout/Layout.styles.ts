@@ -177,6 +177,7 @@ export const footer = css`
   overflow: hidden;
   padding-top: 40px;
   transition: transform 1s;
+  pointer-events: none;
   transform: translateX(50%);
 
   &.show {
@@ -185,6 +186,7 @@ export const footer = css`
 
   ${mq.md} {
     position: relative;
+    pointer-events: auto;
     padding-top: 0;
     height: 40px;
     width: 100%;
