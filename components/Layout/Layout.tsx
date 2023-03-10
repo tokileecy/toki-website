@@ -52,17 +52,16 @@ const Layout = (inProps: LayoutProps): JSX.Element => {
             hide: show === false,
           })}
         >
-          <Link href="/">
-            <a
-              className={cx(styles.link, {
-                disable: disableNavClick,
-              })}
-              onClick={() => {
-                pageInfo.pageInfoByPage.home.pushState?.()
-              }}
-            >
-              <span className={styles.siteTitle}>Toki</span>
-            </a>
+          <Link
+            href="/"
+            className={cx(styles.link, {
+              disable: disableNavClick,
+            })}
+            onClick={() => {
+              pageInfo.pageInfoByPage.home.pushState?.()
+            }}
+          >
+            <span className={styles.siteTitle}>Toki</span>
           </Link>
           <h1>{pageInfo.pageInfoByPage[page]?.text}</h1>
           <div className={styles.menu} onClick={handleMenuClick}>

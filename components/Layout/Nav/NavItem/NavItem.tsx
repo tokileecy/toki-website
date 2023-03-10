@@ -25,18 +25,17 @@ const NavItem = (props: NavItemProps): JSX.Element => {
   } = props
 
   return (
-    <Link href={href} {...linkProps}>
-      <a
-        className={cx(styles.link, { selected, disable }, className)}
-        onClick={(e) => {
-          // e.preventDefault()
-          return onClick?.(e)
-        }}
-        href={href}
-        {...linkProps}
-      >
-        <span>{children}</span>
-      </a>
+    <Link
+      href={href}
+      {...linkProps}
+      className={cx(styles.link, { selected, disable }, className)}
+      onClick={(e) => {
+        // e.preventDefault()
+        return onClick?.(e)
+      }}
+      {...linkProps}
+    >
+      <span>{children}</span>
     </Link>
   )
 }

@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { AppProvider } from '@/contexts/AppContext'
 import { PageInfosProvider } from '@/contexts/PageInfosContext'
 import HomePage from '@/components/pages/HomePage'
+import 'default-passive-events'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <Head>
           <meta name="description" content="Tokileecy's website" />
           <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
-          <script src="/scripts/justfont.js"></script>
+          {/* <script src="/scripts/justfont.js"></script> */}
         </Head>
         <HomePage />
         <Component {...pageProps} />
