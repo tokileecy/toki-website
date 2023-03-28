@@ -4,6 +4,7 @@ const basePath = process.env.BASE_PATH ?? ''
 
 module.exports = {
   basePath,
+  trailingSlash: true,
   requireConfigFile: false,
   future: {
     webpack5: true,
