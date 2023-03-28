@@ -42,6 +42,8 @@ yarn-error.log
 .pnpm-debug.log
 lerna-debug.log
 testem.log
+firebase-debug.log*
+firebase-debug.*.log*
 /typings
 
 # System Files
@@ -75,6 +77,8 @@ Thumbs.db
 # vercel
 .vercel
 
-# custom
+# Firebase cache
+.firebase/
 
+# custom
 .env
