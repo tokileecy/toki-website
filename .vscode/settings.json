@@ -4,13 +4,6 @@
 		"source.fixAll.eslint": true,
 		"source.fixAll.stylelint": true,
 	},
-	"eslint.workingDirectories": [
-		{
-			"directory": "./packages/next-app",
-			"changeProcessCWD": true
-		},
-	],
-	"stylelint.packageManager": "yarn",
 	"editor.fontLigatures": true,
 	"editor.bracketPairColorization.enabled": true,
 	"editor.guides.bracketPairs":"active"
