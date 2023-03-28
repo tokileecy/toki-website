@@ -1,43 +1,26 @@
 import React from 'react'
 import { cx } from '@/styles/cssInstance'
+import { Work } from '@/lib/api'
 import * as styles from './WorkLayer.styles'
 import WorkBlockBox from './WorkBlockBox'
-import getConfig from 'next/config'
 import { BasePageProps } from '../types'
 
-const { publicRuntimeConfig } = getConfig()
+export interface WorkLayerProps extends BasePageProps {
+  works: Work[]
+}
 
-const { basePath = '' } = publicRuntimeConfig
-
-const works = [
-  {
-    name: 'tokisite',
-    title: 'TokiSite',
-    imgSrc: `${basePath}/tokisite.png`,
-    url: `${basePath}/`,
-  },
-  {
-    name: 'psycholog-ui',
-    title: 'Psycholog ui',
-    imgSrc: `${basePath}/psycholog-storybook.png`,
-    url: `https://psycholog-studio.github.io/psycholog/`,
-  },
-  {
-    name: 'TokiNotes',
-    title: 'Toki Notes(Stage)',
-    imgSrc: `${basePath}/toki-notes-stage.png`,
-    url: `https://notes.stage.tokileecy.com/`,
-  },
-]
-
-const WorkLayer = (props: BasePageProps): JSX.Element => {
-  const { show } = props
+const WorkLayer = (props: WorkLayerProps): JSX.Element => {
+  const { works, show } = props
 
   return (
     <div className={styles.rightBlock}>
       <WorkBlockBox
         className={cx(styles.workBlockBox, { show, hide: show === false })}
-        works={works}
+        works={works.map((work) => ({
+          name: work.id.toString(),
+          title: work.name,
+          imgSrc: work.banner.url,
+        }))}
       />
     </div>
   )

@@ -3,7 +3,7 @@ import usePageInfos from '@/hooks/usePageInfos'
 import HomePage, { HomePageProps } from '@/components/pages/HomePage'
 import api from '@/lib/api'
 
-const About = (props: HomePageProps): JSX.Element => {
+export default function About(props: HomePageProps) {
   const pageInfos = usePageInfos()
 
   return (
@@ -25,5 +25,3 @@ export async function getStaticProps() {
     },
   }
 }
-
-export default About

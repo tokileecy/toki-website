@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import usePageInfos from '@/hooks/usePageInfos'
 import usePage from '@/hooks/usePage'
 import AppContext from '@/contexts/AppContext'
-import { SkillCategory } from '@/lib/api'
+import { SkillCategory, Work as WorkData } from '@/lib/api'
 import BaseHome from './layers/HomeLayer'
 import BaseAbout from './layers/AboutLayer'
 import BaseWork from './layers/WorkLayer'
@@ -18,10 +18,11 @@ export interface HomePageProps {
   skillCategories: SkillCategory[]
   name: string
   description: string
+  works: WorkData[]
 }
 
 const HomePage = (props: HomePageProps): JSX.Element => {
-  const { name, description, skillCategories } = props
+  const { name, description, skillCategories, works } = props
   const { page } = usePage()
   const [isStartup, setIsStartup] = useState(false)
   const pageInfos = usePageInfos()
@@ -52,6 +53,7 @@ const HomePage = (props: HomePageProps): JSX.Element => {
           }
         />
         <Work
+          works={works}
           show={
             !isStartup
               ? undefined

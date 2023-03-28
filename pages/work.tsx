@@ -3,7 +3,7 @@ import usePageInfos from '@/hooks/usePageInfos'
 import HomePage, { HomePageProps } from '@/components/pages/HomePage'
 import api from '@/lib/api'
 
-function Work(props: HomePageProps) {
+export default function Work(props: HomePageProps) {
   const pageInfos = usePageInfos()
   return (
     <>
@@ -24,5 +24,3 @@ export async function getStaticProps() {
     },
   }
 }
-
-export default Work
