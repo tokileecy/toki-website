@@ -1,15 +1,29 @@
 import Head from 'next/head'
 import usePageInfos from '@/hooks/usePageInfos'
+import HomePage, { HomePageProps } from '@/components/pages/HomePage'
+import api from '@/lib/api'
 
-const About = (): JSX.Element => {
+const About = (props: HomePageProps): JSX.Element => {
   const pageInfos = usePageInfos()
+
   return (
     <>
       <Head>
         <title>{pageInfos.pageInfoByPage.about.documentTitle}</title>
       </Head>
+      <HomePage {...props} />
     </>
   )
+}
+
+export async function getStaticProps() {
+  const data = await api.getData()
+
+  return {
+    props: {
+      ...data,
+    },
+  }
 }
 
 export default About

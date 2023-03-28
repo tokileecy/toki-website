@@ -4,9 +4,17 @@ import * as styles from './AboutLayer.styles'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import SkillBox from './SkillBox'
 import { BasePageProps } from '../types'
+import { SkillCategory } from '@/lib/api'
+import xss from 'xss'
 
-const AboutLayer = (props: BasePageProps): JSX.Element => {
-  const { show } = props
+export interface AboutLayerProps extends BasePageProps {
+  skillCategories: SkillCategory[]
+  name: string
+  description: string
+}
+
+const AboutLayer = (props: AboutLayerProps): JSX.Element => {
+  const { show, name, description, skillCategories } = props
 
   return (
     <div className={styles.root}>
@@ -14,25 +22,21 @@ const AboutLayer = (props: BasePageProps): JSX.Element => {
         <MessageBox
           className={cx(styles.leadRoleBox, { show, hide: show === false })}
         >
-          {'Tokileecy'}
+          {name}
         </MessageBox>
         <MessageBox
           className={cx(styles.recentlyBox, { show, hide: show === false })}
         >
-          <span>
-            <p>
-              {
-                '畢業於中山大學應用數學系，曾維護過 Unity 與 ASP.Net Core 專案，在期間接觸了 Node.js 與前端相關技術，進而持續修習 Web Component 、 WebGL、Electron 等前端相關技術。目前工作上主要使用 React 與 Emotion 進行開發。'
-              }
-            </p>
-            <p>
-              {`目前正關注建構 Design System 的相關技術與知識，並對於任何前端的技術抱有熱忱也持續精進中。`}
-            </p>
-          </span>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: xss(description),
+            }}
+          ></span>
         </MessageBox>
       </div>
       <div className={styles.rightBlock}>
         <SkillBox
+          skillCategories={skillCategories}
           classes={{
             root: cx(styles.skillBox, { show, hide: show === false }),
             scrollableContent: styles.skillBoxContent,

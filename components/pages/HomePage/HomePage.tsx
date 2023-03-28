@@ -1,19 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
 import usePageInfos from '@/hooks/usePageInfos'
 import usePage from '@/hooks/usePage'
+import AppContext from '@/contexts/AppContext'
+import { SkillCategory } from '@/lib/api'
 import BaseHome from './layers/HomeLayer'
 import BaseAbout from './layers/AboutLayer'
 import BaseWork from './layers/WorkLayer'
 import Layout from '../../Layout'
 import * as styles from './HomePage.styles'
 import useWrapper from './useWrapper'
-import AppContext from '@/contexts/AppContext'
 
 const Home = useWrapper(BaseHome)
 const About = useWrapper(BaseAbout)
 const Work = useWrapper(BaseWork)
 
-const HomePage = (): JSX.Element => {
+export interface HomePageProps {
+  skillCategories: SkillCategory[]
+  name: string
+  description: string
+}
+
+const HomePage = (props: HomePageProps): JSX.Element => {
+  const { name, description, skillCategories } = props
   const { page } = usePage()
   const [isStartup, setIsStartup] = useState(false)
   const pageInfos = usePageInfos()
@@ -34,6 +42,9 @@ const HomePage = (): JSX.Element => {
           }
         />
         <About
+          skillCategories={skillCategories}
+          name={name}
+          description={description}
           show={
             !isStartup
               ? undefined

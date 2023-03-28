@@ -5,8 +5,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "declaration": true,
-    "allowJs": true,
-    "outDir": "./lib",
+    "allowJs": false,
     "strict": true,
     "lib": [
       "dom",
@@ -32,5 +31,5 @@
     "type-glsl.d.ts",
     "custom.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "lib"]
 }

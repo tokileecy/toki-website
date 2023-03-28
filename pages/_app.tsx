@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import '@psycholog-studio/ui/reset.css'
-import '@/styles/main.css'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import 'default-passive-events'
 import { AppProvider } from '@/contexts/AppContext'
 import { PageInfosProvider } from '@/contexts/PageInfosContext'
-import HomePage from '@/components/pages/HomePage'
-import 'default-passive-events'
+import '@psycholog-studio/ui/reset.css'
+import '@/styles/main.css'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
@@ -21,7 +20,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           <link rel="icon" href="/favicon.png" sizes="16x16" type="image/png" />
           {/* <script src="/scripts/justfont.js"></script> */}
         </Head>
-        <HomePage />
         <Component {...pageProps} />
       </PageInfosProvider>
     </AppProvider>

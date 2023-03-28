@@ -3,12 +3,12 @@ import React, { FC } from 'react'
 import { cx } from '@/styles/cssInstance'
 import * as styles from './useWrapper.styles'
 
-const useWrapper = (Comp: FC<{ show?: boolean }>) => {
-  const CompWithWrapper = ({ show }: { show?: boolean }) => {
+const useWrapper = <T,>(Comp: FC<T & { show?: boolean }>) => {
+  const CompWithWrapper = (props: T & { show?: boolean }) => {
     return (
-      <div className={cx(styles.wrapper, { hide: !show })}>
+      <div className={cx(styles.wrapper, { hide: !props.show })}>
         <div className={styles.content}>
-          <Comp show={show} />
+          <Comp {...props} />
         </div>
       </div>
     )
