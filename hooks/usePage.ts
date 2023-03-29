@@ -6,7 +6,7 @@ interface PageUtils {
   setPage?: (page: Page) => void
 }
 
-const usePage = (): PageUtils => {
+export default function usePage() {
   const router = useRouter()
   const currentPagePath = router?.pathname.replace(/\//g, '')
   const page = (currentPagePath === '' ? 'home' : currentPagePath) as Page
@@ -18,7 +18,5 @@ const usePage = (): PageUtils => {
   return {
     page,
     setPage,
-  }
+  } as PageUtils
 }
-
-export default usePage

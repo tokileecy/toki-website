@@ -5,7 +5,6 @@ import api from '@/lib/api'
 
 export default function About(props: HomePageProps) {
   const pageInfos = usePageInfos()
-
   return (
     <>
       <Head>

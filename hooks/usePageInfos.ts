@@ -10,10 +10,8 @@ export type PageInfo = {
   pushState: () => void
 }
 
-const usePageInfos = () => {
+export default function usePageInfos() {
   const pageInfos = useContext(PageInfosContext)
 
   return pageInfos
 }
-
-export default usePageInfos
