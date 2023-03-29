@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { cx } from '@/styles/cssInstance'
-import * as styles from './HomeLayer.styles'
 import usePageInfos from '@/hooks/usePageInfos'
-import NavItem from '../../../../Layout/Nav/NavItem'
-import { BasePageProps } from '../types'
+import NavItem from '@/components/Layout/Nav/NavItem'
 import AppContext from '@/contexts/AppContext'
+import { BasePageProps } from '../types'
+import * as styles from './HomeLayer.styles'
 
 const HomeLayer = (props: BasePageProps): JSX.Element => {
   const { show = false } = props

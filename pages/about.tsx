@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import usePageInfos from '@/hooks/usePageInfos'
-import HomePage, { HomePageProps } from '@/components/pages/HomePage'
+import HomePage, { HomePageProps } from '@/containers/HomePage'
 import api from '@/lib/api'
 
 export default function About(props: HomePageProps) {
