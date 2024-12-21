@@ -133,10 +133,8 @@ const WorkBlock = (inProps: WorkBlockProps): JSX.Element => {
               `}
               key={name}
               href={url}
-              onClick={(e) => {
-                e.preventDefault()
-                window.open(url)
-              }}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <ImgContainer title={title}>{imgElement}</ImgContainer>
             </a>

@@ -20,6 +20,7 @@ const WorkLayer = (props: WorkLayerProps): JSX.Element => {
           name: work.id.toString(),
           title: work.name,
           imgSrc: work.banner.url,
+          url: work.url,
         }))}
       />
     </div>

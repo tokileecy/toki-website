@@ -26,6 +26,7 @@ export type Format = {
 export type Work = {
   id: number
   name: string
+  url?: string
   banner: {
     id: number
     name: string

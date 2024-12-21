@@ -162,6 +162,7 @@
     {
       "id": 1,
       "name": "TokiSite",
+      "url": "https://www.tokileecy.com/",
       "banner": {
         "id": 6,
         "name": "tokisite.png",
@@ -225,6 +226,7 @@
     {
       "id": 2,
       "name": "Psycholog UI",
+      "url": "https://psycholog-studio.github.io/psycholog/?path=/story/introduction--page",
       "banner": {
         "id": 3,
         "name": "psycholog-storybook.png",
