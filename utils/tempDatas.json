@@ -1,0 +1,289 @@
+{
+  "id": 1,
+  "name": "tokileecy",
+  "description": "\u003cp\u003e\n畢業於中山大學應用數學系，曾維護過 Unity 與 ASP.Net Core 專案，在期間接觸了 Node.js 與前端相關技術，進而持續修習 Web Component 、 WebGL、Electron 等前端相關技術。目前工作上主要使用 React 與 Emotion 進行開發。\n\u003c/p\u003e\n\u003cp\u003e\n目前正關注建構 Design System 的相關技術與知識，並對於任何前端的技術抱有熱忱也持續精進中。\n\u003c/p\u003e",
+  "skillCategories": [
+    {
+      "id": 1,
+      "name": "Frontend",
+      "description": "曾關注 Web Components 而學習 Polymer 的用法，並且曾使用過 Vue.js 進行開發，而目前主要使用 React.js 進行開發。",
+      "skills": [
+        {
+          "id": 1,
+          "name": "React",
+          "level": 90
+        },
+        {
+          "id": 2,
+          "name": "Vue",
+          "level": 70
+        },
+        {
+          "id": 3,
+          "name": "Polymer",
+          "level": 80
+        },
+        {
+          "id": 4,
+          "name": "jQuery",
+          "level": 80
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "CSS Framwork",
+      "description": "早期有使用過 Bootstrap 進行開發，目前主要是搭配 Material-UI 開發客製的組件。",
+      "skills": [
+        {
+          "id": 5,
+          "name": "Material-UI",
+          "level": 80
+        },
+        {
+          "id": 6,
+          "name": "Bootstrap",
+          "level": 70
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Modern CSS",
+      "description": "許多開發框架預設支援 css-loader，開發上基本上都會維護到 CSS Modules的專案，近期熱衷於使用 Emotion 進行開發中。\n",
+      "skills": [
+        {
+          "id": 7,
+          "name": "CSS Modules",
+          "level": 70
+        },
+        {
+          "id": 8,
+          "name": "Emotion",
+          "level": 90
+        },
+        {
+          "id": 9,
+          "name": "styled-jsx",
+          "level": 60
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Build \u0026 Package Mangement",
+      "description": "以 Lerna 與 Yarn 建置 Mono-Repo 開發環境，並配合 Babel、TypeScript、Glob 等工具編譯後發布到內部的 npm registry。",
+      "skills": [
+        {
+          "id": 10,
+          "name": "Babel",
+          "level": 50
+        },
+        {
+          "id": 12,
+          "name": "Webpack",
+          "level": 70
+        },
+        {
+          "id": 13,
+          "name": "Gulp",
+          "level": 40
+        },
+        {
+          "id": 14,
+          "name": "Lerna",
+          "level": 75
+        },
+        {
+          "id": 15,
+          "name": "Yarn",
+          "level": 75
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "JAMstack",
+      "description": "主要使用 Next.js SSG 的功能，藉由 Strapi 配合 CI/CD 的流程在內部編輯頁面後部署靜態頁面至外部環境。",
+      "skills": [
+        {
+          "id": 16,
+          "name": "Next.js",
+          "level": 80
+        },
+        {
+          "id": 17,
+          "name": "Strapi",
+          "level": 70
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "CI \u0026 CD",
+      "description": "為了發佈 npm package 時會處理部分 CI/CD 的工作，目前主要使用到 Gitlab-CI。\n",
+      "skills": [
+        {
+          "id": 18,
+          "name": "Gitlab-CI",
+          "level": 65
+        },
+        {
+          "id": 19,
+          "name": "Github Actions",
+          "level": 65
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Design",
+      "description": "與設計師合作時主要使用到 Sketch 與 Zeplin，目前正在自學 Figma 中。",
+      "skills": [
+        {
+          "id": 21,
+          "name": "Figma",
+          "level": 75
+        },
+        {
+          "id": 20,
+          "name": "Sketch",
+          "level": 55
+        },
+        {
+          "id": 22,
+          "name": "Zeplin",
+          "level": 60
+        }
+      ]
+    }
+  ],
+  "works": [
+    {
+      "id": 1,
+      "name": "TokiSite",
+      "banner": {
+        "id": 6,
+        "name": "tokisite.png",
+        "alternativeText": null,
+        "caption": null,
+        "width": 2856,
+        "height": 1304,
+        "formats": {
+          "large": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/tokisite_acd6030862/large_tokisite_acd6030862.png",
+            "hash": "large_tokisite_acd6030862",
+            "mime": "image/png",
+            "name": "large_tokisite.png",
+            "path": null,
+            "size": 327.1,
+            "width": 1000,
+            "height": 457
+          },
+          "small": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/tokisite_acd6030862/small_tokisite_acd6030862.png",
+            "hash": "small_tokisite_acd6030862",
+            "mime": "image/png",
+            "name": "small_tokisite.png",
+            "path": null,
+            "size": 108.4,
+            "width": 500,
+            "height": 228
+          },
+          "medium": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/tokisite_acd6030862/medium_tokisite_acd6030862.png",
+            "hash": "medium_tokisite_acd6030862",
+            "mime": "image/png",
+            "name": "medium_tokisite.png",
+            "path": null,
+            "size": 203.02,
+            "width": 750,
+            "height": 342
+          },
+          "thumbnail": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/tokisite_acd6030862/thumbnail_tokisite_acd6030862.png",
+            "hash": "thumbnail_tokisite_acd6030862",
+            "mime": "image/png",
+            "name": "thumbnail_tokisite.png",
+            "path": null,
+            "size": 33.29,
+            "width": 245,
+            "height": 112
+          }
+        },
+        "hash": "tokisite_acd6030862",
+        "ext": ".png",
+        "mime": "image/png",
+        "size": 370.16,
+        "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/tokisite_acd6030862/tokisite_acd6030862.png"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Psycholog UI",
+      "banner": {
+        "id": 3,
+        "name": "psycholog-storybook.png",
+        "alternativeText": null,
+        "caption": null,
+        "width": 1122,
+        "height": 558,
+        "formats": {
+          "large": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/psycholog_storybook_0364cd3cd7/large_psycholog_storybook_0364cd3cd7.png",
+            "hash": "large_psycholog_storybook_0364cd3cd7",
+            "mime": "image/png",
+            "name": "large_psycholog-storybook.png",
+            "path": null,
+            "size": 147.09,
+            "width": 1000,
+            "height": 497
+          },
+          "small": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/psycholog_storybook_0364cd3cd7/small_psycholog_storybook_0364cd3cd7.png",
+            "hash": "small_psycholog_storybook_0364cd3cd7",
+            "mime": "image/png",
+            "name": "small_psycholog-storybook.png",
+            "path": null,
+            "size": 51.85,
+            "width": 500,
+            "height": 249
+          },
+          "medium": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/psycholog_storybook_0364cd3cd7/medium_psycholog_storybook_0364cd3cd7.png",
+            "hash": "medium_psycholog_storybook_0364cd3cd7",
+            "mime": "image/png",
+            "name": "medium_psycholog-storybook.png",
+            "path": null,
+            "size": 94.54,
+            "width": 750,
+            "height": 373
+          },
+          "thumbnail": {
+            "ext": ".png",
+            "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/psycholog_storybook_0364cd3cd7/thumbnail_psycholog_storybook_0364cd3cd7.png",
+            "hash": "thumbnail_psycholog_storybook_0364cd3cd7",
+            "mime": "image/png",
+            "name": "thumbnail_psycholog-storybook.png",
+            "path": null,
+            "size": 16.38,
+            "width": 245,
+            "height": 122
+          }
+        },
+        "hash": "psycholog_storybook_0364cd3cd7",
+        "ext": ".png",
+        "mime": "image/png",
+        "size": 19.47,
+        "url": "https://storage.googleapis.com/tokileecy-website.appspot.com/Image/psycholog_storybook_0364cd3cd7/psycholog_storybook_0364cd3cd7.png"
+      }
+    }
+  ]
+}

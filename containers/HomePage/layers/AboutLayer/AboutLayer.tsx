@@ -4,7 +4,7 @@ import * as styles from './AboutLayer.styles'
 import MessageBox from '@psycholog-studio/ui/Containers/MessageBox'
 import SkillBox from './SkillBox'
 import { BasePageProps } from '../types'
-import { SkillCategory } from '@/lib/api'
+import { SkillCategory } from '@/utils/baseTypes'
 import xss from 'xss'
 
 export interface AboutLayerProps extends BasePageProps {

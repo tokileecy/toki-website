@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import usePageInfos from '@/hooks/usePageInfos'
 import HomePage, { HomePageProps } from '@/containers/HomePage'
-import api from '@/lib/api'
+import data from '@/utils/tempDatas.json'
 
 export default function Home(props: HomePageProps) {
   const pageInfos = usePageInfos()
@@ -16,8 +16,6 @@ export default function Home(props: HomePageProps) {
 }
 
 export async function getStaticProps() {
-  const data = await api.getData()
-
   return {
     props: {
       ...data,

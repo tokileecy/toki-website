@@ -1,6 +1,6 @@
 import React from 'react'
 import { cx } from '@/styles/cssInstance'
-import { Work } from '@/lib/api'
+import { Work } from '@/utils/baseTypes'
 import * as styles from './WorkLayer.styles'
 import WorkBlockBox from './WorkBlockBox'
 import { BasePageProps } from '../types'

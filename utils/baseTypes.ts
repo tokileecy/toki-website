@@ -46,19 +46,3 @@ export type Work = {
     url: string
   }
 }
-
-declare type Api = {
-  getData: () => {
-    id: number
-    name: string
-    description: string
-    skillCategories: SkillCategory[]
-    works: Work[]
-  }
-}
-
-declare const api: Api
-
-export { Api }
-
-export default api
