@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -30,7 +30,7 @@ jobs:
       - name: Build & Export
         run: |
           pnpm i
-          pnpm build 
+          pnpm build
           pnpm export
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
