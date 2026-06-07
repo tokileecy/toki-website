@@ -1,13 +1,5 @@
 {
   "projects": {
     "default": "tokileecy-website"
-  },
-  "targets": {
-    "tokileecy-website": {
-      "hosting": {
-        "main": ["tokileecy-website"],
-        "legacy": ["tokileecy-website-legacy"]
-      }
-    }
   }
 }

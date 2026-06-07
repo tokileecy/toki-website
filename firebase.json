@@ -1,22 +1,10 @@
 {
-  "hosting": [
-    {
-      "target": "main",
-      "public": "apps/toki-website/out",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ]
-    },
-    {
-      "target": "legacy",
-      "public": "apps/toki-website-legacy/out",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ]
-    }
-  ]
+  "hosting": {
+    "public": "apps/toki-website/out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
 }
