@@ -30,4 +30,3 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKILEECY_WEBSITE }}'
           channelId: live
           projectId: tokileecy-website
-          target: main
