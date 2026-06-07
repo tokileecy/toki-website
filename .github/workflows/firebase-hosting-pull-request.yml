@@ -10,6 +10,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    defaults:
+      run:
+        working-directory: apps/2022-toki-website
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}

@@ -8,6 +8,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    defaults:
+      run:
+        working-directory: apps/2022-toki-website
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
