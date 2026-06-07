@@ -19,6 +19,21 @@ const TRAIN_Z_CYCLE_S = 10
 const TRAIN_X_CYCLE_S = 10
 const TRAIN_X_DELAY_S = 2.5
 
+function makeFogShaderMat(
+  vertexShader: string,
+  fragmentShader: string,
+  extraUniforms: Record<string, THREE.IUniform>,
+): THREE.ShaderMaterial {
+  const mat = new THREE.ShaderMaterial({
+    uniforms: THREE.UniformsUtils.merge([THREE.UniformsLib.fog, extraUniforms]),
+    vertexShader,
+    fragmentShader,
+    transparent: true,
+  })
+  mat.fog = true
+  return mat
+}
+
 function TunnelObjects() {
   const grid0Ref = useRef<THREE.LineSegments>(null)
   const grid1Ref = useRef<THREE.LineSegments>(null)
@@ -37,7 +52,7 @@ function TunnelObjects() {
   // Snap alpha uniforms on first frame instead of lerping (handles deep links)
   const alphaInitialized = useRef(false)
 
-  // Geometry — created once, shared where legal
+  // Geometry — created once, not mutated
   const gridGeo = useMemo(() => createGrid3D(1500, 1200, 2000, 7, 9, 30), [])
   const trainGeo = useMemo(() => new THREE.BoxGeometry(50, 50, 400, 1, 1, 10), [])
   const wireframeGeo = useMemo(() => {
@@ -45,64 +60,26 @@ function TunnelObjects() {
     return new THREE.WireframeGeometry(box)
   }, [])
 
-  // Task 2.1 — grid/train shader material: UniformsLib.fog + color cyan + lineWidth + alpha
-  const gridMat = useMemo(() => {
-    const mat = new THREE.ShaderMaterial({
-      uniforms: THREE.UniformsUtils.merge([
-        THREE.UniformsLib.fog,
-        {
-          lineWidth: { value: 1 },
-          color: { value: CYAN.clone() },
-          alpha: { value: 0.1 }, // Task 2.3 — home state for grids
-        },
-      ]),
-      vertexShader: gridVert,
-      fragmentShader: gridFrag,
-      transparent: true,
-    })
-    mat.fog = true
-    return mat
-  }, [])
+  // Materials — created once, mutated imperatively in useFrame
+  const gridMat = useMemo(() => makeFogShaderMat(gridVert, gridFrag, {
+    lineWidth: { value: 1 },
+    color: { value: CYAN.clone() },
+    alpha: { value: 0.1 },
+  }), [])
 
-  const trainMat = useMemo(() => {
-    const mat = new THREE.ShaderMaterial({
-      uniforms: THREE.UniformsUtils.merge([
-        THREE.UniformsLib.fog,
-        {
-          lineWidth: { value: 1 },
-          color: { value: CYAN.clone() },
-          alpha: { value: 1.0 }, // Task 2.3 — home state for trains
-        },
-      ]),
-      vertexShader: gridVert,
-      fragmentShader: gridFrag,
-      transparent: true,
-    })
-    mat.fog = true
-    return mat
-  }, [])
+  const trainMat = useMemo(() => makeFogShaderMat(gridVert, gridFrag, {
+    lineWidth: { value: 1 },
+    color: { value: CYAN.clone() },
+    alpha: { value: 1.0 },
+  }), [])
 
-  // Task 2.2 — wireframe material from its ported shaders
-  const wireframeMat = useMemo(() => {
-    const mat = new THREE.ShaderMaterial({
-      uniforms: THREE.UniformsUtils.merge([
-        THREE.UniformsLib.fog,
-        {
-          color: { value: CYAN.clone() },
-          pScale: { value: 0.07 },
-          zScale: { value: 0.0 }, // home state: flat
-          alpha: { value: 0.08 }, // home state
-        },
-      ]),
-      vertexShader: wireframeVert,
-      fragmentShader: wireframeFrag,
-      transparent: true,
-    })
-    mat.fog = true
-    return mat
-  }, [])
+  const wireframeMat = useMemo(() => makeFogShaderMat(wireframeVert, wireframeFrag, {
+    color: { value: CYAN.clone() },
+    pScale: { value: 0.07 },
+    zScale: { value: 0.0 },
+    alpha: { value: 0.08 },
+  }), [])
 
-  // Tasks 4.1 + 4.2 — useFrame loop: 22s grid cycle + leapfrog + train animations
   useFrame((_, delta) => {
     // Grid flythrough: linear 22s cycle, both grids always 2000 units apart
     gridElapsed.current = (gridElapsed.current + delta) % GRID_CYCLE_S
@@ -157,11 +134,8 @@ function TunnelObjects() {
 
   return (
     <>
-      {/* Task 3.2 — two grids at legacy z positions */}
       <lineSegments ref={grid0Ref} args={[gridGeo, gridMat]} position={[0, 0, 200]} />
       <lineSegments ref={grid1Ref} args={[gridGeo, gridMat]} position={[0, 0, -1800]} />
-
-      {/* Task 3.3 — three trains */}
       <lineSegments ref={train1Ref} args={[trainGeo, trainMat]} position={[250, 0, 1500]} />
       <lineSegments
         ref={train2Ref}
@@ -175,8 +149,6 @@ function TunnelObjects() {
         position={[-1800, -150, 0]}
         rotation={[0, Math.PI / 2, 0]}
       />
-
-      {/* Task 3.3 — wireframe object at home z=900 */}
       <lineSegments args={[wireframeGeo, wireframeMat]} position={[0, 0, 900]} />
     </>
   )
@@ -185,7 +157,6 @@ function TunnelObjects() {
 export default function TunnelScene() {
   return (
     <>
-      {/* Task 3.1 — black fog matching legacy Fog(0x000000, 800, 1700) */}
       <fog attach="fog" args={[0x000000, 800, 1700]} />
       <TunnelObjects />
     </>

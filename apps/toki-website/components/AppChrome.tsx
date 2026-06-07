@@ -59,8 +59,7 @@ export default function AppChrome() {
               key={href}
               href={href}
               className={styles.navItem}
-              selected={pathname === href}
-              disable={false}
+              selected={normalizedPath === href}
             >
               {label}
             </NavItem>
