@@ -6,7 +6,7 @@ interface SkillProps {
 export default function Skill({ name, score }: SkillProps) {
   const clamped = Math.min(1, Math.max(0, score))
   return (
-    <div className="flex flex-col items-start pr-[5px] w-full text-[17px] mt-[0.5em] first:mt-0">
+    <div className="flex flex-col items-start pr-1 w-full text-base mt-[0.5em] first:mt-0">
       <em className="leading-[1.6rem]">{name}</em>
       <div
         className="w-full h-5"

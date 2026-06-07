@@ -19,12 +19,12 @@ export default function HomeContent() {
         }}
       >
         <h2
-          className="text-[44px] font-extrabold leading-[1.2em] text-[#f7f7f7] [text-shadow:0_0_1em_rgba(194,250,241,0.55)] md:text-[64px] lg:text-[96px] xxl:text-[128px]"
+          className="text-display-sm font-extrabold leading-[1.2em] text-[#f7f7f7] [text-shadow:0_0_1em_rgba(194,250,241,0.55)] md:text-display-md lg:text-8xl xxl:text-9xl"
         >
           {`HI! I'm TokiLee!`}
         </h2>
         <h3
-          className="text-[20px] font-extrabold leading-[1.2em] text-[#f7f7f7] [text-shadow:0_0_1em_rgba(194,250,241,0.55)] md:text-[28px] lg:text-[38px] xxl:text-[48px]"
+          className="text-xl font-extrabold leading-[1.2em] text-[#f7f7f7] [text-shadow:0_0_1em_rgba(194,250,241,0.55)] md:text-heading-sm lg:text-heading-md xxl:text-5xl"
         >
           {`Frontend Web Developer`}
         </h3>
@@ -39,7 +39,7 @@ export default function HomeContent() {
       >
         <Link
           href="/about"
-          className="tile-btn flex items-center justify-center w-[300px] h-[80px] text-[44px] font-extrabold rounded-[4px] text-[#f7f7f7] no-underline md:w-[400px] md:text-[48px] xxl:w-[460px] xxl:h-[100px] xxl:text-[64px]"
+          className="tile-btn flex items-center justify-center w-75 h-20 text-display-sm font-extrabold rounded text-[#f7f7f7] no-underline md:w-100 md:text-5xl xxl:w-115 xxl:h-25 xxl:text-display-md"
         >
           <span>About Me!</span>
         </Link>

@@ -35,14 +35,22 @@
   --breakpoint-xl: 1440px;
   --breakpoint-xxl: 1920px;
 
-  /* Font sizes (legacy scale) */
-  --font-size-body: 1rem;
-  --font-size-h6: 1.5rem;
-  --font-size-h5: 2rem;
-  --font-size-h4: 2.25rem;
-  --font-size-h3: 2.5rem;
-  --font-size-h2: 3rem;
-  --font-size-h1: 3.5rem;
+  /* Font sizes — standard heading scale */
+  --font-size-body: 1rem;        /* 16px */
+  --font-size-h6: 1.5rem;        /* 24px  = text-2xl */
+  --font-size-h5: 2rem;          /* 32px */
+  --font-size-h4: 2.25rem;       /* 36px  = text-4xl */
+  --font-size-h3: 2.5rem;        /* 40px */
+  --font-size-h2: 3rem;          /* 48px  = text-5xl */
+  --font-size-h1: 3.5rem;        /* 56px */
+
+  /* Font sizes — display scale (hero/large headings) */
+  --font-size-display-sm: 2.75rem;   /* 44px */
+  --font-size-display-md: 4rem;      /* 64px */
+
+  /* Font sizes — intermediate steps not in Tailwind defaults */
+  --font-size-heading-sm: 1.75rem;   /* 28px */
+  --font-size-heading-md: 2.375rem;  /* 38px */
 }
 
 @layer base {

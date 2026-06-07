@@ -21,7 +21,7 @@ export default function NavItem({
 }: NavItemProps) {
   const cls = [
     'tile-btn',
-    'flex flex-col items-center justify-center text-white no-underline font-bold rounded-[3px]',
+    'flex flex-col items-center justify-center text-white no-underline font-bold rounded',
     className,
   ]
     .filter(Boolean)

@@ -52,8 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         */}
         <div className="fixed inset-0 z-10 flex flex-col items-stretch overflow-hidden pointer-events-none">
           <AppChrome />
-          <main className="flex-1 flex items-center justify-center overflow-hidden pointer-events-none py-5 md:pb-[40px] lg:pb-[50px] xl:pb-[60px]">
-            <div className="w-[300px] sm:w-[500px] md:w-[800px] lg:w-[1000px] xl:w-[1100px] h-full flex items-center justify-center pointer-events-auto">
+          <main className="flex-1 flex items-center justify-center overflow-hidden pointer-events-none py-5 md:pb-10 lg:pb-12.5 xl:pb-15">
+            <div className="w-75 sm:w-125 md:w-200 lg:w-250 xl:w-275 h-full flex items-center justify-center pointer-events-auto">
               {children}
             </div>
           </main>

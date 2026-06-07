@@ -31,17 +31,17 @@ export default function AppChrome() {
     // base (mobile)
     'flex items-end justify-between text-white font-bold',
     'bg-[rgba(10,10,10,0.75)] shadow-[0_0_20px_10px_rgba(200,255,230,0.1)]',
-    'rounded-[3px] w-full text-[20px] px-6 py-2 pointer-events-auto shrink-0',
+    'rounded w-full text-xl px-6 py-2 pointer-events-auto shrink-0',
     // md+: bracket container, fixed width, centered
-    'md:px-4 md:py-0 md:items-center md:text-[36px] md:h-[1.2em]',
-    'md:w-[700px] md:min-w-[350px] md:mt-2 md:self-center',
+    'md:px-4 md:py-0 md:items-center md:text-4xl md:h-[1.2em]',
+    'md:w-175 md:min-w-87.5 md:mt-2 md:self-center',
     "md:before:content-['['] md:before:h-full md:after:content-[']'] md:after:h-full",
     // lg+
-    'lg:w-[500px] lg:text-[56px]',
+    'lg:w-125 lg:text-h1',
     // show/hide on md+ (mobile has no transform)
     show
       ? 'md:translate-y-0 md:transition-[transform] md:duration-1000'
-      : 'md:-translate-y-[100px] md:transition-[transform] md:duration-1000',
+      : 'md:-translate-y-25 md:transition-[transform] md:duration-1000',
   ]
     .filter(Boolean)
     .join(' ')
@@ -56,21 +56,21 @@ export default function AppChrome() {
     'md:pointer-events-auto md:pt-0 md:h-10 md:left-0',
     'md:translate-x-0',
     // lg+/xl+
-    'lg:h-[50px] xl:h-[60px]',
+    'lg:h-12.5 xl:h-15',
     // show/hide on md+
     show
       ? 'md:translate-y-0 md:transition-[transform] md:duration-1000'
-      : 'md:translate-y-[100px] md:transition-[transform] md:duration-1000',
+      : 'md:translate-y-25 md:transition-[transform] md:duration-1000',
   ]
     .filter(Boolean)
     .join(' ')
 
   const navItemCls = [
-    'my-[5px] w-[100px] text-base',
-    'sm:w-[150px]',
-    'md:text-2xl md:w-[200px]',
-    'lg:text-[28px] lg:w-[250px] lg:h-[30px]',
-    'xl:text-[32px] xl:w-[300px] xl:h-10',
+    'my-1 w-25 text-base',
+    'sm:w-37.5',
+    'md:text-2xl md:w-50',
+    'lg:text-heading-sm lg:w-62.5 lg:h-7.5',
+    'xl:text-h5 xl:w-75 xl:h-10',
   ].join(' ')
 
   return (
@@ -79,9 +79,9 @@ export default function AppChrome() {
         <Link href="/" className="cursor-pointer text-2xl md:hidden" onClick={() => setMenuOpen(false)}>
           Toki
         </Link>
-        <h1 className="select-none text-[18px] md:text-[36px] lg:text-[56px]">{pageTitle}</h1>
+        <h1 className="select-none text-lg md:text-4xl lg:text-h1">{pageTitle}</h1>
         <button
-          className="[transform:scaleX(0.9)] font-semibold text-[18px] text-white cursor-pointer flex items-end justify-center bg-transparent border-0 md:hidden"
+          className="[transform:scaleX(0.9)] font-semibold text-lg text-white cursor-pointer flex items-end justify-center bg-transparent border-0 md:hidden"
           onClick={() => setMenuOpen((p) => !p)}
         >
           Menu
@@ -93,10 +93,10 @@ export default function AppChrome() {
           className={[
             // mobile: right-anchored column with dark bg via ::after
             'flex flex-col justify-around items-center relative z-[5]',
-            'w-[40%] h-[120px] top-0 left-[60%]',
+            'w-[40%] h-30 top-0 left-[60%]',
             "after:content-[''] after:absolute after:inset-0 after:z-[-5] after:bg-[rgba(5,5,5,0.9)]",
             // md+: full-width row, no bg
-            'md:w-full md:flex-row md:px-[60px] md:h-full md:top-auto md:left-auto md:after:content-none',
+            'md:w-full md:flex-row md:px-15 md:h-full md:top-auto md:left-auto md:after:content-none',
           ].join(' ')}
         >
           {NAV_LINKS.map(({ href, label }) => (

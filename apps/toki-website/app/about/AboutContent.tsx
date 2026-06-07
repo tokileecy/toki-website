@@ -33,9 +33,9 @@ export default function AboutContent() {
   return (
     <div className="flex flex-col h-full w-full lg:flex-row lg:items-center lg:justify-between xl:justify-around">
       {/* Left: bio */}
-      <div className="basis-1/2 flex flex-col justify-evenly pt-[10px] md:basis-[45%] md:pt-0 lg:h-[450px] lg:items-center lg:justify-between xl:max-w-[700px]">
+      <div className="basis-1/2 flex flex-col justify-evenly pt-2.5 md:basis-[45%] md:pt-0 lg:h-112.5 lg:items-center lg:justify-between xl:max-w-175">
         <MessageBox
-          className="w-full p-[10px] mb-5 md:text-[30px] md:h-[60px]"
+          className="w-full p-2.5 mb-5 md:text-3xl md:h-15"
           style={{ transform: leftTransform, transition }}
         >
           {name}
@@ -49,14 +49,14 @@ export default function AboutContent() {
       </div>
 
       {/* Right: skills */}
-      <div className="flex basis-[55%] flex-col items-center justify-center lg:basis-[45%] xl:max-w-[700px]">
+      <div className="flex basis-[55%] flex-col items-center justify-center lg:basis-[45%] xl:max-w-175">
         <Box
-          className="w-full lg:h-[450px]"
+          className="w-full lg:h-112.5"
           style={{ transform: rightTransform, transition }}
         >
           <ScrollableBox className="p-0 h-full">
-            <div className="p-[10px] lg:p-6">
-              <div className="text-[40px] font-bold text-white">SKILL</div>
+            <div className="p-2.5 lg:p-6">
+              <div className="text-h3 font-bold text-white">SKILL</div>
               {skillCategories.map((cat) => (
                 <SubSkillBlock
                   key={cat.id}
