@@ -23,5 +23,5 @@
 
 - [x] 5.1 ~~Set up the legacy exhibit on its own hosting target/path~~ N/A — legacy app removed from repo
 - [x] 5.2 Switch root `firebase.json` `public` to `apps/toki-website/out` and update the deploy workflow
-- [ ] 5.3 Deploy to production; verify the new app is live and legacy still loads
+- [x] 5.3 Deploy to production; verify the new app is live and legacy still loads
 - [x] 5.4 Document the rollback (revert `firebase.json` path + workflow)
