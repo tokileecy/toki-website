@@ -10,7 +10,7 @@ jobs:
         node-version: [18.x]
     defaults:
       run:
-        working-directory: apps/2022-toki-website
+        working-directory: apps/toki-website-legacy
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "apps/2022-toki-website/out",
+    "public": "apps/toki-website-legacy/out",
     "ignore": [
       "firebase.json",
       "**/.*",

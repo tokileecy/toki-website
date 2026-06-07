@@ -1,20 +1,44 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Monorepo (plain directory split, NOT a Node workspace) for tokileecy's
+  personal website. Each app under apps/ is self-contained with its own
+  package.json, dependencies, and Node version.
+
+  apps/2022-toki-website: the existing site, FROZEN as a portfolio piece.
+    Stack: Next 13 (pages router), React 18, Emotion (CSS-in-JS), Three.js +
+    GSAP (hand-written 3D), @psycholog-studio/ui internal lib. Do NOT modify
+    it as part of new work; it stays as a historical exhibit.
+
+  apps/2026-toki-website: the new site (in progress). The current goal is a
+    FAITHFUL 1:1 visual port of the 2022 site onto a modern stack:
+    Next 15 App Router + RSC, React 19, Tailwind CSS v4, React Three Fiber +
+    drei, zustand. Visuals and transition feel must match the 2022 site as
+    closely as possible; visual refinements are deferred to a separate later
+    pass.
+
+  The 2022 "soul" to preserve exactly: an endless cyan wireframe tunnel
+  flythrough (two leapfrogging grids looping on ~22s), 3 wireframe trains, and
+  fog depth. Home = immersive 3D; navigating to about/work fades the 3D out to
+  foreground readable content; returning home fades it back in. The persistent
+  canvas must never unmount across route changes. Pages: home, about, work.
+
+  Conventions:
+  - All text committed to git (README, openspec, code comments, commit
+    messages) is written in English.
+  - Design tokens from the 2022 styles/baseStyles.ts (colors, breakpoints,
+    font sizes) map into Tailwind v4 @theme.
+  - GLSL shaders and geometry helpers port as-is; wrap shaders via R3F
+    shaderMaterial. The 3D layer renders identical pixels (same Three.js).
+  - For the DOM/CSS layer, reproduce exact computed values (px, colors,
+    spacing) rather than re-idiomatizing; use arbitrary values or a small CSS
+    module where utilities cannot express the original faithfully.
+  - Content stored as typed TS modules (no CMS). The profile description is a
+    rich-text/HTML field, sanitized before render (2022 used the xss lib).
+  - Deployment: Firebase Hosting via static export (output: 'export');
+    basePath/trailingSlash constraints apply. firebase.json lives at repo root.
 
 # Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+# rules:
+#   proposal:
+#     - Always include a "Non-goals" section

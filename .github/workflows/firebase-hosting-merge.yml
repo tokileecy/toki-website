@@ -14,7 +14,7 @@ jobs:
         node-version: [18.x]
     defaults:
       run:
-        working-directory: apps/2022-toki-website
+        working-directory: apps/toki-website-legacy
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
