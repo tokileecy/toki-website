@@ -11,7 +11,8 @@ export default function RouteSync() {
   const setMode = useSceneStore((s) => s.setMode)
 
   useEffect(() => {
-    setMode(pathname === '/' ? 'immersive' : 'content')
+    const normalized = pathname.replace(/\/$/, '') || '/'
+    setMode(normalized === '/' ? 'immersive' : 'content')
   }, [pathname, setMode])
 
   return null

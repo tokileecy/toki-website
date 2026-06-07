@@ -1,0 +1,24 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 5px;
+  width: 100%;
+  font-size: 17px;
+  margin-top: 0.5em;
+}
+
+.root:first-child {
+  margin-top: 0;
+}
+
+.root > em {
+  line-height: 1.6rem;
+}
+
+.bar {
+  content: '';
+  width: 100%;
+  height: 20px;
+  margin: 0;
+}

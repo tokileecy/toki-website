@@ -1,0 +1,144 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+  .root {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .root {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+/* ── Left block ── */
+.leftBlock {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+@media screen and (min-width: 960px) {
+  .leftBlock {
+    flex-basis: 45%;
+    padding-top: 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .leftBlock {
+    height: 450px;
+    flex-basis: 45%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .leftBlock {
+    max-width: 700px;
+  }
+}
+
+/* ── Right block ── */
+.rightBlock {
+  display: flex;
+  flex-basis: 55%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1280px) {
+  .rightBlock {
+    flex-basis: 45%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .rightBlock {
+    max-width: 700px;
+  }
+}
+
+/* ── Name (lead role) box ── */
+.leadRoleBox {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 960px) {
+  .leadRoleBox {
+    font-size: 30px;
+    height: 60px;
+  }
+}
+
+/* ── Description box ── */
+.recentlyBox {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.recentlyBox p {
+  padding: 0.5em 0;
+}
+
+@media screen and (min-width: 600px) {
+  .recentlyBox {
+    padding: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .recentlyBox {
+    margin-bottom: 0;
+  }
+}
+
+/* ── Skill box ── */
+.skillBox {
+  width: 100%;
+  height: initial;
+}
+
+@media screen and (min-width: 1280px) {
+  .skillBox {
+    height: 450px;
+  }
+}
+
+.skillBoxScroll {
+  padding: 0;
+  height: 100%;
+}
+
+.skillBoxInner {
+  padding: 10px;
+}
+
+@media screen and (min-width: 1280px) {
+  .skillBoxInner {
+    padding: 24px;
+  }
+}
+
+.skillTitle {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}

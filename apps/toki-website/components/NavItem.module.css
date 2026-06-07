@@ -1,0 +1,126 @@
+/* diagonal tile gradient helpers */
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 3px;
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ::before carries the diagonal-tile background */
+.link::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -3;
+  background-size: 15px 15px;
+  background-image: linear-gradient(
+    -45deg,
+    #00aee8 0,
+    #00aee8 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #00aee8 0,
+    #00aee8 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+  transition: background-image 0.2s ease-in-out;
+}
+
+.link:hover::before {
+  background-image: linear-gradient(
+    -45deg,
+    #1fc7ff 0,
+    #1fc7ff 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #1fc7ff 0,
+    #1fc7ff 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+.link:active::before {
+  background-image: linear-gradient(
+    -45deg,
+    #66dbff 0,
+    #66dbff 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #66dbff 0,
+    #66dbff 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+/* selected = on the matching page */
+.link.selected::before {
+  background-image: linear-gradient(
+    -45deg,
+    #e0a27e 0,
+    #e0a27e 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #e0a27e 0,
+    #e0a27e 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+.link.selected:hover::before {
+  background-image: linear-gradient(
+    -45deg,
+    #e0a27e 0,
+    #e0a27e 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #e0a27e 0,
+    #e0a27e 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+.link.selected:active::before {
+  background-image: linear-gradient(
+    -45deg,
+    #e8b595 0,
+    #e8b595 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #e8b595 0,
+    #e8b595 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+/* ::after carries the glow overlay */
+.link::after {
+  content: '';
+  position: absolute;
+  z-index: -5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.2);
+  box-shadow: 0 0 20px 10px rgba(200, 255, 230, 0.1);
+}
+
+.link.disable {
+  cursor: not-allowed;
+  pointer-events: none;
+}

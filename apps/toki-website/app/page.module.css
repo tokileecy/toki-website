@@ -1,0 +1,164 @@
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: white;
+  height: 100%;
+  justify-content: center;
+}
+
+/* ── Greeting heading ── */
+.h2 {
+  font-size: 44px;
+  text-shadow: 0 0 1em rgba(194, 250, 241, 0.55);
+  color: #f7f7f7;
+  font-weight: 800;
+  line-height: 1.2em;
+}
+
+@media screen and (min-width: 960px) {
+  .h2 {
+    font-size: 64px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .h2 {
+    font-size: 96px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .h2 {
+    font-size: 128px;
+  }
+}
+
+.h3 {
+  font-size: 20px;
+  text-shadow: 0 0 1em rgba(194, 250, 241, 0.55);
+  color: #f7f7f7;
+  font-weight: 800;
+  line-height: 1.2em;
+}
+
+@media screen and (min-width: 960px) {
+  .h3 {
+    font-size: 28px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .h3 {
+    font-size: 38px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .h3 {
+    font-size: 48px;
+  }
+}
+
+/* ── Button row ── */
+.buttonWrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 96px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 80px;
+  font-size: 44px;
+  font-weight: 800;
+  border-radius: 4px;
+  color: #f7f7f7;
+  text-decoration: none;
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -3;
+  background-size: 15px 15px;
+  background-image: linear-gradient(
+    -45deg,
+    #00aee8 0,
+    #00aee8 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #00aee8 0,
+    #00aee8 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+  transition: background-image 0.2s ease-in-out;
+}
+
+.button:hover::before {
+  background-image: linear-gradient(
+    -45deg,
+    #1fc7ff 0,
+    #1fc7ff 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #1fc7ff 0,
+    #1fc7ff 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+.button:active::before {
+  background-image: linear-gradient(
+    -45deg,
+    #66dbff 0,
+    #66dbff 15%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 50%,
+    #66dbff 0,
+    #66dbff 65%,
+    rgba(52, 52, 52, 0.05) 0,
+    rgba(52, 52, 52, 0.05) 100%
+  );
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  z-index: -5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.2);
+  box-shadow: 0 0 20px 10px rgba(200, 255, 230, 0.1);
+}
+
+@media screen and (min-width: 960px) {
+  .button {
+    width: 400px;
+    height: 80px;
+    font-size: 48px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .button {
+    width: 460px;
+    height: 100px;
+    font-size: 64px;
+  }
+}

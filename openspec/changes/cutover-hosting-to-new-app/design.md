@@ -62,7 +62,19 @@ if the faces differ.
    workflow; deploy.
 5. Rollback: revert the `firebase.json` path and workflow to the legacy export.
 
-## Open Questions
+## Rollback Procedure
 
-- Legacy exhibit at a subdomain (e.g. `legacy.…`) or a path (e.g. `/2022`)?
-- `next/font` self-hosting vs the original justfont script for `xingothic-tc`?
+If the new app needs to be rolled back to legacy as the primary site:
+
+1. In `firebase.json`, swap the `main` target's `public` back to `apps/toki-website-legacy/out`.
+2. In `.github/workflows/firebase-hosting-merge.yml`, change `working-directory` back to `apps/toki-website-legacy`, restore `node-version: '18'` and `pnpm version: 7`.
+3. Do the same in `.github/workflows/firebase-hosting-pull-request.yml`.
+4. Push to `main` — CI will build legacy and deploy it to the `main` target.
+5. The `legacy` target/site is unaffected and continues to serve the exhibit at its subdomain.
+
+## Resolved Questions
+
+- Legacy exhibit at subdomain: `legacy.tokileecy.com` (Firebase Hosting site `tokileecy-website-legacy`).
+  The site must be created in the Firebase console before the first deploy.
+- Font loading: retained the original justfont script (`public/scripts/justfont.js`) as `next/font`
+  does not support the justfont CDN faces directly.
