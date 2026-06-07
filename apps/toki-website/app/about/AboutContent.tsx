@@ -8,7 +8,6 @@ import Box from '@/components/Box'
 import ScrollableBox from '@/components/ScrollableBox'
 import SubSkillBlock from '@/components/SubSkillBlock'
 import TagSubSkillBlock from '@/components/TagSubSkillBlock'
-import styles from './about.module.css'
 
 const OTHER_SKILLS = [
   'HTML5', 'CSS3', 'JavaScript', 'ES6/ES5', 'Typescript', 'SCSS', 'C#',
@@ -32,32 +31,32 @@ export default function AboutContent() {
   const transition = show ? 'transform 1s' : 'none'
 
   return (
-    <div className={styles.root}>
+    <div className="flex flex-col h-full w-full lg:flex-row lg:items-center lg:justify-between xl:justify-around">
       {/* Left: bio */}
-      <div className={styles.leftBlock}>
+      <div className="basis-1/2 flex flex-col justify-evenly pt-[10px] md:basis-[45%] md:pt-0 lg:h-[450px] lg:items-center lg:justify-between xl:max-w-[700px]">
         <MessageBox
-          className={styles.leadRoleBox}
+          className="w-full p-[10px] mb-5 md:text-[30px] md:h-[60px]"
           style={{ transform: leftTransform, transition }}
         >
           {name}
         </MessageBox>
         <MessageBox
-          className={styles.recentlyBox}
+          className="w-full p-4 mb-5 sm:p-6 xl:mb-0"
           style={{ transform: leftTransform, transition }}
         >
-          <span dangerouslySetInnerHTML={{ __html: safeDescription }} />
+          <span className="about-description" dangerouslySetInnerHTML={{ __html: safeDescription }} />
         </MessageBox>
       </div>
 
       {/* Right: skills */}
-      <div className={styles.rightBlock}>
+      <div className="flex basis-[55%] flex-col items-center justify-center lg:basis-[45%] xl:max-w-[700px]">
         <Box
-          className={styles.skillBox}
+          className="w-full lg:h-[450px]"
           style={{ transform: rightTransform, transition }}
         >
-          <ScrollableBox className={styles.skillBoxScroll}>
-            <div className={styles.skillBoxInner}>
-              <div className={styles.skillTitle}>SKILL</div>
+          <ScrollableBox className="p-0 h-full">
+            <div className="p-[10px] lg:p-6">
+              <div className="text-[40px] font-bold text-white">SKILL</div>
               {skillCategories.map((cat) => (
                 <SubSkillBlock
                   key={cat.id}

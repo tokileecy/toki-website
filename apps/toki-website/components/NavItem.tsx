@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import styles from './NavItem.module.css'
 
 interface NavItemProps {
   href: string
@@ -21,9 +20,8 @@ export default function NavItem({
   external = false,
 }: NavItemProps) {
   const cls = [
-    styles.link,
-    selected ? styles.selected : '',
-    disable ? styles.disable : '',
+    'tile-btn',
+    'flex flex-col items-center justify-center text-white no-underline font-bold rounded-[3px]',
     className,
   ]
     .filter(Boolean)
@@ -38,7 +36,12 @@ export default function NavItem({
   }
 
   return (
-    <Link href={href} className={cls}>
+    <Link
+      href={href}
+      className={cls}
+      data-selected={selected || undefined}
+      data-disabled={disable || undefined}
+    >
       <span>{children}</span>
     </Link>
   )
