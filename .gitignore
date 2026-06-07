@@ -82,3 +82,13 @@ Thumbs.db
 
 # custom
 .env
+
+# local-only Claude context (not committed)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# monorepo apps (build artifacts & deps in any app dir)
+**/node_modules/
+**/.next/
+**/out/
+apps/*/.env
