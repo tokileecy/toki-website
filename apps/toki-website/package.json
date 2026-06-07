@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start"
   },
   "dependencies": {
     "xss": "^1.0.15",
@@ -24,8 +23,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.184.1",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.7",
     "raw-loader": "^4.0.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^5"
