@@ -4,6 +4,7 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { createGrid3D } from '@/scene/createGrid3D'
+import { useSceneStore } from '@/store/sceneStore'
 import gridVert from '@/shaders/grid/vert.glsl'
 import gridFrag from '@/shaders/grid/frag.glsl'
 import wireframeVert from '@/shaders/wireframe/vert.glsl'
@@ -32,6 +33,9 @@ function TunnelObjects() {
   const t2XElapsed = useRef(-TRAIN_X_DELAY_S)
   const t3ZElapsed = useRef(0)
   const t3XElapsed = useRef(-TRAIN_X_DELAY_S)
+
+  // Snap alpha uniforms on first frame instead of lerping (handles deep links)
+  const alphaInitialized = useRef(false)
 
   // Geometry — created once, shared where legal
   const gridGeo = useMemo(() => createGrid3D(1500, 1200, 2000, 7, 9, 30), [])
@@ -133,6 +137,21 @@ function TunnelObjects() {
         const px = (t3XElapsed.current % TRAIN_X_CYCLE_S) / TRAIN_X_CYCLE_S
         train3Ref.current.position.x = -1800 + px * 5600 // -1800 to 3800
       }
+    }
+
+    // Alpha fade: lerp toward store targets each frame (lambda=8 ≈ 0.5s settle)
+    // On first frame, snap directly to avoid a flash when deep-linking to /about or /work
+    const { grid: gridTarget, train: trainTarget, wireframe: wireframeTarget } =
+      useSceneStore.getState().targets
+    if (!alphaInitialized.current) {
+      gridMat.uniforms.alpha.value = gridTarget
+      trainMat.uniforms.alpha.value = trainTarget
+      wireframeMat.uniforms.alpha.value = wireframeTarget
+      alphaInitialized.current = true
+    } else {
+      gridMat.uniforms.alpha.value = THREE.MathUtils.damp(gridMat.uniforms.alpha.value, gridTarget, 8, delta)
+      trainMat.uniforms.alpha.value = THREE.MathUtils.damp(trainMat.uniforms.alpha.value, trainTarget, 8, delta)
+      wireframeMat.uniforms.alpha.value = THREE.MathUtils.damp(wireframeMat.uniforms.alpha.value, wireframeTarget, 8, delta)
     }
   })
 

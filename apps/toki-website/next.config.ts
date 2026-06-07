@@ -3,6 +3,7 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
+  allowedDevOrigins: ['172.17.0.1'],
   basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? '',
   turbopack: {
     rules: {
